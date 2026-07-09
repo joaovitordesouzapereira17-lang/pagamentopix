@@ -62,6 +62,11 @@ nome do campo `fullName`.
 coloque a imagem em `public/images/profile/` e aponte o campo `image` para
 ela; `quote` e `caption` são o texto ao lado.
 
+`photoFrame` (opcional) é uma imagem decorativa (colagem, textura) exibida
+como moldura ao redor da foto do Hero — efeito "moldura de foto de perfil"
+estilo Facebook: a moldura ocupa um quadrado com cantos arredondados e a foto
+(`photo`) aparece por cima, recortada em círculo, centralizada.
+
 ### Experiências profissionais — `src/data/experience.ts`
 
 Um objeto por experiência (empresa, cargo, período, descrição, tecnologias),

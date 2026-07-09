@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import { useParallax } from "../hooks/useParallax";
+import { withBase } from "../utils/paths";
 import { EditHint } from "./EditHint";
 import { GraphicMark } from "./GraphicMark";
 import { ProfilePhoto } from "./ProfilePhoto";
@@ -40,6 +42,7 @@ export function Hero() {
   const foot = useReveal<HTMLDivElement>(420);
   const tagReveal = useReveal<HTMLSpanElement>(500);
   const tagParallax = useParallax<HTMLSpanElement>(0.06);
+  const [photoMissing, setPhotoMissing] = useState(false);
 
   return (
     <section className="hero" id="topo">
@@ -66,13 +69,25 @@ export function Hero() {
         </h1>
 
         <div className={`hero-photo-panel ${photo.className}`} ref={photo.ref} style={photo.style}>
-          <ProfilePhoto
-            src={profile.photo}
-            alt={profile.fullName}
-            initials={initials}
-            hintFile="public/images/profile/"
-            className="hero-photo"
-          />
+          <div className="hero-avatar">
+            {profile.photoFrame && (
+              <img className="hero-avatar-frame" src={withBase(profile.photoFrame)} alt="" aria-hidden="true" />
+            )}
+            <ProfilePhoto
+              src={profile.photo}
+              alt={profile.fullName}
+              initials={initials}
+              hintFile="public/images/profile/"
+              className="hero-avatar-photo"
+              hideHint
+              onErrorChange={setPhotoMissing}
+            />
+          </div>
+          {photoMissing && (
+            <EditHint file="public/images/profile/" className="hero-avatar-hint">
+              Adicione sua foto
+            </EditHint>
+          )}
           {profile.nickname && (
             <span
               className={`hero-photo-tag mono ${tagReveal.className}`}

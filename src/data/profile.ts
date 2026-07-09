@@ -37,6 +37,13 @@ export interface Profile {
   /** Caminho da foto dentro de /public, ex: "images/profile/joao-vitor.jpg" */
   photo: string;
 
+  /**
+   * Imagem decorativa (colagem, textura, moldura) exibida como anel ao redor
+   * da foto no Hero — efeito "moldura de foto de perfil" estilo Facebook.
+   * Caminho dentro de /public, ex: "images/profile/moldura.jpg". Opcional.
+   */
+  photoFrame?: string;
+
   age?: number;
   city?: string;
 
@@ -72,6 +79,7 @@ export const profile: Profile = {
   heroIntro:
     "Tenho 22 anos e acredito que toda boa ideia começa com uma boa história. Meu trabalho é transformar criatividade em soluções que conectam marcas, pessoas e experiências.",
   photo: "images/profile/joao-vitor.jpg",
+  photoFrame: "images/profile/moldura.jpg",
 
   age: 22,
   city: "",
