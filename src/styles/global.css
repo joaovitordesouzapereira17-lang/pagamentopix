@@ -303,7 +303,37 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
 .experience-description { font-size: 14px; color: var(--text-on-light-muted); max-width: 62ch; margin-bottom: 8px; }
 .experience-tech { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--text-on-light-muted); text-transform: uppercase; }
 
-.about-content > .btn { margin-top: 40px; }
+.about-grid .btn-line { margin-top: 40px; }
+
+/* =====================================================
+   CHILDHOOD PHOTO — bloco narrativo com foto de infância
+===================================================== */
+.childhood-block { margin-top: 96px; padding-top: 48px; border-top: 1px solid var(--border-on-light); }
+.childhood-grid { display: grid; grid-template-columns: 240px 1fr; column-gap: clamp(32px, 6vw, 72px); align-items: center; }
+
+.childhood-photo.photo-frame { width: 100%; height: auto; }
+.childhood-photo .photo-frame-inner { aspect-ratio: 4 / 5; }
+.childhood-photo .photo-frame-fallback { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+.childhood-photo .edit-hint { margin-top: 12px; }
+
+.childhood-quote {
+  font-family: var(--font-display); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.3; margin-bottom: 18px;
+}
+.childhood-caption { font-size: 15px; color: var(--text-on-light-muted); max-width: 52ch; }
+
+/* =====================================================
+   PHILOSOPHY — declaração de princípio, alinhada à direita
+===================================================== */
+.about-philosophy {
+  margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border-on-light);
+  max-width: 620px; margin-left: auto;
+}
+.philosophy-title {
+  font-family: var(--font-display); font-style: italic; font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  color: var(--wine); margin-bottom: 16px;
+}
+.philosophy-text { font-size: 16px; color: var(--text-on-light-muted); }
 
 /* =====================================================
    PROJECTS (fundo grafite — accent secundário azul)
@@ -462,6 +492,10 @@ body.modal-open { overflow: hidden; }
   .about-rule { display: none; }
   .about-facts { margin-top: 40px; flex-direction: row; flex-wrap: wrap; gap: 0 40px; }
   .fact-row { flex: 1 1 200px; }
+
+  .childhood-grid { grid-template-columns: 1fr; row-gap: 28px; }
+  .childhood-photo.photo-frame { max-width: 240px; }
+  .about-philosophy { max-width: none; margin-left: 0; }
 
   .project-spread, .project-spread.is-reverse { grid-template-columns: 1fr; }
   .project-visual-col, .project-spread.is-reverse .project-visual-col { grid-column: 1 / -1; order: 1; }

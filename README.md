@@ -57,6 +57,11 @@ O campo `nickname` (opcional) vira a assinatura no cabeçalho e uma etiqueta
 vertical ao lado da foto no Hero — deixe em branco para usar só o primeiro
 nome do campo `fullName`.
 
+`philosophy` (opcional) é uma declaração curta exibida no fim da seção Sobre.
+`childhoodPhoto` (opcional) monta o bloco narrativo com uma foto antiga —
+coloque a imagem em `public/images/profile/` e aponte o campo `image` para
+ela; `quote` e `caption` são o texto ao lado.
+
 ### Experiências profissionais — `src/data/experience.ts`
 
 Um objeto por experiência (empresa, cargo, período, descrição, tecnologias),

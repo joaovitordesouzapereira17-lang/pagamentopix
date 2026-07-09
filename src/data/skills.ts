@@ -9,7 +9,17 @@ export interface SkillGroup {
 }
 
 export const skills: SkillGroup[] = [
-  // { category: "Frontend", items: ["React", "TypeScript", "CSS"] },
-  // { category: "Backend", items: ["Node.js", "PostgreSQL"] },
-  // { category: "Ferramentas", items: ["Git", "Figma", "Docker"] },
+  { category: "Design", items: ["Adobe Photoshop", "Adobe Illustrator", "Canva"] },
+  {
+    category: "Marketing",
+    items: [
+      "Branding",
+      "Social Media",
+      "Planejamento de Conteúdo",
+      "Identidade Visual",
+      "Copywriting",
+      "Marketing Digital",
+      "Estratégia de Comunicação",
+    ],
+  },
 ];

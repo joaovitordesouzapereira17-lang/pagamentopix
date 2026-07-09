@@ -24,9 +24,10 @@ export function Projects() {
       <div className={`section-head ${head.className}`} ref={head.ref} style={head.style}>
         <h2 className="section-title-serif">Trabalho selecionado</h2>
         <p className="section-desc">
-          {projects.length > 0
-            ? "Uma seleção de projetos. Selecione a imagem para abrir o case completo."
-            : "Nenhum projeto cadastrado ainda."}
+          Cada projeto representa uma oportunidade de transformar uma ideia em uma experiência. Gosto
+          de participar de todas as etapas do processo, desde o conceito até a construção da
+          identidade visual, sempre buscando unir criatividade e estratégia para criar soluções que
+          realmente façam sentido.
         </p>
 
         {projectCategories.length > 1 && (
