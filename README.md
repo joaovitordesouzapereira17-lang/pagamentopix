@@ -1,54 +1,95 @@
-# Portfólio — Ana Duarte (template)
+# Portfólio — João Vitor de Souza Pereira
 
-Site de portfólio estático (HTML/CSS/JS puro, sem build), pronto para publicar em qualquer
-hospedagem estática (GitHub Pages, Netlify, Vercel, etc.).
+Portfólio pessoal construído em **React + TypeScript + Vite**. Todo o conteúdo
+(nome, bio, experiências, skills, projetos, mídias) fica isolado em `src/data/`
+e `public/` — para atualizar o site, edite esses arquivos; os componentes em
+`src/components/` não precisam ser tocados.
 
-Identidade visual autoral: mistura de Punk, Y2K, Maximalismo, Editorial e Design Tech —
-paleta preto/branco/vinho/azul elétrico, tipografia `Unbounded` + `Archivo` + `Space Mono`,
-grid assimétrico, glitch, halftone, marquee, cursor customizado e modal de detalhes de
-projeto.
+O projeto não tem nenhum conteúdo fictício. Onde uma informação ainda não foi
+preenchida, o site mostra um aviso discreto (`✎ ... — edite em src/data/...`)
+apontando exatamente onde escrever — nunca um texto de exemplo fingindo ser real.
+
+## Rodando localmente
+
+```bash
+npm install
+npm run dev      # servidor de desenvolvimento com hot reload
+npm run build    # build de produção em /dist
+npm run preview  # serve o build de produção localmente
+npm run lint     # checagem de tipos (tsc --noEmit)
+```
 
 ## Estrutura
 
 ```
-index.html        # marcação e conteúdo de todas as seções
-css/styles.css     # estilos (paleta, tipografia, layout, responsividade, animações)
-js/main.js         # menu mobile, cursor, parallax, glitch, filtro de projetos,
-                    # modal de detalhes, scroll reveal, formulário
+src/
+  data/
+    profile.ts        # nome, cargo, foto, bio, idade, cidade, formação, contato, redes sociais
+    experience.ts      # lista de experiências profissionais
+    skills.ts           # habilidades agrupadas por categoria
+    projects/
+      types.ts          # formato (interface) de um projeto
+      index.ts           # agrega automaticamente os arquivos desta pasta — não editar
+      README.md            # como adicionar um projeto novo
+      <slug>.ts             # um arquivo por projeto (você cria)
+  components/          # UI — consome os dados acima, não contém conteúdo
+  hooks/                # scroll reveal, parallax, glitch
+  styles/global.css      # paleta, tipografia, layout, responsividade
+public/
+  images/profile/        # sua foto
+  images/projects/<slug>/  # imagens de cada projeto
+  videos/projects/<slug>/  # vídeos de apresentação (opcional)
+  icons/                    # ícones extras, se precisar
+  files/                     # currículo em PDF, etc.
 ```
 
-## Como personalizar
+## Como editar o conteúdo
 
-Todo o conteúdo é placeholder e deve ser substituído no `index.html`:
+### Perfil, hero, "Sobre" e contato — `src/data/profile.ts`
 
-- **Nome/logo**: troque "Ana Duarte" e as iniciais "AD" no cabeçalho, hero e rodapé.
-- **Hero**: nome grande, frase de apresentação e números em `#topo`.
-- **Sobre**: citação de destaque, bio e as duas listas ("O que eu faço" / "Área de
-  atuação") em `#sobre`.
-- **Projetos**: cada `<button class="project-card">` em `#projetos` tem um
-  `data-project="id"` que corresponde a uma entrada no objeto `projectData` em
-  `js/main.js` — é ali que ficam a descrição longa, ano, papel, ferramentas e tags
-  exibidas no modal de detalhes. Edite os dois lugares juntos ao trocar um projeto.
-  Para adicionar/remover categorias de filtro, ajuste os botões `.filter-btn` e o
-  atributo `data-category` dos cards.
-- **Skills**: grupos e tags em `#skills` (`.skill-group` / `.tag-chip`).
-- **Contato**: e-mail, telefone e links de redes sociais (`href="#"`) em `#contato`.
-  O formulário abre o cliente de e-mail do visitante via `mailto:` (em `js/main.js`,
-  variável de destino `ana.duarte@exemplo.com`) — troque pelo seu e-mail, ou substitua
-  por um serviço de formulário (Formspree, Web3Forms, etc.) se preferir receber sem
-  depender do app de e-mail do usuário.
-- **Paleta**: os quatro tokens de cor (`--ink`, `--paper`, `--wine`, `--electric`) estão
-  no topo de `css/styles.css` — mudar esses valores atualiza o site inteiro.
+Preencha os campos: `role`, `heroIntro`, `bio`, `age`, `city`, `education`,
+`focusAreas`, `email`, `phone`, `socials`. Coloque sua foto em
+`public/images/profile/` e aponte o campo `photo` para o arquivo (ex:
+`"images/profile/joao-vitor.jpg"`). Enquanto a foto não existir, o site mostra
+suas iniciais no lugar — nada quebra.
+
+### Experiências profissionais — `src/data/experience.ts`
+
+Um objeto por experiência (empresa, cargo, período, descrição, tecnologias),
+do mais recente para o mais antigo.
+
+### Skills — `src/data/skills.ts`
+
+Grupos por categoria (`{ category: "Frontend", items: [...] }`). Adicione,
+remova ou renomeie grupos livremente.
+
+### Projetos — `src/data/projects/`
+
+Cada projeto é **um arquivo próprio** nessa pasta (veja o `README.md` dentro
+dela para o formato exato). Para adicionar um projeto novo, basta criar o
+arquivo — nenhum outro lugar precisa ser editado, o índice encontra sozinho.
+Categorias de filtro na seção Projetos são geradas automaticamente a partir
+dos projetos cadastrados.
+
+Coloque as imagens/vídeos de cada projeto em:
+
+```
+public/images/projects/<slug>/
+public/videos/projects/<slug>/
+```
+
+### Currículo em PDF
+
+Coloque o arquivo em `public/files/` e aponte `profile.resumeUrl` para ele.
+O botão "Baixar currículo" na seção Sobre só aparece quando esse campo está
+preenchido.
 
 ## Publicar no GitHub Pages
 
-1. Configure Settings → Pages → Branch: a branch deste repositório, pasta `/ (root)`.
-2. O site ficará disponível em `https://<usuário>.github.io/<repositório>/`.
+Este repositório já inclui um workflow (`.github/workflows/deploy.yml`) que
+builda e publica o site automaticamente a cada push na branch principal.
+Ative em **Settings → Pages → Source: GitHub Actions** uma única vez; depois
+disso, todo push já atualiza o site publicado em
+`https://<usuário>.github.io/pagamentopix/`.
 
-## Rodar localmente
-
-Não é necessário build. Basta abrir `index.html` no navegador, ou servir a pasta:
-
-```
-python3 -m http.server 8000
-```
+Se o nome do repositório mudar, atualize também o `base` em `vite.config.ts`.
