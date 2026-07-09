@@ -46,6 +46,11 @@ export function Hero() {
 
   return (
     <section className="hero" id="topo">
+      {profile.photoFrame && (
+        <div className="hero-bg" aria-hidden="true">
+          <img className="hero-bg-image" src={withBase(profile.photoFrame)} alt="" />
+        </div>
+      )}
       <div className="hero-grid">
         <p className={`hero-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
           <GraphicMark symbol="cross" className="hero-kicker-mark" />
@@ -70,9 +75,6 @@ export function Hero() {
 
         <div className={`hero-photo-panel ${photo.className}`} ref={photo.ref} style={photo.style}>
           <div className="hero-avatar">
-            {profile.photoFrame && (
-              <img className="hero-avatar-frame" src={withBase(profile.photoFrame)} alt="" aria-hidden="true" />
-            )}
             <ProfilePhoto
               src={profile.photo}
               alt={profile.fullName}

@@ -38,8 +38,8 @@ export interface Profile {
   photo: string;
 
   /**
-   * Imagem decorativa (colagem, textura, moldura) exibida como anel ao redor
-   * da foto no Hero — efeito "moldura de foto de perfil" estilo Facebook.
+   * Imagem decorativa (colagem, textura) exibida como plano de fundo de todo
+   * o Hero — como uma capa/cover, com a foto (circular) sobreposta por cima.
    * Caminho dentro de /public, ex: "images/profile/moldura.jpg". Opcional.
    */
   photoFrame?: string;
@@ -90,8 +90,8 @@ export const profile: Profile = {
     "Hoje curso Publicidade e Propaganda e direciono minha criatividade para áreas como branding, identidade visual, design e marketing digital. Busco desenvolver projetos que unam estratégia, comunicação e estética para criar experiências que façam sentido para as pessoas.",
   focusAreas: ["Branding", "Identidade Visual", "Design", "Marketing Digital"],
 
-  email: "",
-  phone: "",
+  email: "joaovitordesouzapereira17@gmail.com",
+  phone: "(11) 97093-4843",
   resumeUrl: "files/curriculo-joao-vitor.pdf",
 
   socials: [

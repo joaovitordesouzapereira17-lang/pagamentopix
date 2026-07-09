@@ -63,9 +63,9 @@ coloque a imagem em `public/images/profile/` e aponte o campo `image` para
 ela; `quote` e `caption` são o texto ao lado.
 
 `photoFrame` (opcional) é uma imagem decorativa (colagem, textura) exibida
-como moldura ao redor da foto do Hero — efeito "moldura de foto de perfil"
-estilo Facebook: a moldura ocupa um quadrado com cantos arredondados e a foto
-(`photo`) aparece por cima, recortada em círculo, centralizada.
+como plano de fundo de toda a seção Hero — como uma capa/cover (estilo
+Facebook) —, com a foto (`photo`) sobreposta por cima, recortada em círculo,
+centralizada.
 
 ### Experiências profissionais — `src/data/experience.ts`
 
