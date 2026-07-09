@@ -3,365 +3,362 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ana Duarte — Portfólio de Design</title>
-<meta name="description" content="Portfólio de Ana Duarte, designer de produto especializada em branding, UI/UX e ilustração." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%237C3AED%22/><text x=%2250%22 y=%2266%22 font-size=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>A</text></svg>" />
+<title>Ana Duarte — Direção de Arte & Design</title>
+<meta name="description" content="Portfólio de Ana Duarte, diretora de arte e designer criativa. Branding, UI/UX e ilustração com atitude." />
+<meta name="theme-color" content="#0B0B0C" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0B0C%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%232A3EFF%22 font-family=%22sans-serif%22 font-weight=%22900%22>A</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-<a class="skip-link" href="#inicio-conteudo">Pular para o conteúdo</a>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
 
 <header class="site-header" id="site-header">
-  <div class="container header-inner">
-    <a href="#inicio" class="logo">
-      <span class="logo-mark">AD</span>
-      <span class="logo-text">Ana Duarte</span>
+  <div class="header-inner">
+    <a href="#topo" class="logo">
+      <span class="logo-mark">AD<span class="logo-mark-dot">*</span></span>
     </a>
 
     <nav class="nav" id="nav">
+      <button class="nav-close" id="nav-close" aria-label="Fechar menu">✕</button>
       <ul>
-        <li><a href="#inicio" class="nav-link">Início</a></li>
-        <li><a href="#sobre" class="nav-link">Sobre</a></li>
-        <li><a href="#projetos" class="nav-link">Projetos</a></li>
-        <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
-        <li><a href="#contato" class="nav-link">Contato</a></li>
+        <li><span class="nav-index">01</span><a href="#sobre" class="nav-link">Sobre</a></li>
+        <li><span class="nav-index">02</span><a href="#projetos" class="nav-link">Projetos</a></li>
+        <li><span class="nav-index">03</span><a href="#skills" class="nav-link">Skills</a></li>
+        <li><span class="nav-index">04</span><a href="#contato" class="nav-link">Contato</a></li>
       </ul>
+      <div class="nav-footer">
+        <span>ana.duarte@exemplo.com</span>
+        <span>São Paulo, BR — GMT-3</span>
+      </div>
     </nav>
 
-    <a href="#contato" class="btn btn-small btn-primary header-cta">Vamos conversar</a>
+    <a href="#contato" class="btn btn-mini header-cta">Disponível ✦</a>
 
     <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
+      <span>Menu</span>
+      <span class="menu-toggle-box"><i></i><i></i></span>
     </button>
   </div>
 </header>
 
-<main id="inicio-conteudo">
+<main id="conteudo">
 
-  <!-- HERO / INÍCIO -->
-  <section class="hero" id="inicio">
-    <div class="hero-blobs" aria-hidden="true">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
+  <!-- HERO -->
+  <section class="hero" id="topo">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-halftone"></div>
+      <div class="hero-scanlines"></div>
+      <div class="hero-shape hero-shape-ring" data-parallax="0.12"></div>
+      <div class="hero-shape hero-shape-star" data-parallax="0.22">
+        <svg viewBox="0 0 40 40" fill="var(--electric)"><path d="M20 0l4 15 15 5-15 5-4 15-4-15-15-5 15-5z"/></svg>
+      </div>
+      <div class="hero-shape hero-shape-square" data-parallax="0.08"></div>
+      <span class="hero-shape hero-shape-vert" data-parallax="0.05">ANO 2026 ✦ PORTFÓLIO ✦</span>
     </div>
 
-    <div class="container hero-inner">
-      <p class="eyebrow reveal">Designer de Produto & Marca</p>
+    <div class="hero-inner">
+      <p class="eyebrow mono reveal">// Diretora de Arte — Design Criativo</p>
+
       <h1 class="hero-title reveal">
-        Eu crio <span class="text-gradient">experiências visuais</span><br />
-        que conectam marcas a pessoas.
+        <span class="glitch-wrap" data-text="ANA">
+          <span class="glitch-base">ANA</span>
+          <span class="glitch-layer glitch-layer-1" aria-hidden="true">ANA</span>
+          <span class="glitch-layer glitch-layer-2" aria-hidden="true">ANA</span>
+        </span>
+        <span class="glitch-wrap hero-title-outline" data-text="DUARTE">
+          <span class="glitch-base">DUARTE</span>
+          <span class="glitch-layer glitch-layer-1" aria-hidden="true">DUARTE</span>
+          <span class="glitch-layer glitch-layer-2" aria-hidden="true">DUARTE</span>
+        </span>
       </h1>
-      <p class="hero-subtitle reveal">
-        Olá, eu sou a Ana. Ajudo empresas e startups a transformar ideias em produtos
-        digitais bonitos, usáveis e memoráveis — do branding ao design de interface.
-      </p>
-      <div class="hero-actions reveal">
-        <a href="#projetos" class="btn btn-primary">Ver projetos</a>
-        <a href="#contato" class="btn btn-outline">Fale comigo</a>
+
+      <div class="hero-foot reveal">
+        <p class="hero-subtitle">
+          Eu desenho marcas e interfaces que não pedem licença.
+          Branding, UI/UX e ilustração com <em>atitude</em> — para gente que
+          não quer se parecer com todo mundo.
+        </p>
+        <div class="hero-actions">
+          <a href="#projetos" class="btn btn-primary">Ver trabalhos</a>
+          <a href="#contato" class="btn btn-outline">Fale comigo</a>
+        </div>
       </div>
 
       <div class="hero-stats reveal">
-        <div class="stat">
-          <span class="stat-number">6+</span>
-          <span class="stat-label">anos de experiência</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">40+</span>
-          <span class="stat-label">projetos entregues</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">18</span>
-          <span class="stat-label">clientes satisfeitos</span>
-        </div>
+        <div class="stat"><span class="stat-number mono">6+</span><span class="stat-label">anos na estrada</span></div>
+        <div class="stat"><span class="stat-number mono">40+</span><span class="stat-label">projetos soltos no mundo</span></div>
+        <div class="stat"><span class="stat-number mono">18</span><span class="stat-label">marcas reinventadas</span></div>
       </div>
     </div>
 
     <a href="#sobre" class="scroll-cue" aria-label="Rolar para a próxima seção">
-      <span></span>
+      <span class="scroll-cue-text mono">SCROLL</span>
+      <span class="scroll-cue-line"><span></span></span>
     </a>
   </section>
 
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>DIREÇÃO DE ARTE ✦ BRANDING ✦ UI/UX ✦ ILUSTRAÇÃO ✦ DESIGN SYSTEMS ✦ MOTION ✦ </span>
+      <span>DIREÇÃO DE ARTE ✦ BRANDING ✦ UI/UX ✦ ILUSTRAÇÃO ✦ DESIGN SYSTEMS ✦ MOTION ✦ </span>
+    </div>
+  </div>
+
   <!-- SOBRE -->
-  <section class="section" id="sobre">
-    <div class="container about-grid">
+  <section class="section about" id="sobre">
+    <div class="spread-label mono reveal"><span>SOBRE — SPREAD 01</span><span>ROLAR ↓</span></div>
+
+    <div class="about-grid">
       <div class="about-visual reveal">
-        <div class="avatar-frame">
-          <div class="avatar-badge">AD</div>
-        </div>
-        <div class="about-card-float">
-          <span class="dot"></span>
-          Disponível para novos projetos
+        <div class="about-frame">
+          <span class="about-frame-mono">AD.02</span>
+          <div class="about-avatar">AD</div>
+          <div class="about-frame-tag">DISPONÍVEL<br />PARA PROJETOS</div>
         </div>
       </div>
 
       <div class="about-content reveal">
-        <p class="section-eyebrow">Sobre mim</p>
-        <h2 class="section-title">Design é a forma como eu resolvo problemas.</h2>
-        <p class="about-text">
-          Sou designer com foco em identidade visual e produtos digitais. Trabalho na
-          fronteira entre estética e estratégia, criando marcas consistentes e interfaces
-          intuitivas que ajudam negócios a crescer. Já colaborei com startups, agências e
-          empresas estabelecidas, sempre com um processo colaborativo e centrado em pessoas.
-        </p>
-        <p class="about-text">
-          Quando não estou desenhando telas, estou estudando tipografia, testando novas
-          paletas de cor ou tomando café em busca da próxima grande ideia.
+        <p class="pull-quote">
+          "Eu não sigo tendência.<br />Eu colido referências até<br />virar personalidade."
         </p>
 
-        <ul class="about-facts">
-          <li><strong>Localização</strong><span>São Paulo, Brasil (remoto)</span></li>
-          <li><strong>E-mail</strong><span>ana.duarte@exemplo.com</span></li>
-          <li><strong>Foco</strong><span>Branding · UI/UX · Design Systems</span></li>
-        </ul>
+        <p class="about-text">
+          Sou designer com base em identidade visual e produtos digitais. Trabalho na
+          fronteira entre estética e estratégia — pego briefings sérios e devolvo
+          soluções com camada, textura e um pé fora da linha. Já colaborei com
+          startups, agências e marcas grandes que queriam parar de parecer iguais.
+        </p>
 
-        <a href="#contato" class="btn btn-primary">Vamos trabalhar juntos</a>
+        <div class="about-lists">
+          <div>
+            <p class="about-list-title mono">O QUE EU FAÇO</p>
+            <ul class="scribble-list">
+              <li>Identidade visual & branding</li>
+              <li>Interfaces digitais (web & app)</li>
+              <li>Design systems escaláveis</li>
+              <li>Ilustração editorial</li>
+            </ul>
+          </div>
+          <div>
+            <p class="about-list-title mono">ÁREA DE ATUAÇÃO</p>
+            <ul class="scribble-list">
+              <li>Startups & produtos digitais</li>
+              <li>Moda, música & cultura</li>
+              <li>Fintech & healthtech</li>
+              <li>Editoriais independentes</li>
+            </ul>
+          </div>
+        </div>
+
+        <a href="#contato" class="btn btn-primary">Vamos trabalhar juntas</a>
       </div>
     </div>
   </section>
 
   <!-- PROJETOS -->
-  <section class="section section-alt" id="projetos">
-    <div class="container">
-      <div class="section-heading reveal">
-        <p class="section-eyebrow">Trabalhos selecionados</p>
-        <h2 class="section-title">Projetos recentes</h2>
-        <p class="section-subtitle">Uma seleção de trabalhos em branding, produtos digitais e ilustração.</p>
-      </div>
+  <section class="section section-invert" id="projetos">
+    <div class="spread-label mono reveal"><span>PROJETOS — SPREAD 02</span><span>06 TRABALHOS</span></div>
 
-      <div class="filters reveal" role="group" aria-label="Filtrar projetos por categoria">
-        <button class="filter-btn is-active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="branding">Branding</button>
-        <button class="filter-btn" data-filter="uiux">UI/UX</button>
-        <button class="filter-btn" data-filter="ilustracao">Ilustração</button>
-      </div>
+    <div class="section-heading reveal">
+      <h2 class="section-title">Trabalhos que<br />fazem barulho.</h2>
+      <p class="section-subtitle">Uma seleção de projetos em branding, produto digital e ilustração. Clique num card para abrir os detalhes.</p>
+    </div>
 
-      <div class="projects-grid" id="projects-grid">
+    <div class="filters reveal" role="group" aria-label="Filtrar projetos por categoria">
+      <button class="filter-btn is-active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="branding">Branding</button>
+      <button class="filter-btn" data-filter="uiux">UI/UX</button>
+      <button class="filter-btn" data-filter="ilustracao">Ilustração</button>
+    </div>
 
-        <article class="project-card reveal" data-category="branding">
-          <div class="project-thumb thumb-1">
-            <span class="project-tag-float">Branding</span>
-          </div>
-          <div class="project-body">
-            <h3>Aurora — Identidade Visual</h3>
-            <p>Sistema de marca completo para uma healthtech, do logo à aplicação em UI.</p>
-            <div class="project-tags">
-              <span>Branding</span><span>Logo</span><span>Guidelines</span>
-            </div>
-            <a href="#" class="project-link">Ver estudo de caso <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
+    <div class="projects-grid" id="projects-grid">
 
-        <article class="project-card reveal" data-category="uiux">
-          <div class="project-thumb thumb-2">
-            <span class="project-tag-float">UI/UX</span>
-          </div>
-          <div class="project-body">
-            <h3>Nimbus — App de Produtividade</h3>
-            <p>Redesign completo de app mobile, com foco em simplicidade e acessibilidade.</p>
-            <div class="project-tags">
-              <span>UI Design</span><span>Mobile</span><span>Prototipagem</span>
-            </div>
-            <a href="#" class="project-link">Ver estudo de caso <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
+      <button class="project-card reveal span-8" data-category="branding" data-project="aurora">
+        <span class="project-index mono">01</span>
+        <div class="project-thumb thumb-1"><span class="project-tag-float mono">BRANDING</span></div>
+        <div class="project-body">
+          <h3>Aurora — Identidade Visual</h3>
+          <p>Sistema de marca completo para uma healthtech, do logo à aplicação em UI.</p>
+          <span class="project-cta mono">ABRIR DETALHES →</span>
+        </div>
+      </button>
 
-        <article class="project-card reveal" data-category="ilustracao">
-          <div class="project-thumb thumb-3">
-            <span class="project-tag-float">Ilustração</span>
-          </div>
-          <div class="project-body">
-            <h3>Flora Fest — Cartazes de Evento</h3>
-            <p>Série de ilustrações e cartazes para um festival de música independente.</p>
-            <div class="project-tags">
-              <span>Ilustração</span><span>Pôster</span><span>Editorial</span>
-            </div>
-            <a href="#" class="project-link">Ver estudo de caso <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
+      <button class="project-card reveal span-4" data-category="uiux" data-project="nimbus">
+        <span class="project-index mono">02</span>
+        <div class="project-thumb thumb-2"><span class="project-tag-float mono">UI/UX</span></div>
+        <div class="project-body">
+          <h3>Nimbus — App de Produtividade</h3>
+          <p>Redesign mobile com foco em simplicidade e acessibilidade.</p>
+          <span class="project-cta mono">ABRIR DETALHES →</span>
+        </div>
+      </button>
 
-        <article class="project-card reveal" data-category="uiux">
-          <div class="project-thumb thumb-4">
-            <span class="project-tag-float">UI/UX</span>
-          </div>
-          <div class="project-body">
-            <h3>Orbit — App Financeiro</h3>
-            <p>Design de produto do zero para um app de finanças pessoais.</p>
-            <div class="project-tags">
-              <span>Fintech</span><span>Design System</span><span>App</span>
-            </div>
-            <a href="#" class="project-link">Ver estudo de caso <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
+      <button class="project-card reveal span-4" data-category="ilustracao" data-project="flora">
+        <span class="project-index mono">03</span>
+        <div class="project-thumb thumb-3"><span class="project-tag-float mono">ILUSTRAÇÃO</span></div>
+        <div class="project-body">
+          <h3>Flora Fest — Cartazes</h3>
+          <p>Ilustrações e cartazes para um festival de música independente.</p>
+          <span class="project-cta mono">ABRIR DETALHES →</span>
+        </div>
+      </button>
 
-        <article class="project-card reveal" data-category="branding">
-          <div class="project-thumb thumb-5">
-            <span class="project-tag-float">Branding</span>
-          </div>
-          <div class="project-body">
-            <h3>Café Lumen — Marca & Embalagem</h3>
-            <p>Naming, identidade visual e embalagens para uma torrefação artesanal.</p>
-            <div class="project-tags">
-              <span>Branding</span><span>Packaging</span><span>Print</span>
-            </div>
-            <a href="#" class="project-link">Ver estudo de caso <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
+      <button class="project-card reveal span-4" data-category="uiux" data-project="orbit">
+        <span class="project-index mono">04</span>
+        <div class="project-thumb thumb-4"><span class="project-tag-float mono">APP</span></div>
+        <div class="project-body">
+          <h3>Orbit — App Financeiro</h3>
+          <p>Design de produto do zero para um app de finanças pessoais.</p>
+          <span class="project-cta mono">ABRIR DETALHES →</span>
+        </div>
+      </button>
 
-        <article class="project-card reveal" data-category="uiux">
-          <div class="project-thumb thumb-6">
-            <span class="project-tag-float">Design System</span>
-          </div>
-          <div class="project-body">
-            <h3>Estudo: Sistema de Design</h3>
-            <p>Biblioteca de componentes escalável construída para um time de produto.</p>
-            <div class="project-tags">
-              <span>Design System</span><span>Figma</span><span>Documentação</span>
-            </div>
-            <a href="#" class="project-link">Ver estudo de caso <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
+      <button class="project-card reveal span-4" data-category="branding" data-project="lumen">
+        <span class="project-index mono">05</span>
+        <div class="project-thumb thumb-5"><span class="project-tag-float mono">BRANDING</span></div>
+        <div class="project-body">
+          <h3>Café Lumen — Marca & Embalagem</h3>
+          <p>Naming, identidade visual e embalagens para uma torrefação artesanal.</p>
+          <span class="project-cta mono">ABRIR DETALHES →</span>
+        </div>
+      </button>
 
-      </div>
+      <button class="project-card reveal span-8" data-category="uiux" data-project="sistema">
+        <span class="project-index mono">06</span>
+        <div class="project-thumb thumb-6"><span class="project-tag-float mono">DESIGN SYSTEM</span></div>
+        <div class="project-body">
+          <h3>Estudo: Sistema de Design</h3>
+          <p>Biblioteca de componentes escalável construída para um time de produto.</p>
+          <span class="project-cta mono">ABRIR DETALHES →</span>
+        </div>
+      </button>
+
     </div>
   </section>
 
-  <!-- HABILIDADES -->
-  <section class="section" id="habilidades">
-    <div class="container">
-      <div class="section-heading reveal">
-        <p class="section-eyebrow">O que eu faço</p>
-        <h2 class="section-title">Habilidades & Ferramentas</h2>
-        <p class="section-subtitle">Um conjunto de competências construído ao longo de projetos reais.</p>
-      </div>
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="spread-label mono reveal"><span>SKILLS — SPREAD 03</span><span>4 FRENTES</span></div>
 
-      <div class="skills-grid">
-        <div class="skill-card reveal">
-          <div class="skill-icon" style="--c1:#7C3AED;--c2:#EC4899">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-          </div>
-          <h3>UI Design</h3>
-          <p>Interfaces limpas, consistentes e centradas no usuário para web e mobile.</p>
-        </div>
+    <div class="section-heading reveal">
+      <h2 class="section-title">Caixa de<br />ferramentas.</h2>
+      <p class="section-subtitle">Habilidades por área — sem barra de progresso, só o que eu realmente entrego.</p>
+    </div>
 
-        <div class="skill-card reveal">
-          <div class="skill-icon" style="--c1:#EC4899;--c2:#F97316">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4l6 6-9 9H5v-6l9-9z"/><path d="M13 5l6 6"/></svg>
-          </div>
-          <h3>Prototipagem</h3>
-          <p>Fluxos interativos e testáveis para validar ideias antes do desenvolvimento.</p>
-        </div>
-
-        <div class="skill-card reveal">
-          <div class="skill-icon" style="--c1:#F97316;--c2:#FACC15">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="8" r="1.4" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="8" cy="13" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="16" r="1.4" fill="currentColor" stroke="none"/></svg>
-          </div>
-          <h3>Branding & Identidade</h3>
-          <p>Construção de marcas com personalidade, do naming à aplicação visual.</p>
-        </div>
-
-        <div class="skill-card reveal">
-          <div class="skill-icon" style="--c1:#06B6D4;--c2:#7C3AED">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19c4-1 5-9 9-11 3-1.5 6 .5 7 3-3-1-6 1-8 4-2 3-4 5-8 4z"/></svg>
-          </div>
-          <h3>Ilustração Digital</h3>
-          <p>Ilustrações autorais para campanhas, editoriais e produtos digitais.</p>
-        </div>
-
-        <div class="skill-card reveal">
-          <div class="skill-icon" style="--c1:#7C3AED;--c2:#06B6D4">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2.5"/><line x1="5" y1="18" x2="19" y2="18"/></svg>
-          </div>
-          <h3>Design Responsivo</h3>
-          <p>Experiências consistentes em qualquer tamanho de tela.</p>
-        </div>
-
-        <div class="skill-card reveal">
-          <div class="skill-icon" style="--c1:#FACC15;--c2:#EC4899">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg>
-          </div>
-          <h3>Design Systems</h3>
-          <p>Bibliotecas de componentes escaláveis para times de produto.</p>
+    <div class="skills-groups">
+      <div class="skill-group reveal">
+        <p class="skill-group-title mono">DESIGN</p>
+        <div class="tag-cloud">
+          <span class="tag-chip size-lg rot-1">UI Design</span>
+          <span class="tag-chip size-md rot-2">Branding</span>
+          <span class="tag-chip size-md rot-0">Design Systems</span>
+          <span class="tag-chip size-sm rot-3">Ilustração</span>
+          <span class="tag-chip size-md rot-1">Editorial</span>
+          <span class="tag-chip size-sm rot-0">Packaging</span>
         </div>
       </div>
 
-      <div class="tools reveal">
-        <span class="tool-pill">Figma</span>
-        <span class="tool-pill">Adobe XD</span>
-        <span class="tool-pill">Photoshop</span>
-        <span class="tool-pill">Illustrator</span>
-        <span class="tool-pill">After Effects</span>
-        <span class="tool-pill">Notion</span>
-        <span class="tool-pill">Webflow</span>
+      <div class="skill-group reveal">
+        <p class="skill-group-title mono">MOTION</p>
+        <div class="tag-cloud">
+          <span class="tag-chip size-md rot-2">Motion Graphics</span>
+          <span class="tag-chip size-lg rot-0">Micro-interações</span>
+          <span class="tag-chip size-sm rot-1">Prototipagem</span>
+          <span class="tag-chip size-md rot-3">After Effects</span>
+        </div>
       </div>
+
+      <div class="skill-group reveal">
+        <p class="skill-group-title mono">DESENVOLVIMENTO</p>
+        <div class="tag-cloud">
+          <span class="tag-chip size-md rot-1">HTML/CSS</span>
+          <span class="tag-chip size-sm rot-0">Figma-to-Code</span>
+          <span class="tag-chip size-lg rot-2">Webflow</span>
+          <span class="tag-chip size-sm rot-0">Design Tokens</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <p class="skill-group-title mono">MARKETING</p>
+        <div class="tag-cloud">
+          <span class="tag-chip size-md rot-0">Social Design</span>
+          <span class="tag-chip size-sm rot-2">Campanhas</span>
+          <span class="tag-chip size-lg rot-1">Naming</span>
+          <span class="tag-chip size-md rot-0">Estratégia de Marca</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools-strip reveal">
+      <span class="mono">FERRAMENTAS —</span>
+      <span class="tool-pill">Figma</span>
+      <span class="tool-pill">Adobe XD</span>
+      <span class="tool-pill">Photoshop</span>
+      <span class="tool-pill">Illustrator</span>
+      <span class="tool-pill">After Effects</span>
+      <span class="tool-pill">Notion</span>
+      <span class="tool-pill">Webflow</span>
     </div>
   </section>
 
   <!-- CONTATO -->
   <section class="section section-contact" id="contato">
-    <div class="contact-blobs" aria-hidden="true"></div>
-    <div class="container contact-grid">
+    <div class="contact-bg" aria-hidden="true"></div>
+    <div class="spread-label mono light reveal"><span>CONTATO — SPREAD 04</span><span>VAMOS NESSA</span></div>
+
+    <div class="contact-grid">
       <div class="contact-info reveal">
-        <p class="section-eyebrow section-eyebrow-light">Contato</p>
-        <h2 class="section-title section-title-light">Vamos criar algo incrível juntas(os)?</h2>
+        <h2 class="section-title section-title-light">Vamos criar<br />algo <span class="text-outline-electric">insano</span>?</h2>
         <p class="contact-text">
-          Estou sempre aberta a novos projetos, colaborações e boas conversas sobre design.
-          Me manda uma mensagem e eu respondo o mais rápido possível.
+          Projetos novos, colaborações malucas ou só uma boa conversa sobre design —
+          me chama que eu respondo rápido.
         </p>
 
         <ul class="contact-details">
           <li>
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
-            </span>
+            <span class="contact-icon">✉</span>
             <a href="mailto:ana.duarte@exemplo.com">ana.duarte@exemplo.com</a>
           </li>
           <li>
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.9 2.2z"/></svg>
-            </span>
+            <span class="contact-icon">☏</span>
             <a href="tel:+5511999999999">+55 (11) 99999-9999</a>
           </li>
           <li>
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.2 7-12A7 7 0 0 0 5 10c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.4"/></svg>
-            </span>
+            <span class="contact-icon">◎</span>
             <span>São Paulo, Brasil</span>
           </li>
         </ul>
 
         <div class="social-links">
-          <a href="#" aria-label="LinkedIn" class="social-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21H9z"/></svg>
-          </a>
-          <a href="#" aria-label="Instagram" class="social-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-          </a>
-          <a href="#" aria-label="Behance" class="social-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h6.5a2.7 2.7 0 0 1 0 5.4H2z"/><path d="M2 12.4h7a2.8 2.8 0 0 1 0 5.6H2z"/><path d="M15 15.3a3.2 3.2 0 0 0 6.2-1.1c0-1.9-1.5-3.4-3.4-3.4-1.8 0-3.3 1.4-3.4 3.2M14.8 12.5h6.9"/><path d="M15.5 7.5h5"/></svg>
-          </a>
+          <a href="#" class="social-btn">LinkedIn</a>
+          <a href="#" class="social-btn">Instagram</a>
+          <a href="#" class="social-btn">Behance</a>
         </div>
       </div>
 
       <form class="contact-form reveal" id="contact-form" novalidate>
         <div class="form-row">
-          <label for="name">Nome</label>
+          <label for="name" class="mono">NOME</label>
           <input type="text" id="name" name="name" placeholder="Seu nome" required />
         </div>
         <div class="form-row">
-          <label for="email">E-mail</label>
+          <label for="email" class="mono">E-MAIL</label>
           <input type="email" id="email" name="email" placeholder="voce@email.com" required />
         </div>
         <div class="form-row">
-          <label for="message">Mensagem</label>
+          <label for="message" class="mono">MENSAGEM</label>
           <textarea id="message" name="message" rows="5" placeholder="Conte um pouco sobre o seu projeto..." required></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-full">Enviar mensagem</button>
-        <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
+        <p class="form-note mono" id="form-note" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -369,11 +366,37 @@
 </main>
 
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <p>© <span id="year"></span> Ana Duarte. Todos os direitos reservados.</p>
-    <a href="#inicio" class="back-to-top">Voltar ao topo ↑</a>
+  <div class="marquee-strip footer-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>DISPONÍVEL PARA PROJETOS ✦ DESIGN QUE GRITA ✦ VAMOS NESSA ✦ </span>
+      <span>DISPONÍVEL PARA PROJETOS ✦ DESIGN QUE GRITA ✦ VAMOS NESSA ✦ </span>
+    </div>
+  </div>
+  <div class="footer-inner">
+    <p class="mono">© <span id="year"></span> ANA DUARTE</p>
+    <a href="#topo" class="back-to-top mono">VOLTAR AO TOPO ↑</a>
   </div>
 </footer>
+
+<!-- MODAL DE PROJETO -->
+<div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Fechar detalhes do projeto">✕</button>
+    <span class="modal-index mono" id="modal-index">01</span>
+    <div class="modal-thumb" id="modal-thumb"></div>
+    <div class="modal-body">
+      <p class="modal-category mono" id="modal-category">BRANDING</p>
+      <h3 id="modal-title">Título do projeto</h3>
+      <p id="modal-description">Descrição do projeto.</p>
+      <dl class="modal-meta">
+        <div><dt class="mono">ANO</dt><dd id="modal-year">2025</dd></div>
+        <div><dt class="mono">PAPEL</dt><dd id="modal-role">Design</dd></div>
+        <div><dt class="mono">FERRAMENTAS</dt><dd id="modal-tools">Figma</dd></div>
+      </dl>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
 </body>
