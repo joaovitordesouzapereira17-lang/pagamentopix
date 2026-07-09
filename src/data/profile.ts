@@ -82,7 +82,7 @@ export const profile: Profile = {
   photoFrame: "images/profile/moldura.jpg",
 
   age: 22,
-  city: "",
+  city: "Várzea Paulista, SP",
   education: "Publicidade e Propaganda",
   bio:
     "A criatividade sempre fez parte de quem eu sou. Tenho 22 anos e, desde criança, minha imaginação sempre foi um pouco inquieta. Sempre gostei de criar histórias, imaginar possibilidades e enxergar as coisas por perspectivas diferentes. Aquela criança curiosa continua fazendo parte de quem eu sou hoje — e é justamente ela que inspira a forma como penso e desenvolvo cada projeto.\n\n" +
@@ -95,9 +95,7 @@ export const profile: Profile = {
   resumeUrl: "files/curriculo-joao-vitor.pdf",
 
   socials: [
-    // { label: "LinkedIn", url: "https://linkedin.com/in/seu-usuario" },
-    // { label: "GitHub", url: "https://github.com/seu-usuario" },
-    // { label: "Instagram", url: "https://instagram.com/seu-usuario" },
+    { label: "Instagram", url: "https://www.instagram.com/_.joaovitorz" },
   ],
 
   philosophy: {
