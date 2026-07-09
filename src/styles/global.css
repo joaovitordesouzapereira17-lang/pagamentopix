@@ -23,7 +23,7 @@
   --border-on-dark: rgba(245, 245, 245, 0.12);
   --border-on-light: rgba(28, 26, 24, 0.12);
 
-  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-display: "Bodoni Moda", "Times New Roman", serif;
   --font-body: "Archivo", system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
 
@@ -82,6 +82,19 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
   color: var(--text-on-dark-muted); border-color: var(--border-on-dark); background: rgba(245, 245, 245, 0.04);
 }
 .hero .edit-hint code, .section-contact .edit-hint code { color: var(--blue-soft); background: rgba(63, 94, 140, 0.14); }
+
+/* =====================================================
+   GRAPHIC MARKS
+   Pequenos elementos recorrentes (estrela, cruz, círculo, seta) que
+   surgem com fade + leve rotação ao entrar na viewport.
+===================================================== */
+.graphic-mark {
+  display: inline-block; font-family: var(--font-mono); font-size: 13px; line-height: 1;
+  color: var(--wine-soft); opacity: 0; transform: translateY(10px) rotate(-16deg) scale(0.8);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.graphic-mark.is-visible { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+.section-projects .graphic-mark { color: var(--blue-soft); }
 
 /* =====================================================
    CURSOR + SCROLL PROGRESS
@@ -146,8 +159,9 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
   padding: 0 var(--edge); height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 
-.wordmark { font-family: var(--font-display); font-size: 20px; color: var(--text-on-dark); }
-.wordmark-dot { color: var(--wine-soft); }
+.wordmark { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--text-on-dark); display: inline-flex; align-items: center; gap: 8px; }
+.wordmark-mark { font-size: 11px; transition: transform 0.3s var(--ease), opacity 0.6s var(--ease); }
+.wordmark:hover .wordmark-mark { transform: rotate(90deg) scale(1.15); }
 
 .nav ul { display: flex; gap: 40px; }
 .nav-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-on-dark-muted); position: relative; }
@@ -184,18 +198,35 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
   grid-template-rows: auto 1fr auto; padding-top: clamp(28px, 6vh, 64px);
 }
 
-.hero-kicker { grid-column: 1 / 7; grid-row: 1; font-size: 12px; color: var(--text-on-dark-muted); max-width: 380px; }
+.hero-kicker {
+  grid-column: 1 / 7; grid-row: 1; font-size: 12px; color: var(--text-on-dark-muted); max-width: 380px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-kicker-mark { font-size: 12px; }
 
 .hero-name { grid-column: 1 / 10; grid-row: 2; align-self: center; z-index: 2; }
 .hero-name-line {
   display: block; font-size: clamp(3rem, 9.5vw, 8.5rem); line-height: 0.94; letter-spacing: -0.01em;
+  font-weight: 800;
 }
 .line-b { padding-left: clamp(20px, 8vw, 130px); }
-.line-c { padding-left: clamp(40px, 15vw, 260px); font-style: italic; color: var(--wine-soft); }
+.line-c { padding-left: clamp(40px, 15vw, 260px); font-style: italic; font-weight: 700; color: var(--wine-soft); }
 
 .hero-photo-panel {
   grid-column: 7 / 13; grid-row: 1 / 4; align-self: stretch; position: relative; z-index: 1;
   min-height: 320px;
+}
+.hero-photo-tag {
+  position: absolute; top: 50%; right: -18px; transform-origin: center; z-index: 2;
+  writing-mode: vertical-rl; font-size: 10px; letter-spacing: 0.16em; color: var(--text-on-dark-muted);
+  white-space: nowrap; transition: opacity 0.7s var(--ease);
+}
+/* Especificidade combinada para vencer o transform genérico de .reveal/.reveal.is-visible */
+.hero-photo-tag.reveal {
+  opacity: 0; transform: translateY(calc(-50% + var(--parallax-y, 0px))) rotate(180deg);
+}
+.hero-photo-tag.reveal.is-visible {
+  opacity: 1; transform: translateY(calc(-50% + var(--parallax-y, 0px))) rotate(180deg);
 }
 
 .hero-foot {
@@ -230,9 +261,18 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
    SECTIONS GENERIC
 ===================================================== */
 .section { max-width: var(--container); margin: 0 auto; padding: 120px var(--edge); }
-.section-kicker { font-size: 11px; color: var(--text-on-light-muted); display: block; padding-bottom: 18px; border-bottom: 1px solid var(--border-on-light); margin-bottom: 56px; }
+.section-kicker {
+  font-size: 11px; color: var(--text-on-light-muted); display: flex; align-items: center; gap: 8px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border-on-light); margin-bottom: 56px;
+}
 .section-kicker.light { color: var(--text-on-dark-muted); border-color: var(--border-on-dark); }
 .section-title-serif { font-size: clamp(2.4rem, 5.2vw, 4.4rem); font-style: italic; margin-bottom: 12px; }
+.section-title-serif::after {
+  content: ""; display: block; width: 0; height: 2px; background: var(--wine-soft);
+  margin-top: 16px; transition: width 0.7s var(--ease) 0.15s;
+}
+.section-head.is-visible .section-title-serif::after { width: 72px; }
+.section-projects .section-title-serif::after { background: var(--blue-soft); }
 .section-head { max-width: 680px; margin-bottom: 56px; }
 .section-desc { color: var(--text-on-light-muted); font-size: 16px; max-width: 460px; }
 
@@ -336,6 +376,11 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
 ===================================================== */
 .section-contact { background: var(--ink); color: var(--text-on-dark); max-width: none; padding: 120px var(--edge); }
 .contact-statement { font-size: clamp(2.6rem, 6vw, 5.2rem); font-style: italic; max-width: 16ch; margin: 20px 0 72px; }
+.contact-statement::after {
+  content: ""; display: block; width: 0; height: 2px; background: var(--wine-soft);
+  margin-top: 24px; transition: width 0.7s var(--ease) 0.3s;
+}
+.contact-statement.is-visible::after { width: 72px; }
 .contact-columns { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(24px, 5vw, 64px); align-items: start; }
 
 .contact-details-editorial .fact-row { border-color: var(--border-on-dark); }

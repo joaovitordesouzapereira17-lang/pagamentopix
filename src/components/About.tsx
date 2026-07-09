@@ -3,6 +3,7 @@ import { experience } from "../data/experience";
 import { useReveal } from "../hooks/useReveal";
 import { withBase } from "../utils/paths";
 import { EditHint } from "./EditHint";
+import { GraphicMark } from "./GraphicMark";
 
 function splitLede(bio: string): [string, string] {
   const match = bio.match(/^(.+?[.!?])(\s+(.*))?$/s);
@@ -27,7 +28,7 @@ export function About() {
   return (
     <section className="section" id="sobre">
       <p className={`section-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
-        SOBRE — 01
+        <GraphicMark symbol="circle" /> SOBRE — 01
       </p>
 
       <div className="about-grid">

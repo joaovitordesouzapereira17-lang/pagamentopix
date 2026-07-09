@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import { EditHint } from "./EditHint";
+import { GraphicMark } from "./GraphicMark";
 
 export function Contact() {
   const kicker = useReveal<HTMLParagraphElement>(0);
@@ -40,7 +41,7 @@ export function Contact() {
   return (
     <section className="section-contact" id="contato">
       <p className={`section-kicker mono light ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
-        CONTATO — 04
+        <GraphicMark symbol="star" /> CONTATO — 04
       </p>
 
       <h2 className={`contact-statement ${statement.className}`} ref={statement.ref} style={statement.style}>

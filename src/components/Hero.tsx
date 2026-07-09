@@ -1,6 +1,8 @@
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
+import { useParallax } from "../hooks/useParallax";
 import { EditHint } from "./EditHint";
+import { GraphicMark } from "./GraphicMark";
 import { ProfilePhoto } from "./ProfilePhoto";
 
 const LINE_CLASSES = ["line-a", "line-b", "line-c"];
@@ -30,23 +32,37 @@ export function Hero() {
     .toUpperCase();
 
   const kicker = useReveal<HTMLParagraphElement>(0);
-  const name = useReveal<HTMLHeadingElement>(120);
-  const photo = useReveal<HTMLDivElement>(240);
-  const foot = useReveal<HTMLDivElement>(360);
+  const nameReveal0 = useReveal<HTMLSpanElement>(120);
+  const nameReveal1 = useReveal<HTMLSpanElement>(220);
+  const nameReveal2 = useReveal<HTMLSpanElement>(320);
+  const nameReveals = [nameReveal0, nameReveal1, nameReveal2];
+  const photo = useReveal<HTMLDivElement>(200);
+  const foot = useReveal<HTMLDivElement>(420);
+  const tagReveal = useReveal<HTMLSpanElement>(500);
+  const tagParallax = useParallax<HTMLSpanElement>(0.06);
 
   return (
     <section className="hero" id="topo">
       <div className="hero-grid">
         <p className={`hero-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
-          {profile.role ? `— ${profile.role}` : <EditHint file="src/data/profile.ts">Defina seu cargo/título (campo role)</EditHint>}
+          <GraphicMark symbol="cross" className="hero-kicker-mark" />
+          {profile.role ? profile.role : <EditHint file="src/data/profile.ts">Defina seu cargo/título (campo role)</EditHint>}
         </p>
 
-        <h1 className={`hero-name ${name.className}`} ref={name.ref} style={name.style}>
-          {nameLines.map((line, i) => (
-            <span className={`hero-name-line ${LINE_CLASSES[i] ?? "line-c"}`} key={line}>
-              {line}
-            </span>
-          ))}
+        <h1 className="hero-name">
+          {nameLines.map((line, i) => {
+            const r = nameReveals[i] ?? nameReveals[nameReveals.length - 1];
+            return (
+              <span
+                className={`hero-name-line ${LINE_CLASSES[i] ?? "line-c"} ${r.className}`}
+                ref={r.ref}
+                style={r.style}
+                key={line}
+              >
+                {line}
+              </span>
+            );
+          })}
         </h1>
 
         <div className={`hero-photo-panel ${photo.className}`} ref={photo.ref} style={photo.style}>
@@ -57,6 +73,18 @@ export function Hero() {
             hintFile="public/images/profile/"
             className="hero-photo"
           />
+          {profile.nickname && (
+            <span
+              className={`hero-photo-tag mono ${tagReveal.className}`}
+              ref={(node) => {
+                tagReveal.ref.current = node;
+                tagParallax.current = node;
+              }}
+              style={tagReveal.style}
+            >
+              CONHECIDO COMO {profile.nickname.toUpperCase()} ✦
+            </span>
+          )}
         </div>
 
         <div className={`hero-foot ${foot.className}`} ref={foot.ref} style={foot.style}>

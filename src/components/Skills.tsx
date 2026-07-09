@@ -1,6 +1,7 @@
 import { skills } from "../data/skills";
 import { useReveal } from "../hooks/useReveal";
 import { EditHint } from "./EditHint";
+import { GraphicMark } from "./GraphicMark";
 
 export function Skills() {
   const kicker = useReveal<HTMLParagraphElement>(0);
@@ -9,7 +10,7 @@ export function Skills() {
   return (
     <section className="section" id="skills">
       <p className={`section-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
-        SKILLS — 03
+        <GraphicMark symbol="cross" /> SKILLS — 03
       </p>
 
       <div className={`section-head ${head.className}`} ref={head.ref} style={head.style}>

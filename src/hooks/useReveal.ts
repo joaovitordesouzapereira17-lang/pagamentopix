@@ -35,6 +35,7 @@ export function useReveal<T extends HTMLElement>(delayMs = 0) {
 
   return {
     ref,
+    visible,
     className: `reveal${visible ? " is-visible" : ""}`,
     style: { transitionDelay: `${delayMs}ms` },
   };

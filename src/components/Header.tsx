@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data/profile";
+import { GraphicMark } from "./GraphicMark";
 
 const NAV_ITEMS = [
   { id: "sobre", label: "Sobre", index: "01" },
@@ -27,13 +28,13 @@ export function Header() {
   }, []);
 
   const closeNav = () => setNavOpen(false);
-  const firstName = profile.fullName.split(" ")[0] || "Portfólio";
+  const signature = profile.nickname || profile.fullName.split(" ")[0] || "Portfólio";
 
   return (
     <header className="site-header">
       <div className="header-inner">
         <a href="#topo" className="wordmark">
-          {firstName}<span className="wordmark-dot">.</span>
+          {signature} <GraphicMark symbol="star" className="wordmark-mark" />
         </a>
 
         <nav className={`nav${navOpen ? " is-open" : ""}`} id="nav">

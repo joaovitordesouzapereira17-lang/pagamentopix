@@ -2,6 +2,7 @@ import { useState } from "react";
 import { projects, projectCategories, type Project } from "../data/projects";
 import { useReveal } from "../hooks/useReveal";
 import { EditHint } from "./EditHint";
+import { GraphicMark } from "./GraphicMark";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectModal } from "./ProjectModal";
 
@@ -17,7 +18,7 @@ export function Projects() {
   return (
     <section className="section-projects" id="projetos">
       <p className={`section-kicker mono light ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
-        PROJETOS — 02
+        <GraphicMark symbol="arrow" /> PROJETOS — 02
       </p>
 
       <div className={`section-head ${head.className}`} ref={head.ref} style={head.style}>

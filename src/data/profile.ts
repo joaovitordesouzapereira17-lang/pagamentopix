@@ -13,6 +13,9 @@ export interface SocialLink {
 export interface Profile {
   fullName: string;
 
+  /** Apelido usado como assinatura no cabeçalho e como etiqueta no Hero. */
+  nickname?: string;
+
   /** Cargo/título curto exibido abaixo do nome no hero. Ex: "Desenvolvedor Full Stack" */
   role: string;
 
@@ -46,6 +49,7 @@ export interface Profile {
 
 export const profile: Profile = {
   fullName: "João Vitor de Souza Pereira",
+  nickname: "Jão",
   role: "",
   heroIntro: "",
   photo: "images/profile/joao-vitor.jpg",

@@ -53,6 +53,10 @@ Preencha os campos: `role`, `heroIntro`, `bio`, `age`, `city`, `education`,
 `"images/profile/joao-vitor.jpg"`). Enquanto a foto não existir, o site mostra
 suas iniciais no lugar — nada quebra.
 
+O campo `nickname` (opcional) vira a assinatura no cabeçalho e uma etiqueta
+vertical ao lado da foto no Hero — deixe em branco para usar só o primeiro
+nome do campo `fullName`.
+
 ### Experiências profissionais — `src/data/experience.ts`
 
 Um objeto por experiência (empresa, cargo, período, descrição, tecnologias),
