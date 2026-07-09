@@ -20,7 +20,7 @@ export function ProfilePhoto({ src, alt, initials, hintFile, className = "" }: P
         {!errored ? (
           <img src={withBase(src)} alt={alt} onError={() => setErrored(true)} />
         ) : (
-          <span className="photo-frame-fallback mono" aria-hidden="true">
+          <span className="photo-frame-fallback" aria-hidden="true">
             {initials}
           </span>
         )}

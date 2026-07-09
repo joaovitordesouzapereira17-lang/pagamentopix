@@ -11,8 +11,8 @@ interface EditHintProps {
  */
 export function EditHint({ children, file }: EditHintProps) {
   return (
-    <p className="edit-hint mono">
+    <span className="edit-hint mono">
       ✎ {children} — edite em <code>{file}</code>
-    </p>
+    </span>
   );
 }

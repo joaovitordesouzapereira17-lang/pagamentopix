@@ -27,27 +27,18 @@ export function Header() {
   }, []);
 
   const closeNav = () => setNavOpen(false);
-  const initials = profile.fullName
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
+  const firstName = profile.fullName.split(" ")[0] || "Portfólio";
 
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a href="#topo" className="logo">
-          <span className="logo-mark">
-            {initials || "JV"}
-            <span className="logo-mark-dot">*</span>
-          </span>
+        <a href="#topo" className="wordmark">
+          {firstName}<span className="wordmark-dot">.</span>
         </a>
 
         <nav className={`nav${navOpen ? " is-open" : ""}`} id="nav">
-          <button className="nav-close" aria-label="Fechar menu" onClick={closeNav}>
-            ✕
+          <button className="nav-close mono" aria-label="Fechar menu" onClick={closeNav}>
+            FECHAR ✕
           </button>
           <ul>
             {NAV_ITEMS.map((item) => (
@@ -69,8 +60,8 @@ export function Header() {
           </div>
         </nav>
 
-        <a href="#contato" className="btn btn-mini header-cta">
-          Disponível ✦
+        <a href="#contato" className="btn btn-line header-cta">
+          Contato
         </a>
 
         <button

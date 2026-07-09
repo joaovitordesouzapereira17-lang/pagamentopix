@@ -33,7 +33,7 @@ src/
       README.md            # como adicionar um projeto novo
       <slug>.ts             # um arquivo por projeto (você cria)
   components/          # UI — consome os dados acima, não contém conteúdo
-  hooks/                # scroll reveal, parallax, glitch
+  hooks/                # scroll reveal (useReveal)
   styles/global.css      # paleta, tipografia, layout, responsividade
 public/
   images/profile/        # sua foto

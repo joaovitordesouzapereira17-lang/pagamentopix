@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
+  const [label, setLabel] = useState("");
 
   useEffect(() => {
     const isFinePointer = window.matchMedia("(pointer: fine)").matches;
@@ -14,17 +15,20 @@ export function CustomCursor() {
     if (!enabled) return;
 
     function onMove(e: MouseEvent) {
-      const dot = dotRef.current;
-      if (dot) dot.style.transform = `translate(${e.clientX - 9}px, ${e.clientY - 9}px)`;
+      const ring = ringRef.current;
+      if (ring) ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     }
 
     function onOver(e: MouseEvent) {
       const target = e.target as HTMLElement;
-      if (target.closest("a, button, .tag-chip")) dotRef.current?.classList.add("is-active");
+      const labelled = target.closest<HTMLElement>("[data-cursor-label]");
+      if (labelled) {
+        setLabel(labelled.dataset.cursorLabel ?? "");
+      }
     }
     function onOut(e: MouseEvent) {
       const target = e.target as HTMLElement;
-      if (target.closest("a, button, .tag-chip")) dotRef.current?.classList.remove("is-active");
+      if (target.closest("[data-cursor-label]")) setLabel("");
     }
 
     window.addEventListener("mousemove", onMove);
@@ -38,5 +42,9 @@ export function CustomCursor() {
   }, [enabled]);
 
   if (!enabled) return null;
-  return <div className="cursor-dot" ref={dotRef} aria-hidden="true" />;
+  return (
+    <div className={`cursor-ring${label ? " is-project" : ""}`} ref={ringRef} aria-hidden="true">
+      <span className="cursor-ring-label mono">{label}</span>
+    </div>
+  );
 }

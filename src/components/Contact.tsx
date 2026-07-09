@@ -4,8 +4,9 @@ import { useReveal } from "../hooks/useReveal";
 import { EditHint } from "./EditHint";
 
 export function Contact() {
-  const label = useReveal<HTMLDivElement>(0);
-  const info = useReveal<HTMLDivElement>(0);
+  const kicker = useReveal<HTMLParagraphElement>(0);
+  const statement = useReveal<HTMLHeadingElement>(0);
+  const info = useReveal<HTMLDivElement>(80);
   const form = useReveal<HTMLFormElement>(80);
 
   const [values, setValues] = useState({ name: "", email: "", message: "" });
@@ -30,64 +31,55 @@ export function Contact() {
     setValues({ name: "", email: "", message: "" });
   }
 
+  const factRows: { label: string; value?: string; href?: string }[] = [
+    { label: "E-mail", value: profile.email || undefined, href: profile.email ? `mailto:${profile.email}` : undefined },
+    profile.phone ? { label: "Telefone", value: profile.phone, href: `tel:${profile.phone.replace(/\D/g, "")}` } : { label: "", value: undefined },
+    { label: "Cidade", value: profile.city || undefined },
+  ].filter((row) => row.label);
+
   return (
-    <section className="section section-contact" id="contato">
-      <div className="contact-bg" aria-hidden="true" />
-      <div className={`spread-label mono light ${label.className}`} ref={label.ref} style={label.style}>
-        <span>CONTATO — SPREAD 04</span>
-        <span>VAMOS NESSA</span>
-      </div>
+    <section className="section-contact" id="contato">
+      <p className={`section-kicker mono light ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
+        CONTATO — 04
+      </p>
 
-      <div className="contact-grid">
-        <div className={info.className} ref={info.ref} style={info.style}>
-          <div className="contact-info">
-            <h2 className="section-title section-title-light">
-              Vamos criar<br />algo <span className="text-outline-electric">insano</span>?
-            </h2>
-            <p className="contact-text">
-              Projetos novos, colaborações ou uma boa conversa — me chama que eu respondo rápido.
-            </p>
+      <h2 className={`contact-statement ${statement.className}`} ref={statement.ref} style={statement.style}>
+        Vamos conversar sobre o que vem a seguir.
+      </h2>
 
-            <ul className="contact-details">
-              <li>
-                <span className="contact-icon">✉</span>
-                {profile.email ? (
-                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                ) : (
-                  <EditHint file="src/data/profile.ts">Adicione seu e-mail</EditHint>
-                )}
-              </li>
-              {profile.phone && (
-                <li>
-                  <span className="contact-icon">☏</span>
-                  <a href={`tel:${profile.phone.replace(/\D/g, "")}`}>{profile.phone}</a>
-                </li>
-              )}
-              {profile.city && (
-                <li>
-                  <span className="contact-icon">◎</span>
-                  <span>{profile.city}</span>
-                </li>
-              )}
-            </ul>
-
-            {profile.socials.length > 0 ? (
-              <div className="social-links">
-                {profile.socials.map((social) => (
-                  <a key={social.label} href={social.url} className="social-btn" target="_blank" rel="noopener noreferrer">
-                    {social.label}
-                  </a>
-                ))}
+      <div className="contact-columns">
+        <div className={`contact-details-editorial ${info.className}`} ref={info.ref} style={info.style}>
+          <dl>
+            {factRows.map((row) => (
+              <div className="fact-row" key={row.label}>
+                <dt>{row.label}</dt>
+                <dd>
+                  {row.value ? (
+                    row.href ? <a href={row.href}>{row.value}</a> : row.value
+                  ) : (
+                    <EditHint file="src/data/profile.ts">{`Preencha o campo ${row.label.toLowerCase()}`}</EditHint>
+                  )}
+                </dd>
               </div>
-            ) : (
-              <EditHint file="src/data/profile.ts">Adicione seus links de redes sociais (campo socials)</EditHint>
-            )}
-          </div>
+            ))}
+          </dl>
+
+          {profile.socials.length > 0 ? (
+            <div className="contact-socials-inline">
+              {profile.socials.map((social) => (
+                <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer">
+                  {social.label}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <EditHint file="src/data/profile.ts">Adicione seus links de redes sociais (campo socials)</EditHint>
+          )}
         </div>
 
-        <form className={`contact-form ${form.className}`} ref={form.ref} style={form.style} onSubmit={handleSubmit} noValidate>
+        <form className={`contact-form-editorial ${form.className}`} ref={form.ref} style={form.style} onSubmit={handleSubmit} noValidate>
           <div className="form-row">
-            <label htmlFor="name" className="mono">NOME</label>
+            <label htmlFor="name">Nome</label>
             <input
               type="text" id="name" placeholder="Seu nome" required
               value={values.name}
@@ -95,7 +87,7 @@ export function Contact() {
             />
           </div>
           <div className="form-row">
-            <label htmlFor="email" className="mono">E-MAIL</label>
+            <label htmlFor="email">E-mail</label>
             <input
               type="email" id="email" placeholder="voce@email.com" required
               value={values.email}
@@ -103,15 +95,15 @@ export function Contact() {
             />
           </div>
           <div className="form-row">
-            <label htmlFor="message" className="mono">MENSAGEM</label>
+            <label htmlFor="message">Mensagem</label>
             <textarea
-              id="message" rows={5} placeholder="Conte um pouco sobre o seu projeto..." required
+              id="message" rows={4} placeholder="Conte um pouco sobre o seu projeto..." required
               value={values.message}
               onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-full">Enviar mensagem</button>
-          <p className="form-note mono" role="status" aria-live="polite">{note}</p>
+          <button type="submit" className="btn btn-solid">Enviar mensagem</button>
+          <p className="form-note" role="status" aria-live="polite">{note}</p>
         </form>
       </div>
     </section>

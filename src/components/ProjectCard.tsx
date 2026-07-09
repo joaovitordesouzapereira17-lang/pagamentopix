@@ -3,46 +3,47 @@ import type { Project } from "../data/projects";
 import { useReveal } from "../hooks/useReveal";
 import { withBase } from "../utils/paths";
 
-const THUMB_CLASSES = ["thumb-1", "thumb-2", "thumb-3", "thumb-4", "thumb-5", "thumb-6"];
-
 interface ProjectCardProps {
   project: Project;
   index: number;
-  span: "span-8" | "span-4" | "span-12";
+  reverse: boolean;
   hidden: boolean;
   onOpen: (project: Project) => void;
 }
 
-export function ProjectCard({ project, index, span, hidden, onOpen }: ProjectCardProps) {
-  const reveal = useReveal<HTMLButtonElement>(0);
+export function ProjectCard({ project, index, reverse, hidden, onOpen }: ProjectCardProps) {
+  const reveal = useReveal<HTMLDivElement>(0);
   const [imgErrored, setImgErrored] = useState(false);
-  const thumbClass = THUMB_CLASSES[index % THUMB_CLASSES.length];
   const cover = project.images[0];
 
   return (
-    <button
-      className={`project-card ${reveal.className} ${span} ${hidden ? "is-hidden" : ""}`}
+    <article
+      className={`project-spread reveal ${reveal.className} ${reverse ? "is-reverse" : ""} ${hidden ? "is-hidden" : ""}`}
       ref={reveal.ref}
       style={reveal.style}
-      onClick={() => onOpen(project)}
     >
-      <span className="project-index mono">{String(index + 1).padStart(2, "0")}</span>
-      <div className={`project-thumb ${!cover || imgErrored ? thumbClass : ""}`}>
-        {cover && !imgErrored ? (
-          <img
-            className="project-thumb-img"
-            src={withBase(cover)}
-            alt={project.title}
-            onError={() => setImgErrored(true)}
-          />
-        ) : null}
-        <span className="project-tag-float mono">{project.category.toUpperCase()}</span>
+      <div className="project-visual-col">
+        <button className="project-visual" onClick={() => onOpen(project)} data-cursor-label="Ver projeto">
+          <span className="project-number mono">{String(index + 1).padStart(2, "0")}</span>
+          {cover && !imgErrored ? (
+            <img src={withBase(cover)} alt={project.title} onError={() => setImgErrored(true)} />
+          ) : (
+            <div className="project-visual-fallback">
+              <span className="project-visual-fallback-inner">{project.category}</span>
+            </div>
+          )}
+        </button>
       </div>
-      <div className="project-body">
-        <h3>{project.title}</h3>
-        <p>{project.description}</p>
-        <span className="project-cta mono">ABRIR DETALHES →</span>
+
+      <div className="project-meta-col">
+        <p className="project-meta-top mono">{project.category} — {project.year}</p>
+        <h3 className="project-title-serif">{project.title}</h3>
+        <p className="project-desc">{project.description}</p>
+        {project.technologies.length > 0 && <p className="project-tech">{project.technologies.join(" · ")}</p>}
+        <button className="project-open-link underline-link" onClick={() => onOpen(project)}>
+          Ver case completo
+        </button>
       </div>
-    </button>
+    </article>
   );
 }

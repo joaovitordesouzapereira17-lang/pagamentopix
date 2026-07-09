@@ -52,7 +52,9 @@ export function ProjectModal({ project, index, onClose }: ProjectModalProps) {
         {project.images[0] ? (
           <img className="modal-thumb modal-thumb-img" src={withBase(project.images[0])} alt={project.title} />
         ) : (
-          <div className="modal-thumb" />
+          <div className="modal-thumb modal-thumb-fallback">
+            <span>{project.category}</span>
+          </div>
         )}
 
         <div className="modal-body">
@@ -90,23 +92,15 @@ export function ProjectModal({ project, index, onClose }: ProjectModalProps) {
             </div>
           </dl>
 
-          {project.technologies.length > 0 && (
-            <div className="modal-tags">
-              {project.technologies.map((tech) => (
-                <span key={tech}>{tech}</span>
-              ))}
-            </div>
-          )}
-
           {(project.link || project.github) && (
             <div className="modal-links">
               {project.link && (
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn btn-solid">
                   Ver projeto
                 </a>
               )}
               {project.github && (
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-line">
                   Código no GitHub
                 </a>
               )}
