@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Base path matches the GitHub Pages project URL (https://<user>.github.io/pagamentopix/).
-// Update this if you rename the repository or deploy somewhere else.
+// No GitHub Pages o site fica em /pagamentopix/; na Vercel (e em outros hosts
+// que servem a partir da raiz) o Vercel define a env VERCEL=1 automaticamente.
 export default defineConfig({
   plugins: [react()],
-  base: "/pagamentopix/",
+  base: process.env.VERCEL ? "/" : "/pagamentopix/",
 });
