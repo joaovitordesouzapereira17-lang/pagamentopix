@@ -20,12 +20,21 @@ export const project: Project = {
   github: "https://github.com/seu-usuario/app-financeiro", // opcional
   year: 2025,
   client: "", // opcional
+
+  // Case completo, exibido em /trabalhos/<slug>. Todos opcionais — o que
+  // faltar aparece como aviso discreto na página, nunca texto inventado.
+  briefing: "",
+  concept: "",
+  process: "",
+  result: "",
 };
 ```
 
 Não precisa editar mais nada — `src/data/projects/index.ts` encontra e lista o
-arquivo automaticamente, ordenado do mais recente para o mais antigo. Para
-remover um projeto, basta apagar o arquivo correspondente.
+arquivo automaticamente, ordenado do mais recente para o mais antigo. Clicar
+num projeto na seção Projetos abre a página própria em `/trabalhos/<slug>`
+com o case completo. Para remover um projeto, basta apagar o arquivo
+correspondente.
 
 Coloque as imagens e vídeos do projeto em:
 

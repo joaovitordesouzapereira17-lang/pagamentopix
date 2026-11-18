@@ -27,6 +27,9 @@ src/
     profile.ts        # nome, cargo, foto, bio, idade, cidade, formação, contato, redes sociais
     experience.ts      # lista de experiências profissionais
     skills.ts           # habilidades agrupadas por categoria
+    mural.ts             # referências visuais (cinema, música, imagens) do Mural
+    radio.ts              # estações (playlists/faixas incorporadas) do Rádio
+    videoteca.ts           # pôsteres de filmes de referência da Videoteca
     projects/
       types.ts          # formato (interface) de um projeto
       index.ts           # agrega automaticamente os arquivos desta pasta — não editar
@@ -37,6 +40,8 @@ src/
   styles/global.css      # paleta, tipografia, layout, responsividade
 public/
   images/profile/        # sua foto
+  images/mural/            # imagens das referências do Mural
+  images/videoteca/         # pôsteres dos filmes da Videoteca
   images/projects/<slug>/  # imagens de cada projeto
   videos/projects/<slug>/  # vídeos de apresentação (opcional)
   icons/                    # ícones extras, se precisar
@@ -76,6 +81,29 @@ do mais recente para o mais antigo.
 
 Grupos por categoria (`{ category: "Frontend", items: [...] }`). Adicione,
 remova ou renomeie grupos livremente.
+
+### Mural (referências) — `src/data/mural.ts` e página `/mural`
+
+Um arquivo pessoal de cinema, música e imagens de referência, numa colagem
+estilo Y2K/grunge. Cada item é `{ image, kind, origin, note? }`: coloque a
+imagem em `public/images/mural/` e acrescente o objeto ao array `mural`.
+Sem nenhum item cadastrado, a página mostra apenas o aviso discreto apontando
+pra este arquivo — nunca referências inventadas.
+
+### Rádio — `src/data/radio.ts` e página `/radio`
+
+Cada estação é `{ frequency, name, note?, embedUrl }`. `embedUrl` é o link de
+"Incorporar" de uma playlist/faixa do Spotify (ou um embed do YouTube) — o
+áudio em si toca por esse player incorporado, nunca um arquivo hospedado
+aqui. `frequency` só posiciona a estação no dial (escolha um número entre
+88 e 108). Sem estações, o dial funciona normalmente mas fica sempre em
+"estática".
+
+### Videoteca — `src/data/videoteca.ts` e página `/videoteca`
+
+Cada filme é `{ image, title, year, genre, director?, synopsis?, note? }`.
+Coloque o pôster em `public/images/videoteca/`. O botão "Montar sessão
+dupla" só aparece com pelo menos 2 filmes cadastrados.
 
 ### Projetos — `src/data/projects/`
 

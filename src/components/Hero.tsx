@@ -6,6 +6,7 @@ import { withBase } from "../utils/paths";
 import { EditHint } from "./EditHint";
 import { GraphicMark } from "./GraphicMark";
 import { ProfilePhoto } from "./ProfilePhoto";
+import { DesktopLayer } from "./DesktopLayer";
 
 const LINE_CLASSES = ["line-a", "line-b", "line-c"];
 
@@ -51,6 +52,7 @@ export function Hero() {
           <img className="hero-bg-image" src={withBase(profile.photoFrame)} alt="" />
         </div>
       )}
+      <DesktopLayer />
       <div className="hero-grid">
         <p className={`hero-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
           <GraphicMark symbol="cross" className="hero-kicker-mark" />

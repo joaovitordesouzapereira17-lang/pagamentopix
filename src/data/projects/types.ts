@@ -26,4 +26,14 @@ export interface Project {
 
   /** Nome do cliente/empresa, quando aplicável. Opcional. */
   client?: string;
+
+  /**
+   * Conteúdo do case completo (página própria em /trabalhos/<slug>). Todos
+   * opcionais — a página mostra um aviso discreto apontando pra este
+   * arquivo em qualquer seção que ainda não esteja preenchida.
+   */
+  briefing?: string;
+  concept?: string;
+  process?: string;
+  result?: string;
 }
