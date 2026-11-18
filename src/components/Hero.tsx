@@ -2,7 +2,6 @@ import { useState } from "react";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import { useParallax } from "../hooks/useParallax";
-import { withBase } from "../utils/paths";
 import { EditHint } from "./EditHint";
 import { GraphicMark } from "./GraphicMark";
 import { ProfilePhoto } from "./ProfilePhoto";
@@ -47,11 +46,6 @@ export function Hero() {
 
   return (
     <section className="hero" id="topo">
-      {profile.photoFrame && (
-        <div className="hero-bg" aria-hidden="true">
-          <img className="hero-bg-image" src={withBase(profile.photoFrame)} alt="" />
-        </div>
-      )}
       <DesktopLayer />
       <div className="hero-grid">
         <p className={`hero-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
@@ -76,16 +70,22 @@ export function Hero() {
         </h1>
 
         <div className={`hero-photo-panel ${photo.className}`} ref={photo.ref} style={photo.style}>
-          <div className="hero-avatar">
-            <ProfilePhoto
-              src={profile.photo}
-              alt={profile.fullName}
-              initials={initials}
-              hintFile="public/images/profile/"
-              className="hero-avatar-photo"
-              hideHint
-              onErrorChange={setPhotoMissing}
-            />
+          <div className="msn-webcam-card">
+            <div className="msn-webcam-titlebar">
+              <span>📷 Webcam</span>
+              <span className="msn-webcam-live"><i /> AO VIVO</span>
+            </div>
+            <div className="hero-avatar">
+              <ProfilePhoto
+                src={profile.photo}
+                alt={profile.fullName}
+                initials={initials}
+                hintFile="public/images/profile/"
+                className="hero-avatar-photo"
+                hideHint
+                onErrorChange={setPhotoMissing}
+              />
+            </div>
           </div>
           {photoMissing && (
             <EditHint file="public/images/profile/" className="hero-avatar-hint">
@@ -107,15 +107,29 @@ export function Hero() {
         </div>
 
         <div className={`hero-foot ${foot.className}`} ref={foot.ref} style={foot.style}>
-          {profile.heroIntro ? (
-            <p className="hero-intro">{profile.heroIntro}</p>
-          ) : (
-            <EditHint file="src/data/profile.ts">Escreva sua apresentação profissional (campo heroIntro)</EditHint>
-          )}
-          <a href="#projetos" className="hero-scroll">
-            Ver trabalho
-            <span className="hero-scroll-line"><span /></span>
-          </a>
+          <div className="hero-bio-window">
+            <div className="paint-titlebar hero-bio-titlebar">
+              <span className="paint-titlebar-text">👤 Perfil.txt</span>
+              <span className="paint-titlebar-buttons" aria-hidden="true">
+                <span>_</span><span>□</span><span>✕</span>
+              </span>
+            </div>
+            <div className="hero-bio-body">
+              {profile.heroIntro ? (
+                <p className="hero-intro">{profile.heroIntro}</p>
+              ) : (
+                <EditHint file="src/data/profile.ts">Escreva sua apresentação profissional (campo heroIntro)</EditHint>
+              )}
+              <div className="hero-mood">
+                <span className="hero-mood-label">MOOD ATUAL</span>
+                <span className="hero-mood-value">⚡ no modo criar</span>
+              </div>
+              <a href="#projetos" className="hero-scroll">
+                Ver trabalho
+                <span className="hero-scroll-line"><span /></span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

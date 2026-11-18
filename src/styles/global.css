@@ -2,47 +2,47 @@
    TOKENS
 ===================================================== */
 :root {
-  /* Escada de profundidade em vez de preto puro: ink < graphite < surface */
-  --ink: #171717;
-  --graphite: #1D1C1A;
-  --surface: #27251F;
+  /* Reset claro: índigo escuro sobre azul-gelo — zero fundos escuros por padrão */
+  --ink: #1E1B4B;
+  --graphite: #F2F6FF;
+  --surface: #FFFFFF;
 
-  --paper: #E9E1D2;
-  --paper-dim: #DED3BF;
+  --paper: #EFF6FF;
+  --paper-dim: #E2ECFC;
 
-  /* Rosa avermelhado: cor de destaque principal (substitui o antigo "wine") */
-  --wine: #D93656;
-  --wine-soft: #E35C78;
-  /* Azul elétrico: identidade de Projetos e Videoteca */
-  --blue: #536FE5;
-  --blue-soft: #7389EC;
-  /* Amarelo: identidade do Mural, usado também em detalhes/botões pontuais */
-  --yellow: #F2A900;
-  --yellow-soft: #F5BB33;
-  /* Verde: identidade do Rádio, usado com moderação */
-  --green: #8CBA68;
-  --green-soft: #9FC683;
+  /* Vermelho: destaque principal (Portal Teen / XP) */
+  --wine: #EF4444;
+  --wine-soft: #DC2626;
+  /* Azul: identidade de Projetos e Videoteca */
+  --blue: #2563EB;
+  --blue-soft: #1D4ED8;
+  /* Roxo: acento do Mural / cabeçalho portal */
+  --yellow: #7C3AED;
+  --yellow-soft: #9333EA;
+  /* Roxo-escuro: acento do Rádio */
+  --green: #9333EA;
+  --green-soft: #7C3AED;
 
   --text-on-dark: #F5F0E6;
-  --text-on-dark-muted: #B7AFA0;
-  --text-on-light: #201D18;
-  --text-on-light-muted: #7A7165;
+  --text-on-dark-muted: #CBD5F5;
+  --text-on-light: #1E1B4B;
+  --text-on-light-muted: #4C4878;
 
-  --border-on-dark: rgba(245, 240, 230, 0.12);
-  --border-on-light: rgba(32, 29, 24, 0.12);
+  --border-on-dark: rgba(245, 240, 230, 0.18);
+  --border-on-light: rgba(30, 27, 75, 0.16);
 
-  /* Títulos: Pixelify Sans (pixel/bitmap, era Web 2.0). Serifada
-     itálica (--font-display) fica reservada só pra frases de destaque. */
-  --font-title: "Pixelify Sans", "Archivo Black", "Arial Black", sans-serif;
-  --font-display: "Bodoni Moda", "Times New Roman", serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  /* Títulos: Fredoka (bold, redondinha, estilo Portal Teen 2005). Zero
+     fontes pixeladas/8-bit — Tahoma/Verdana cuida de menus e corpo. */
+  --font-title: "Fredoka", Tahoma, sans-serif;
+  --font-display: "Fredoka", Tahoma, sans-serif;
+  --font-body: Tahoma, Verdana, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   /* Chrome de janela XP (barras de título, menus, Paint, Bloco de Notas) */
-  --font-window: Tahoma, Geneva, "Segoe UI", sans-serif;
-  /* Chamadas estilo cartoon/revista (TheSlap, Cartoon Network) */
-  --font-cartoon: "Bangers", "Archivo Black", cursive;
+  --font-window: Tahoma, "Trebuchet MS", sans-serif;
+  /* Chamadas estilo cartoon/revista — mesma fonte dos títulos, sem 8-bit */
+  --font-cartoon: "Fredoka", Tahoma, sans-serif;
 
-  /* Céu Bliss (papel de parede do Windows XP) */
+  /* Céu Bliss (papel de parede do Windows XP) — exclusivo da Home */
   --xp-sky-top: #1E7FE0;
   --xp-sky-mid: #4FA8F0;
   --xp-sky-bottom: #B9E3FB;
@@ -50,18 +50,29 @@
   --xp-hill-front: #5FAE3D;
   --xp-cloud: #FDFEFF;
 
-  /* Azul degradê dos cabeçalhos de portal (Cartoon Network / TheSlap, 2005) */
-  --portal-blue-start: #0055E5;
-  --portal-blue-end: #3B82F6;
-  --portal-red: #E53935;
-  --portal-orange: #F2862B;
-  --portal-green: #3FA34D;
-  --portal-paper: #EAF2FF;
-  --portal-ink: #0B1E3D;
+  /* Degradê azul→roxo do cabeçalho portal (Cartoon Network / TheSlap, 2005) */
+  --portal-blue-start: #1D4ED8;
+  --portal-blue-end: #7C3AED;
+  --portal-red: #EF4444;
+  --portal-red-dark: #DC2626;
+  --portal-purple: #7C3AED;
+  --portal-purple-dark: #9333EA;
+  --portal-paper: #EFF6FF;
+  --portal-ink: #1E1B4B;
 
   --container: 1440px;
   --edge: clamp(20px, 5vw, 72px);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset visual: estas seções deixam de ser escuras — redefine localmente os
+   tokens "para texto claro sobre fundo escuro" assim toda a cascata de
+   regras existentes (muitas) já nasce legível em fundo claro, sem precisar
+   reescrever cada uma à mão. */
+.hero, .mural-page, .radio-page, .videoteca-page, .section-contact, .site-footer {
+  --text-on-dark: var(--ink);
+  --text-on-dark-muted: var(--text-on-light-muted);
+  --border-on-dark: var(--border-on-light);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,7 +94,7 @@ ul { list-style: none; }
 button { font: inherit; background: none; border: none; cursor: pointer; color: inherit; }
 input, textarea { font: inherit; }
 
-h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance; font-weight: 400; }
+h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance; font-weight: 700; }
 
 .mono { font-family: var(--font-mono); letter-spacing: 0.03em; }
 
@@ -169,14 +180,14 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 }
 .btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
 .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
-.btn-solid { background: var(--ink); color: var(--text-on-dark); }
-.btn-solid:hover { background: var(--wine); border-color: var(--wine); box-shadow: 4px 4px 0 var(--ink); }
+.btn-solid { background: linear-gradient(135deg, var(--portal-red), var(--portal-purple)); color: #fff; border-color: var(--portal-purple-dark); }
+.btn-solid:hover { filter: brightness(1.08); border-color: var(--portal-purple-dark); box-shadow: 4px 4px 0 var(--ink); }
 .btn-solid::before {
   content: ""; position: absolute; inset: 2px 2px auto 2px; height: 42%; border-radius: 6px 6px 0 0;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0)); pointer-events: none;
 }
 .btn-line { background: transparent; color: var(--ink); }
-.btn-line:hover { background: var(--ink); color: var(--text-on-dark); }
+.btn-line:hover { background: var(--portal-purple); color: #fff; border-color: var(--portal-purple-dark); }
 .btn-full { width: 100%; justify-content: center; }
 
 .underline-link {
@@ -195,26 +206,38 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 ===================================================== */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 300;
-  background: var(--graphite); border-bottom: 1px solid var(--border-on-dark);
+  background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
+  border-bottom: 3px solid var(--portal-purple-dark);
 }
 .header-inner {
   padding: 0 var(--edge); height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 
-.wordmark { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--text-on-dark); display: inline-flex; align-items: center; gap: 8px; }
+.wordmark {
+  font-family: var(--font-title); font-weight: 700; font-size: 22px; color: #fff;
+  -webkit-text-stroke: 1px var(--portal-purple-dark); text-shadow: 2px 2px 0 var(--portal-purple-dark);
+  display: inline-flex; align-items: center; gap: 8px;
+}
 .wordmark-mark { font-size: 11px; transition: transform 0.3s var(--ease), opacity 0.6s var(--ease); }
 .wordmark:hover .wordmark-mark { transform: rotate(90deg) scale(1.15); }
 
-.nav ul { display: flex; gap: 40px; }
-.nav-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-on-dark-muted); position: relative; }
-.nav-link::after { content: ""; position: absolute; left: 0; bottom: -20px; width: 0; height: 1px; background: var(--wine-soft); transition: width 0.25s var(--ease); }
-.nav-link:hover, .nav-link.is-active { color: var(--text-on-dark); }
-.nav-link:hover::after, .nav-link.is-active::after { width: 100%; }
+.nav ul { display: flex; gap: 0; align-items: flex-end; }
+.nav-link {
+  font-family: var(--font-title); font-size: 13px; letter-spacing: 0.01em; color: #fff;
+  position: relative; display: inline-flex; padding: 22px 18px 20px; border: 2px solid var(--portal-purple-dark);
+  border-top: none; margin-right: -2px; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+  transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
+}
+.nav ul > li:nth-child(3n + 1) .nav-link { background: var(--portal-blue-start); }
+.nav ul > li:nth-child(3n + 2) .nav-link { background: var(--portal-red); }
+.nav ul > li:nth-child(3n) .nav-link { background: var(--portal-purple); }
+.nav-link:hover { filter: brightness(1.12); }
+.nav-link.is-active { transform: translateY(3px); filter: brightness(1.1); }
 .nav-index { display: none; }
 .nav-close, .nav-footer { display: none; }
 
-.header-cta { flex-shrink: 0; color: var(--text-on-dark); border-color: var(--text-on-dark); box-shadow: 3px 3px 0 var(--text-on-dark); }
-.header-cta.btn-line:hover { background: var(--text-on-dark); color: var(--ink); box-shadow: 4px 4px 0 var(--text-on-dark); }
+.header-cta { flex-shrink: 0; color: var(--ink); background: #fff; border-color: var(--portal-purple-dark); box-shadow: 3px 3px 0 var(--portal-purple-dark); }
+.header-cta.btn-line:hover { background: var(--portal-red); color: #fff; box-shadow: 4px 4px 0 var(--portal-purple-dark); }
 
 .menu-toggle {
   display: none; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px;
@@ -231,7 +254,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
    HERO
 ===================================================== */
 .hero {
-  position: relative; min-height: 100vh; background: var(--ink); color: var(--text-on-dark);
+  position: relative; min-height: 100vh; background: var(--paper); color: var(--ink);
   padding: 68px var(--edge) 44px; display: flex; flex-direction: column; justify-content: space-between;
   overflow: hidden;
 }
@@ -255,7 +278,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   background-image: repeating-linear-gradient(
     0deg, rgba(0, 0, 0, 0.16) 0px, rgba(0, 0, 0, 0.16) 1px, transparent 1px, transparent 3px
   );
-  mix-blend-mode: overlay; opacity: 0.5;
+  mix-blend-mode: overlay; opacity: 0.06;
 }
 
 /* ---- desktop layer: ícones + taskbar por cima da colagem do Hero ---- */
@@ -288,7 +311,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 }
 .sticker-buddy-dot {
   position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%;
-  background: var(--green); border: 2px solid var(--ink);
+  background: #22C55E; border: 2px solid var(--ink);
 }
 .sticker-bubble {
   font-family: var(--font-title); font-size: 13px; letter-spacing: 0.1em; color: var(--ink);
@@ -308,37 +331,21 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); color: var(--ink);
   font-size: 20px; transform: rotate(12deg);
 }
-.sticker-mood {
-  display: flex; flex-direction: column; gap: 3px; background: var(--text-on-dark);
-  border: 2px solid var(--ink); border-radius: 4px; padding: 8px 12px; width: 168px;
-  box-shadow: 4px 4px 0 var(--wine); transform: rotate(-2deg);
-}
-.sticker-mood-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--text-on-light-muted); }
-.sticker-mood-value { font-family: var(--font-window); font-size: 13px; color: var(--ink); font-weight: 700; }
 
 .desktop-taskbar {
   position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 3; pointer-events: auto;
   display: flex; align-items: center; justify-content: space-between; padding: 0 var(--edge);
-  background: rgba(21, 21, 21, 0.88); border-top: 2px solid var(--wine); backdrop-filter: blur(4px);
+  background: linear-gradient(180deg, var(--portal-blue-end), var(--portal-blue-start));
+  border-top: 2px solid #fff;
 }
 .desktop-start {
-  display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.04em;
-  text-transform: uppercase; color: var(--text-on-dark); background: var(--graphite);
-  border: 2px solid var(--wine-soft); border-radius: 6px; padding: 6px 14px; box-shadow: 2px 2px 0 var(--wine-soft);
+  display: flex; align-items: center; gap: 8px; font-size: 12px; font-family: var(--font-title); letter-spacing: 0.02em;
+  color: #fff; background: linear-gradient(180deg, var(--portal-red), var(--portal-red-dark));
+  border: 2px solid #fff; border-radius: 6px; padding: 6px 14px; box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
-.desktop-start:hover { background: var(--surface); }
-.desktop-start-mark { color: var(--wine-soft); }
-.desktop-clock { font-size: 12px; color: var(--text-on-dark-muted); }
-
-.hero-bg { position: absolute; inset: 0; z-index: 1; }
-.hero-bg-image {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: 0.22; filter: saturate(0.85);
-}
-.hero-bg::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(10, 20, 40, 0.58) 0%, rgba(10, 20, 40, 0.22) 32%, rgba(10, 20, 40, 0.22) 68%, rgba(10, 20, 40, 0.62) 100%);
-}
+.desktop-start:hover { filter: brightness(1.08); }
+.desktop-start-mark { color: #fff; }
+.desktop-clock { font-size: 12px; font-family: var(--font-window); color: #fff; }
 
 .hero-grid {
   position: relative; z-index: 1;
@@ -347,26 +354,45 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 }
 
 .hero-kicker {
-  grid-column: 1 / 7; grid-row: 1; font-size: 12px; color: var(--text-on-dark-muted); max-width: 380px;
-  display: flex; align-items: center; gap: 10px;
+  grid-column: 1 / 7; grid-row: 1; font-size: 12px; color: var(--ink); max-width: 380px;
+  display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.85);
+  border: 2px solid var(--portal-purple); border-radius: 20px; padding: 6px 14px; width: fit-content;
 }
 .hero-kicker-mark { font-size: 12px; }
 
 .hero-name { grid-column: 1 / 10; grid-row: 2; align-self: center; z-index: 2; }
 .hero-name-line {
   display: block; font-size: clamp(3rem, 9.5vw, 8.5rem); line-height: 0.94; letter-spacing: -0.01em;
-  font-weight: 800;
+  font-weight: 800; color: #fff; -webkit-text-stroke: 2px var(--portal-purple-dark);
+  text-shadow: 3px 3px 0 var(--portal-purple-dark), 6px 6px 0 rgba(30, 27, 75, 0.25);
 }
-.line-b { padding-left: clamp(20px, 8vw, 130px); }
-.line-c { padding-left: clamp(40px, 15vw, 260px); font-family: var(--font-display); font-style: italic; font-weight: 700; color: var(--wine-soft); }
+.line-b { padding-left: clamp(20px, 8vw, 130px); color: var(--portal-red) !important; -webkit-text-stroke: 2px var(--portal-purple-dark); }
+.line-c {
+  padding-left: clamp(40px, 15vw, 260px); font-family: var(--font-title); font-style: normal; font-weight: 800;
+  color: var(--yellow) !important; -webkit-text-stroke: 2px var(--portal-purple-dark);
+}
 
 .hero-photo-panel {
   grid-column: 7 / 13; grid-row: 1 / 4; align-self: stretch; position: relative; z-index: 1;
   min-height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
 }
+.msn-webcam-card {
+  background: #fff; border: 3px solid var(--portal-purple); border-radius: 10px;
+  box-shadow: 6px 6px 0 var(--portal-blue-start); padding: 0 0 14px; width: min(300px, 90%);
+}
+.msn-webcam-titlebar {
+  display: flex; align-items: center; justify-content: space-between; font-family: var(--font-window);
+  font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
+  padding: 6px 10px; border-radius: 7px 7px 0 0;
+}
+.msn-webcam-live { display: inline-flex; align-items: center; gap: 5px; color: #FFD9D9; }
+.msn-webcam-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--portal-red); display: inline-block; animation: webcam-blink 1.4s ease-in-out infinite; }
+@keyframes webcam-blink { 50% { opacity: 0.25; } }
+.hero-avatar { position: relative; width: min(240px, 85%); margin: 14px auto 0; }
 .hero-photo-tag {
   position: absolute; top: 50%; right: -18px; transform-origin: center; z-index: 2;
-  writing-mode: vertical-rl; font-size: 10px; letter-spacing: 0.16em; color: var(--text-on-dark-muted);
+  writing-mode: vertical-rl; font-size: 10px; letter-spacing: 0.16em; color: #fff;
+  text-shadow: 1px 1px 0 var(--portal-purple-dark), -1px -1px 0 var(--portal-purple-dark);
   white-space: nowrap; transition: opacity 0.7s var(--ease);
 }
 /* Especificidade combinada para vencer o transform genérico de .reveal/.reveal.is-visible */
@@ -380,13 +406,25 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .hero-foot {
   grid-column: 1 / 7; grid-row: 3; display: flex; align-items: flex-end; justify-content: space-between;
   gap: 24px; flex-wrap: wrap; padding: clamp(20px, 4vh, 40px) 0 clamp(24px, 5vh, 48px);
-  border-top: 1px solid var(--border-on-dark); margin-top: clamp(20px, 4vh, 40px);
+  margin-top: clamp(20px, 4vh, 40px); width: 100%;
 }
-.hero-intro { max-width: 400px; font-size: 16px; color: var(--text-on-dark-muted); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55); }
+.hero-bio-window {
+  background: #fff; border: 3px solid var(--portal-blue-start); border-radius: 10px;
+  box-shadow: 6px 6px 0 var(--portal-purple); width: 100%; max-width: 460px; overflow: hidden;
+}
+.hero-bio-titlebar { border-radius: 0; }
+.hero-bio-body { padding: 18px 20px 20px; color: var(--ink); }
+.hero-intro { font-size: 15px; color: var(--ink); margin-bottom: 14px; }
 .hero-foot .edit-hint { max-width: 400px; }
+.hero-mood {
+  display: flex; flex-direction: column; gap: 2px; background: var(--paper); border: 2px solid var(--portal-purple);
+  border-radius: 6px; padding: 8px 12px; margin-bottom: 14px; width: fit-content;
+}
+.hero-mood-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--text-on-light-muted); }
+.hero-mood-value { font-family: var(--font-window); font-size: 13px; color: var(--ink); font-weight: 700; }
 
-.hero-scroll { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-on-dark-muted); flex-shrink: 0; }
-.hero-scroll:hover { color: var(--text-on-dark); }
+.hero-scroll { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); flex-shrink: 0; }
+.hero-scroll:hover { color: var(--wine); }
 .hero-scroll-line { width: 40px; height: 1px; background: currentColor; position: relative; overflow: hidden; }
 .hero-scroll-line::after { content: ""; position: absolute; inset: 0; background: var(--wine-soft); transform: translateX(-100%); animation: scrollline 2.4s ease-in-out infinite; }
 @keyframes scrollline { 0% { transform: translateX(-100%); } 50% { transform: translateX(0); } 100% { transform: translateX(100%); } }
@@ -418,8 +456,8 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 
 /* ---- janela estilo Bloco de Notas / perfil MSN (Sobre) ---- */
 .notepad-window {
-  background: #fff; border: 2px solid #fff; border-bottom-color: #8a877d; border-right-color: #8a877d;
-  box-shadow: 6px 6px 0 var(--wine-soft), 0 24px 48px rgba(0, 0, 0, 0.18);
+  background: #fff; border: 3px solid var(--portal-blue-start);
+  box-shadow: 6px 6px 0 var(--portal-purple), 0 24px 48px rgba(0, 0, 0, 0.12);
 }
 .notepad-titlebar { border-radius: 0; }
 .notepad-status {
@@ -525,9 +563,8 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
 }
 .project-index-nav > button { background: var(--portal-blue-start); }
-.project-index-nav > span:nth-of-type(3n + 1) button { background: var(--portal-red); }
-.project-index-nav > span:nth-of-type(3n + 2) button { background: var(--portal-orange); }
-.project-index-nav > span:nth-of-type(3n) button { background: var(--portal-green); }
+.project-index-nav > span:nth-of-type(2n + 1) button { background: var(--portal-red); }
+.project-index-nav > span:nth-of-type(2n) button { background: var(--portal-purple); }
 .project-index-nav button:hover { filter: brightness(1.12); }
 .project-index-nav button.is-active { transform: translateY(-5px); filter: brightness(1.1); z-index: 1; }
 
@@ -597,7 +634,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 /* =====================================================
    CONTACT (fundo escuro novamente)
 ===================================================== */
-.section-contact { background: var(--ink); color: var(--text-on-dark); max-width: none; padding: 120px var(--edge); }
+.section-contact { background: var(--paper); color: var(--ink); max-width: none; padding: 120px var(--edge); }
 .contact-statement { font-size: clamp(2.2rem, 5vw, 4.4rem); max-width: 16ch; margin: 20px 0 72px; }
 .contact-statement::after {
   content: ""; display: block; width: 0; height: 2px; background: var(--wine-soft);
@@ -636,7 +673,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 /* =====================================================
    FOOTER
 ===================================================== */
-.site-footer { background: var(--graphite); color: var(--text-on-dark-muted); border-top: 1px solid var(--border-on-dark); }
+.site-footer { background: var(--graphite); color: var(--text-on-dark-muted); border-top: 3px solid var(--portal-blue-start); }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 12px; padding: 26px var(--edge); max-width: var(--container); margin: 0 auto; }
 .back-to-top:hover { color: var(--text-on-dark); }
 
@@ -680,7 +717,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 /* =====================================================
    RÁDIO — dial de sintonia (fundo escuro, estética Y2K/grunge)
 ===================================================== */
-.radio-page { background: var(--ink); color: var(--text-on-dark); min-height: 100vh; padding: 140px var(--edge) 100px; }
+.radio-page { background: var(--paper); color: var(--ink); min-height: 100vh; padding: 140px var(--edge) 100px; }
 .radio-intro { max-width: var(--container); margin: 0 auto 64px; }
 .radio-title { font-size: clamp(1.9rem, 4.2vw, 3.2rem); max-width: 18ch; margin-bottom: 18px; }
 .radio-sub { color: var(--text-on-dark-muted); max-width: 56ch; font-size: 16px; }
@@ -745,7 +782,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 /* =====================================================
    VIDEOTECA — parede de pôsteres (fundo escuro, estética Y2K/grunge)
 ===================================================== */
-.videoteca-page { background: var(--ink); color: var(--text-on-dark); min-height: 100vh; padding: 140px var(--edge) 100px; }
+.videoteca-page { background: var(--paper); color: var(--ink); min-height: 100vh; padding: 140px var(--edge) 100px; }
 .videoteca-intro { max-width: var(--container); margin: 0 auto 48px; }
 .videoteca-title { font-size: clamp(1.9rem, 4.2vw, 3.2rem); max-width: 20ch; margin-bottom: 18px; }
 .videoteca-sub { color: var(--text-on-dark-muted); max-width: 56ch; font-size: 16px; margin-bottom: 28px; }
@@ -817,12 +854,12 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .tier-row-letter { font-size: 22px; font-weight: 700; }
 .tier-row-mood { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.75; }
 
-.tier-row-S .tier-row-label { background: var(--wine); }
-.tier-row-A .tier-row-label { background: var(--yellow); }
-.tier-row-B .tier-row-label { background: var(--green); }
-.tier-row-C .tier-row-label { background: var(--blue); color: var(--text-on-dark); }
-.tier-row-D .tier-row-label { background: var(--surface); color: var(--text-on-dark-muted); }
-.tier-row-unranked .tier-row-label { background: transparent; color: var(--text-on-dark-muted); border-right: 1px solid var(--border-on-dark); }
+.tier-row-S .tier-row-label { background: var(--portal-red); color: #fff; }
+.tier-row-A .tier-row-label { background: var(--portal-purple); color: #fff; }
+.tier-row-B .tier-row-label { background: var(--portal-blue-start); color: #fff; }
+.tier-row-C .tier-row-label { background: #93C5FD; color: var(--ink); }
+.tier-row-D .tier-row-label { background: var(--paper-dim); color: var(--text-on-light-muted); }
+.tier-row-unranked .tier-row-label { background: transparent; color: var(--text-on-light-muted); border-right: 1px solid var(--border-on-light); }
 
 .tier-row-items { flex: 1; display: flex; flex-wrap: wrap; align-content: center; gap: 10px; padding: 10px 14px; }
 .tier-poster {

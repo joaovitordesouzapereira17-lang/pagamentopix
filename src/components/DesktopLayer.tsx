@@ -62,10 +62,6 @@ export function DesktopLayer() {
         <div className="sticker sticker-bubble" style={{ top: "9%", left: "70%" }}>•••</div>
         <div className="sticker sticker-burst sticker-burst-pink" style={{ top: "58%", left: "6%" }}>POW!</div>
         <div className="sticker sticker-burst sticker-burst-yellow" style={{ top: "12%", left: "40%" }}>★</div>
-        <div className="sticker sticker-mood" style={{ top: "68%", left: "58%" }}>
-          <span className="sticker-mood-label">MOOD ATUAL</span>
-          <span className="sticker-mood-value">⚡ no modo criar</span>
-        </div>
       </div>
 
       <div className="desktop-taskbar">
