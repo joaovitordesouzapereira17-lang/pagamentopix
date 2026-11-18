@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import type { Project } from "../data/projects";
 import { useReveal } from "../hooks/useReveal";
 import { withBase } from "../utils/paths";
@@ -8,10 +9,9 @@ interface ProjectCardProps {
   index: number;
   reverse: boolean;
   hidden: boolean;
-  onOpen: (project: Project) => void;
 }
 
-export function ProjectCard({ project, index, reverse, hidden, onOpen }: ProjectCardProps) {
+export function ProjectCard({ project, index, reverse, hidden }: ProjectCardProps) {
   const reveal = useReveal<HTMLDivElement>(0);
   const [imgErrored, setImgErrored] = useState(false);
   const cover = project.images[0];
@@ -23,7 +23,7 @@ export function ProjectCard({ project, index, reverse, hidden, onOpen }: Project
       style={reveal.style}
     >
       <div className="project-visual-col">
-        <button className="project-visual" onClick={() => onOpen(project)} data-cursor-label="Ver projeto">
+        <Link to={`/trabalhos/${project.slug}`} className="project-visual" data-cursor-label="Ver projeto">
           <span className="project-number mono">{String(index + 1).padStart(2, "0")}</span>
           {cover && !imgErrored ? (
             <img src={withBase(cover)} alt={project.title} onError={() => setImgErrored(true)} />
@@ -32,7 +32,7 @@ export function ProjectCard({ project, index, reverse, hidden, onOpen }: Project
               <span className="project-visual-fallback-inner">{project.category}</span>
             </div>
           )}
-        </button>
+        </Link>
       </div>
 
       <div className="project-meta-col">
@@ -40,9 +40,9 @@ export function ProjectCard({ project, index, reverse, hidden, onOpen }: Project
         <h3 className="project-title-serif">{project.title}</h3>
         <p className="project-desc">{project.description}</p>
         {project.technologies.length > 0 && <p className="project-tech">{project.technologies.join(" · ")}</p>}
-        <button className="project-open-link underline-link" onClick={() => onOpen(project)}>
+        <Link to={`/trabalhos/${project.slug}`} className="project-open-link underline-link">
           Ver case completo
-        </button>
+        </Link>
       </div>
     </article>
   );

@@ -11,6 +11,7 @@ import { Skills } from "./components/Skills";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Mural } from "./components/Mural";
+import { ProjectDetail } from "./components/ProjectDetail";
 import TypeRemixPreloader from "./components/ui/type-remix-preloader";
 import { profile } from "./data/profile";
 import { skills } from "./data/skills";
@@ -41,6 +42,7 @@ function Site() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/mural" element={<Mural />} />
+        <Route path="/trabalhos/:slug" element={<ProjectDetail />} />
       </Routes>
 
       <Footer />

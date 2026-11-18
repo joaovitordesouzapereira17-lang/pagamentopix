@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { projects, projectCategories, type Project } from "../data/projects";
+import { projects, projectCategories } from "../data/projects";
 import { useReveal } from "../hooks/useReveal";
 import { EditHint } from "./EditHint";
 import { GraphicMark } from "./GraphicMark";
 import { ProjectCard } from "./ProjectCard";
-import { ProjectModal } from "./ProjectModal";
 
 export function Projects() {
   const [filter, setFilter] = useState<string>("all");
-  const [openProject, setOpenProject] = useState<Project | null>(null);
 
   const kicker = useReveal<HTMLParagraphElement>(0);
   const head = useReveal<HTMLDivElement>(0);
-
-  const openIndex = openProject ? projects.indexOf(openProject) : -1;
 
   return (
     <section className="section-projects" id="projetos">
@@ -60,13 +56,10 @@ export function Projects() {
               index={index}
               reverse={index % 2 === 1}
               hidden={filter !== "all" && project.category !== filter}
-              onOpen={setOpenProject}
             />
           ))}
         </div>
       )}
-
-      <ProjectModal project={openProject} index={openIndex} onClose={() => setOpenProject(null)} />
     </section>
   );
 }

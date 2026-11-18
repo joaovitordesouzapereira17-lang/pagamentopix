@@ -457,34 +457,38 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
 .back-to-top:hover { color: var(--text-on-dark); }
 
 /* =====================================================
-   MODAL (accent secundário azul — é sempre sobre um projeto)
+   PROJECT DETAIL (página própria de case, /trabalhos/<slug>)
 ===================================================== */
-.modal-overlay { position: fixed; inset: 0; background: rgba(21, 21, 21, 0.92); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; }
-.modal { position: relative; background: var(--paper); color: var(--text-on-light); max-width: 780px; width: 100%; max-height: 88vh; overflow-y: auto; margin: auto; }
-.modal-close { position: absolute; top: 18px; right: 18px; z-index: 2; width: 36px; height: 36px; background: var(--graphite); color: var(--text-on-dark); display: flex; align-items: center; justify-content: center; }
-.modal-index { position: absolute; top: 20px; left: 20px; z-index: 2; color: var(--text-on-dark); font-size: 11px; }
-.modal-thumb { height: 340px; background: var(--surface); }
-.modal-thumb-img { width: 100%; height: 340px; object-fit: cover; }
-.modal-thumb-fallback {
-  display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center;
-}
-.modal-thumb-fallback span {
-  font-family: var(--font-display); font-style: italic; text-transform: uppercase;
-  font-size: clamp(1.6rem, 4vw, 3rem); color: rgba(245, 245, 245, 0.7); word-break: break-word;
-}
-.modal-body { padding: 44px; }
-.modal-category { color: var(--blue); font-size: 11px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
-.modal-body h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-style: italic; margin-bottom: 18px; }
-.modal-body > p { color: var(--text-on-light-muted); margin-bottom: 28px; max-width: 62ch; }
-.modal-video { margin: -4px 0 28px; }
-.modal-video video, .modal-video iframe { width: 100%; aspect-ratio: 16/9; border: none; background: var(--ink); }
-.modal-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid var(--border-on-light); border-bottom: 1px solid var(--border-on-light); margin-bottom: 24px; }
-.modal-meta dt { font-family: var(--font-mono); font-size: 10px; color: var(--text-on-light-muted); margin-bottom: 4px; text-transform: uppercase; }
-.modal-meta dd { font-size: 14px; font-weight: 600; }
-.modal-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
-.modal-links .btn-solid:hover { background: var(--blue); border-color: var(--blue); }
+.project-detail { background: var(--paper); color: var(--text-on-light); padding: 140px 0 100px; }
+.project-detail-back { max-width: var(--container); margin: 0 auto 32px; padding: 0 var(--edge); display: block; }
+.project-detail-head { max-width: var(--container); margin: 0 auto 48px; padding: 0 var(--edge); }
+.project-detail-category { color: var(--blue); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+.project-detail-title { font-size: clamp(2.4rem, 5.5vw, 4.4rem); font-style: italic; max-width: 18ch; margin-bottom: 20px; }
+.project-detail-desc { font-size: 17px; color: var(--text-on-light-muted); max-width: 62ch; }
 
-body.modal-open { overflow: hidden; }
+.project-detail-cover { width: 100%; aspect-ratio: 16 / 8; background: var(--surface); margin-bottom: 64px; overflow: hidden; }
+.project-detail-cover img { width: 100%; height: 100%; object-fit: cover; }
+.project-detail-cover-fallback {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-style: italic; font-size: clamp(2rem, 5vw, 3.6rem);
+  color: rgba(245, 245, 245, 0.7); text-transform: uppercase;
+}
+
+.project-detail-video { max-width: var(--container); margin: 0 auto 64px; padding: 0 var(--edge); }
+.project-detail-video video, .project-detail-video iframe { width: 100%; aspect-ratio: 16/9; border: none; background: var(--ink); }
+
+.project-detail-body { max-width: var(--container); margin: 0 auto; padding: 0 var(--edge); display: grid; grid-template-columns: 7fr 1px 3fr; column-gap: clamp(24px, 5vw, 64px); }
+.project-detail-rule { background: var(--border-on-light); min-height: 200px; }
+.project-detail-sections { display: flex; flex-direction: column; gap: 48px; }
+.project-detail-section-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wine); margin-bottom: 14px; }
+.project-detail-section p { font-size: 16px; color: var(--text-on-light-muted); max-width: 62ch; white-space: pre-line; }
+
+.project-detail-meta { display: flex; flex-direction: column; }
+.project-detail-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+.project-detail-links .btn-solid:hover { background: var(--blue); border-color: var(--blue); }
+
+.project-detail-gallery { max-width: var(--container); margin: 64px auto 0; padding: 0 var(--edge); display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2.5vw, 28px); }
+.project-detail-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: var(--surface); }
 
 /* =====================================================
    MURAL — colagem de referências (fundo escuro, estética Y2K/grunge)
@@ -597,7 +601,12 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 640px) {
-  .modal-meta { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; text-align: center; }
   .experience-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .project-detail-body { grid-template-columns: 1fr; }
+  .project-detail-rule { display: none; }
+  .project-detail-gallery { grid-template-columns: 1fr; }
 }
