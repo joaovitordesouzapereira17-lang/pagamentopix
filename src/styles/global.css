@@ -779,88 +779,99 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .project-detail-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: var(--surface); }
 
 /* =====================================================
-   RÁDIO — dial de sintonia (fundo escuro, estética Y2K/grunge)
+   RÁDIO — console de estações, estilo app de música real
 ===================================================== */
 .radio-page { background: var(--paper); color: var(--ink); min-height: 100vh; padding: 140px var(--edge) 100px; }
-.radio-intro { max-width: var(--container); margin: 0 auto 64px; }
-.radio-title { font-size: clamp(1.9rem, 4.2vw, 3.2rem); max-width: 18ch; margin-bottom: 18px; }
-.radio-sub { color: var(--text-on-light-muted); max-width: 56ch; font-size: 16px; }
+.radio-topline {
+  max-width: var(--container); margin: 0 auto 32px; display: flex; justify-content: space-between;
+  font-size: 11px; letter-spacing: 0.08em; color: var(--text-on-light-muted);
+}
+.radio-intro {
+  max-width: var(--container); margin: 0 auto 56px; display: flex; justify-content: space-between;
+  align-items: flex-end; gap: 32px; flex-wrap: wrap;
+}
+.radio-kicker { font-size: 11px; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 10px; }
+.radio-title { font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.02; }
+.radio-title-accent { color: var(--blue); }
+.radio-description { max-width: 36ch; color: var(--text-on-light-muted); font-size: 15px; }
 
-/* ---- rádio portátil metálico/glossy, anos 2000 ---- */
-.boombox {
-  max-width: 640px; margin: 0 auto; background: linear-gradient(160deg, #e4e8ee, #b9c0cc 55%, #e4e8ee);
-  border-radius: 20px; padding: 20px; box-shadow: 0 24px 48px rgba(30, 27, 75, 0.2), inset 0 1px 0 var(--bevel-light);
-  display: grid; grid-template-columns: 76px 1fr; gap: 18px;
+/* ---- console do rádio ---- */
+.radio-console {
+  max-width: 820px; margin: 0 auto; background: linear-gradient(180deg, var(--metal-top), var(--metal-bottom));
+  border: 1px solid var(--metal-border); border-radius: 20px; padding: 18px;
+  box-shadow: 0 24px 48px rgba(30, 27, 75, 0.15), inset 0 1px 0 var(--bevel-light);
 }
-.boombox-grille {
-  border-radius: 14px; background: linear-gradient(160deg, #9aa1ad, #7b828e);
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 14px;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+.console-label {
+  display: flex; justify-content: space-between; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--text-on-light-muted); padding: 0 6px 12px;
 }
-.boombox-grille span { aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #4b5563, #1f2937); }
+.radio-device { display: grid; grid-template-columns: 76px 1fr; gap: 18px; }
+.speaker {
+  border-radius: 14px; background: linear-gradient(160deg, #cbd3dd, #9aa3b0);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 14px; align-content: start;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.speaker span { aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #7b8594, #4b5563); }
 
-.boombox-face { min-width: 0; }
-.boombox-lcd {
-  background: linear-gradient(180deg, #0a2e2e, #041818); border-radius: 8px; padding: 14px 16px;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 0 3px #1a1a1a;
-  margin-bottom: 14px; overflow: hidden;
+.radio-screen {
+  background: linear-gradient(180deg, #0a2e2e, #041818); border-radius: 10px; padding: 16px 18px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 0 3px #1a1a1a; color: #CFFFF2;
 }
-.boombox-lcd-freq { display: block; font-size: 13px; letter-spacing: 0.14em; color: #7CFBE0; text-shadow: 0 0 6px rgba(124, 251, 224, 0.6); margin-bottom: 6px; }
-.boombox-marquee { overflow: hidden; white-space: nowrap; height: 18px; }
-.boombox-marquee span {
-  display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
-  color: #9FFCE8; animation: boombox-scroll 9s linear infinite;
-}
-.boombox-marquee span.is-loading { animation: none; color: #FFD166; }
-@keyframes boombox-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.boombox-note { font-size: 11px; color: #6EE7D8; margin-top: 4px; opacity: 0.8; }
-.boombox-static { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: #6EE7D8; text-transform: uppercase; }
-.boombox-eq { display: flex; align-items: flex-end; gap: 3px; height: 20px; margin-top: 8px; }
-.boombox-eq span { width: 4px; height: 20%; background: #7CFBE0; border-radius: 1px; opacity: 0.35; transition: opacity 0.2s; }
-.boombox-eq.is-playing span {
-  opacity: 1; animation: boombox-eq 0.9s ease-in-out infinite; animation-delay: calc(var(--i) * 0.07s);
-}
-@keyframes boombox-eq { 0%, 100% { height: 15%; } 50% { height: 90%; } }
+.screen-top { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: 0.1em; margin-bottom: 10px; opacity: 0.8; }
+.live-dot { color: #9FFCE8; }
+.radio-screen strong { display: block; font-size: 13px; letter-spacing: 0.14em; color: #7CFBE0; text-shadow: 0 0 6px rgba(124, 251, 224, 0.6); margin-bottom: 4px; }
+.radio-screen h2 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); color: #fff; margin-bottom: 6px; }
+.radio-screen > p { font-size: 13px; color: #9FD9CE; max-width: 48ch; }
 
-.radio-dial { position: relative; height: 54px; margin: 0 4px 14px; cursor: pointer; touch-action: none; }
-.radio-dial-track {
-  position: absolute; top: 50%; left: 0; right: 0; height: 3px; transform: translateY(-50%); border-radius: 2px;
-  background: repeating-linear-gradient(90deg, var(--metal-border) 0 1px, transparent 1px 8px);
+.equalizer { display: flex; align-items: flex-end; gap: 3px; height: 24px; margin-top: 12px; }
+.equalizer span { width: 5px; background: #7CFBE0; border-radius: 1px; opacity: 0.3; transition: opacity 0.2s; }
+.equalizer.is-playing span { opacity: 1; animation: radio-eq 0.9s ease-in-out infinite; }
+@keyframes radio-eq { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+
+.radio-controls { margin-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+.tuning-area { display: flex; flex-direction: column; gap: 8px; }
+.tuning-label { font-size: 10px; letter-spacing: 0.1em; color: var(--text-on-light-muted); }
+.tuning-area input[type="range"] { width: 100%; accent-color: var(--blue); }
+.frequency-labels { display: flex; justify-content: space-between; font-size: 11px; }
+.frequency-labels button { color: var(--text-on-light-muted); padding: 4px 6px; border-radius: 4px; }
+.frequency-labels button.selected { color: #fff; background: var(--blue); }
+
+.device-buttons { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.device-buttons button {
+  width: 40px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 13px;
+  background: linear-gradient(180deg, #fff, var(--metal-border)); border: 1px solid var(--metal-border);
+  border-radius: 8px; color: var(--ink); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 var(--bevel-light);
 }
-.radio-tick {
-  position: absolute; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column;
-  align-items: center; gap: 6px; padding: 10px; color: var(--text-on-light-muted);
+.device-buttons button:active { transform: translateY(1px); box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); }
+.play-button { color: var(--blue-soft) !important; width: 48px !important; }
+
+.volume-display { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--text-on-light-muted); }
+.volume-display input[type="range"] { flex: 1; accent-color: var(--blue); }
+
+.console-footer {
+  display: flex; justify-content: space-between; margin-top: 16px; padding: 0 6px;
+  font-size: 9px; letter-spacing: 0.08em; color: var(--text-on-light-muted);
 }
-.radio-tick-mark { width: 1px; height: 14px; background: var(--text-on-light-muted); }
-.radio-tick-label { font-size: 10px; letter-spacing: 0.05em; opacity: 0; transition: opacity 0.2s var(--ease); }
-.radio-tick:hover .radio-tick-label, .radio-tick.is-active .radio-tick-label { opacity: 1; }
-.radio-tick.is-active .radio-tick-mark { background: var(--blue); height: 20px; }
-.radio-tick.is-active { color: var(--blue); }
-.radio-needle {
-  position: absolute; top: -6px; bottom: -6px; width: 2px; background: var(--wine);
-  transform: translateX(-50%); cursor: grab; transition: left 0.08s linear;
-}
-.radio-needle::before {
-  content: ""; position: absolute; top: -6px; left: 50%; width: 12px; height: 12px; border-radius: 50%;
-  background: var(--wine); transform: translateX(-50%); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-}
-.radio-needle:focus-visible { outline: 2px solid var(--blue-soft); outline-offset: 6px; }
 
 .radio-empty { margin-top: 24px; text-align: center; }
 
-.boombox-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-.boombox-transport, .boombox-presets { display: flex; gap: 6px; }
-.boombox-btn, .boombox-preset {
-  width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 13px;
-  background: linear-gradient(180deg, #fff, var(--metal-border)); border: 1px solid var(--metal-border);
-  border-radius: 6px; color: var(--ink); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 var(--bevel-light);
+/* ---- grade de estações ---- */
+.station-section { max-width: var(--container); margin: 56px auto 0; }
+.station-heading { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+.station-heading span { font-size: 11px; letter-spacing: 0.08em; color: var(--text-on-light-muted); }
+.station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.station-card {
+  position: relative; text-align: left; background: #fff; border: 1px solid var(--metal-border);
+  border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 6px;
+  box-shadow: 0 2px 0 var(--bevel-light) inset, 0 6px 16px rgba(30, 27, 75, 0.06);
+  border-top: 3px solid var(--station-color); transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
-.boombox-btn:active, .boombox-preset:active { transform: translateY(1px); box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); }
-.boombox-btn-play { color: var(--blue-soft); }
-.boombox-preset { font-family: var(--font-mono); font-size: 11px; width: 26px; }
-.boombox-preset.is-active { background: linear-gradient(180deg, var(--blue), var(--blue-soft)); color: #fff; border-color: var(--blue-soft); }
-.boombox-volume { display: flex; align-items: center; gap: 6px; font-size: 13px; }
-.boombox-volume input[type="range"] { width: 80px; accent-color: var(--blue); }
+.station-card:hover { transform: translateY(-3px); box-shadow: 0 2px 0 var(--bevel-light) inset, 0 10px 24px rgba(30, 27, 75, 0.12); }
+.station-card.active { border-color: var(--station-color); box-shadow: 0 0 0 2px var(--station-color); }
+.station-number { font-size: 10px; color: var(--station-color); }
+.station-card strong { font-size: 16px; }
+.station-frequency { font-size: 11px; color: var(--text-on-light-muted); }
+.station-arrow { position: absolute; top: 16px; right: 16px; color: var(--station-color); font-size: 16px; }
 
 .global-radio-bar {
   position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 400;
@@ -1146,7 +1157,6 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   .tier-row-mood { display: none; }
   .tier-poster { width: 52px; }
   .tier-row-items { gap: 8px; padding: 8px; }
-  .radio-dial { margin: 0 4px 12px; }
-  .boombox { grid-template-columns: 1fr; }
-  .boombox-grille { display: none; }
+  .radio-device { grid-template-columns: 1fr; }
+  .speaker { display: none; }
 }

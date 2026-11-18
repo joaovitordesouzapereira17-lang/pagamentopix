@@ -23,34 +23,40 @@ export interface RadioStation {
   frequency: number;
   /** Nome da estação. */
   name: string;
-  /** Nota pessoal curta sobre por que essa seleção importa. Opcional. */
-  note?: string;
+  /** Descrição curta exibida no console do rádio. */
+  description: string;
+  /** Cor de identidade da estação (hex) — usada só em detalhes (card, ponto, número). */
+  color: string;
   source: RadioSource;
 }
 
 export const radioStations: RadioStation[] = [
   {
-    frequency: 89.5,
-    name: "Lofi Girl",
-    note: "Pra focar sem distrair — a live de lo-fi mais famosa da internet.",
-    source: { kind: "youtube", videoId: "jfKfPfyJRdk" },
-  },
-  {
-    frequency: 98.0,
-    name: "NovaBrasil FM",
-    note: "Rádio pop brasileira de verdade, ao vivo.",
+    frequency: 88.5,
+    name: "MPB Clube",
+    description: "Pop brasileiro de verdade, ao vivo — clássicos sem pressa.",
+    color: "#F04D68",
     source: { kind: "aac", streamUrl: "https://20823.live.streamtheworld.com/NOVABRASIL_SPAAC.aac" },
   },
   {
-    frequency: 102.9,
-    name: "M80 Rock",
-    note: "Clássicos do rock, ao vivo.",
+    frequency: 94.2,
+    name: "Pop Station",
+    description: "Hits e clássicos que não saem da cabeça, ao vivo.",
+    color: "#4568E8",
     source: { kind: "hls", streamUrl: "https://stream-hls.bauermedia.pt/m80.aac/playlist.m3u8" },
+  },
+  {
+    frequency: 98.0,
+    name: "Alternativa",
+    description: "Sons diferentes — a live de lo-fi mais famosa da internet.",
+    color: "#E9A928",
+    source: { kind: "youtube", videoId: "jfKfPfyJRdk" },
   },
   {
     frequency: 106.7,
     name: "Trilhas",
-    note: "Ambiente/cinemático, de fundo pra qualquer coisa.",
+    description: "Ambiente/cinemático, de fundo pra qualquer coisa.",
+    color: "#77A86A",
     source: { kind: "aac", streamUrl: "https://ice1.somafm.com/deepspaceone-128-mp3" },
   },
 ];

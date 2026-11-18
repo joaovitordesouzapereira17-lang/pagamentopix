@@ -1,210 +1,164 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { radioStations, type RadioStation } from "../data/radio";
+import { radioStations } from "../data/radio";
+import { profile } from "../data/profile";
 import { EditHint } from "./EditHint";
-import { GraphicMark } from "./GraphicMark";
 import { useReveal } from "../hooks/useReveal";
 import { useRadio } from "../context/RadioContext";
 
-const DEFAULT_MIN = 88;
-const DEFAULT_MAX = 108;
-const SNAP_THRESHOLD = 0.6;
-const EQ_BARS = 9;
-
-function clamp(v: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, v));
-}
+const EQ_HEIGHTS = [20, 38, 26, 48, 30, 43, 18, 35, 48, 25, 40, 22];
 
 export function Radio() {
   const kicker = useReveal<HTMLParagraphElement>(0);
   const title = useReveal<HTMLHeadingElement>(0);
   const { current, isPlaying, isLoading, volume, tune, togglePlay, setVolume } = useRadio();
 
-  const { min, max } = useMemo(() => {
-    if (radioStations.length === 0) return { min: DEFAULT_MIN, max: DEFAULT_MAX };
-    const freqs = radioStations.map((s) => s.frequency);
-    return {
-      min: Math.min(DEFAULT_MIN, Math.floor(Math.min(...freqs))),
-      max: Math.max(DEFAULT_MAX, Math.ceil(Math.max(...freqs))),
-    };
-  }, []);
-
-  const [freq, setFreq] = useState(current?.frequency ?? radioStations[0]?.frequency ?? (min + max) / 2);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const dragging = useRef(false);
-
-  const active = radioStations.find((s) => Math.abs(s.frequency - freq) <= SNAP_THRESHOLD) ?? null;
-
-  useEffect(() => {
-    if (active && active.frequency !== current?.frequency) tune(active);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active?.frequency]);
-
-  function freqFromClientX(clientX: number) {
-    const track = trackRef.current;
-    if (!track) return freq;
-    const rect = track.getBoundingClientRect();
-    const ratio = clamp((clientX - rect.left) / rect.width, 0, 1);
-    return min + ratio * (max - min);
+  if (radioStations.length === 0) {
+    return (
+      <main id="conteudo" className="radio-page">
+        <section className="radio-intro">
+          <p className={`section-kicker mono light ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
+            RÁDIO — 05
+          </p>
+          <h1 className={`radio-title font-integral ${title.className}`} ref={title.ref} style={title.style}>
+            Sintonize o que eu ando ouvindo.
+          </h1>
+        </section>
+        <div className="radio-empty">
+          <EditHint file="src/data/radio.ts">Adicione suas estações (array radioStations)</EditHint>
+        </div>
+      </main>
+    );
   }
 
-  function tuneTo(next: number) {
-    setFreq(clamp(next, min, max));
-  }
+  const activeIndex = Math.max(0, radioStations.findIndex((s) => s.frequency === current?.frequency));
+  const station = radioStations[activeIndex];
 
-  function selectStation(s: RadioStation) {
-    setFreq(s.frequency);
+  function changeStation(index: number) {
+    tune(radioStations[index]);
   }
-
-  function onPointerDown(e: React.PointerEvent) {
-    dragging.current = true;
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
-    tuneTo(freqFromClientX(e.clientX));
-  }
-  function onPointerMove(e: React.PointerEvent) {
-    if (!dragging.current) return;
-    tuneTo(freqFromClientX(e.clientX));
-  }
-  function onPointerUp() {
-    dragging.current = false;
-  }
-
-  function onKeyDown(e: React.KeyboardEvent) {
-    if (e.key === "ArrowRight" || e.key === "ArrowUp") tuneTo(freq + 0.1);
-    if (e.key === "ArrowLeft" || e.key === "ArrowDown") tuneTo(freq - 0.1);
-  }
-
-  const needlePercent = ((freq - min) / (max - min)) * 100;
-  const showingLive = active && active.frequency === current?.frequency;
 
   return (
     <main id="conteudo" className="radio-page">
+      <div className="radio-topline mono">
+        <span>● RÁDIO — 05</span>
+        <span>FREQUÊNCIAS PESSOAIS / 2026</span>
+      </div>
+
       <section className="radio-intro">
-        <p className={`section-kicker mono light ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
-          <GraphicMark symbol="circle" /> RÁDIO — 05
-        </p>
-        <h1 className={`radio-title font-integral ${title.className}`} ref={title.ref} style={title.style}>
-          Sintonize o que eu ando ouvindo.
-        </h1>
-        <p className="radio-sub">
-          Gire o dial pra pegar uma estação. É rádio de verdade, tocando ao vivo — a música continua
-          mesmo se você for pra outra página.
+        <div>
+          <p className={`radio-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>SUA PRÓXIMA DESCOBERTA COMEÇA AQUI</p>
+          <h1 className={`radio-title font-integral ${title.className}`} ref={title.ref} style={title.style}>
+            O que toca
+            <br />
+            <span className="font-hotham radio-title-accent">por aqui?</span>
+          </h1>
+        </div>
+
+        <p className="radio-description">
+          Gire o dial, escolha uma frequência e descubra um pouco do que faz parte da minha
+          trilha sonora — é rádio de verdade, tocando ao vivo.
         </p>
       </section>
 
-      <div className="boombox">
-        <div className="boombox-grille" aria-hidden="true">
-          {Array.from({ length: 24 }).map((_, i) => <span key={i} />)}
+      <section className="radio-console">
+        <div className="console-label mono">
+          <span>J.V. RADIO</span>
+          <span>STEREO SYSTEM / Nº 001</span>
         </div>
 
-        <div className="boombox-face">
-          <div className="boombox-lcd">
-            {showingLive ? (
-              <>
-                <span className="mono boombox-lcd-freq">{active!.frequency.toFixed(1)} FM</span>
-                <div className="boombox-marquee">
-                  <span className={isLoading ? "is-loading" : ""}>
-                    {isLoading ? "SINTONIZANDO..." : `${active!.name.toUpperCase()} — AO VIVO — ${active!.name.toUpperCase()} — AO VIVO`}
-                  </span>
-                </div>
-                {active!.note && <p className="boombox-note">{active!.note}</p>}
-              </>
-            ) : (
-              <>
-                <span className="mono boombox-lcd-freq">{freq.toFixed(1)} FM</span>
-                <p className="boombox-static">— estática —</p>
-              </>
-            )}
-            <div className={`boombox-eq${isPlaying ? " is-playing" : ""}`} aria-hidden="true">
-              {Array.from({ length: EQ_BARS }).map((_, i) => <span key={i} style={{ "--i": i } as React.CSSProperties} />)}
+        <div className="radio-device">
+          <div className="speaker speaker-left" aria-hidden="true">
+            {Array.from({ length: 12 }).map((_, i) => <span key={i} />)}
+          </div>
+
+          <div className="radio-screen">
+            <div className="screen-top mono">
+              <span>NOW TUNING</span>
+              <span className="live-dot">
+                {isLoading ? "● SINTONIZANDO" : isPlaying ? "● AO VIVO" : "● EM ESPERA"}
+              </span>
+            </div>
+
+            <strong className="mono">{station.frequency.toFixed(1)} FM</strong>
+            <h2 className="font-integral">{station.name}</h2>
+            <p>{station.description}</p>
+
+            <div className={`equalizer${isPlaying ? " is-playing" : ""}`} aria-hidden="true">
+              {EQ_HEIGHTS.map((height, i) => (
+                <span key={i} style={{ height: `${isPlaying ? height : 5}px`, animationDelay: `${i * 0.08}s` } as React.CSSProperties} />
+              ))}
             </div>
           </div>
 
-          <div
-            className="radio-dial"
-            ref={trackRef}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerLeave={onPointerUp}
-          >
-            <div className="radio-dial-track" />
-            {radioStations.map((s) => (
-              <button
-                key={s.frequency}
-                type="button"
-                className={`radio-tick${active?.frequency === s.frequency ? " is-active" : ""}`}
-                style={{ left: `${((s.frequency - min) / (max - min)) * 100}%` }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  tuneTo(s.frequency);
-                }}
-              >
-                <span className="radio-tick-mark" />
-                <span className="radio-tick-label mono">{s.frequency.toFixed(1)}</span>
-              </button>
-            ))}
-            <div
-              className="radio-needle"
-              role="slider"
-              tabIndex={0}
-              aria-label="Sintonizador do rádio"
-              aria-valuemin={min}
-              aria-valuemax={max}
-              aria-valuenow={Number(freq.toFixed(1))}
-              onKeyDown={onKeyDown}
-              style={{ left: `${needlePercent}%` }}
-            />
-          </div>
+          <div className="radio-controls">
+            <div className="tuning-area">
+              <span className="tuning-label mono">SINTONIZAR ESTAÇÃO</span>
 
-          {radioStations.length === 0 ? (
-            <div className="radio-empty">
-              <EditHint file="src/data/radio.ts">Adicione suas estações (array radioStations)</EditHint>
-            </div>
-          ) : (
-            <div className="boombox-controls">
-              <div className="boombox-transport">
-                <button type="button" className="boombox-btn" aria-label="Estação anterior" onClick={() => {
-                  const idx = radioStations.findIndex((s) => s.frequency === active?.frequency);
-                  const prev = radioStations[(idx <= 0 ? radioStations.length : idx) - 1];
-                  if (prev) selectStation(prev);
-                }}>⏮</button>
-                <button type="button" className="boombox-btn boombox-btn-play" aria-label={isPlaying ? "Pausar" : "Tocar"} onClick={togglePlay}>
-                  {isPlaying ? "⏸" : "▶"}
-                </button>
-                <button type="button" className="boombox-btn" aria-label="Próxima estação" onClick={() => {
-                  const idx = radioStations.findIndex((s) => s.frequency === active?.frequency);
-                  const next = radioStations[(idx + 1) % radioStations.length];
-                  if (next) selectStation(next);
-                }}>⏭</button>
-              </div>
+              <input
+                type="range"
+                min={0}
+                max={radioStations.length - 1}
+                step={1}
+                value={activeIndex}
+                onChange={(e) => changeStation(Number(e.target.value))}
+                aria-label="Sintonizar estação"
+              />
 
-              <div className="boombox-presets">
-                {radioStations.slice(0, 4).map((s, i) => (
-                  <button
-                    key={s.frequency}
-                    type="button"
-                    className={`boombox-preset${active?.frequency === s.frequency ? " is-active" : ""}`}
-                    onClick={() => selectStation(s)}
-                    title={s.name}
-                  >
-                    {i + 1}
+              <div className="frequency-labels mono">
+                {radioStations.map((item, i) => (
+                  <button key={item.frequency} onClick={() => changeStation(i)} className={activeIndex === i ? "selected" : ""}>
+                    {item.frequency.toFixed(1)}
                   </button>
                 ))}
               </div>
-
-              <div className="boombox-volume">
-                <span aria-hidden="true">🔉</span>
-                <input
-                  type="range" min={0} max={1} step={0.01} value={volume}
-                  onChange={(e) => setVolume(Number(e.target.value))}
-                  aria-label="Volume"
-                />
-                <span aria-hidden="true">🔊</span>
-              </div>
             </div>
-          )}
+
+            <div className="device-buttons">
+              <button aria-label="Estação anterior" onClick={() => changeStation((activeIndex + radioStations.length - 1) % radioStations.length)}>◀◀</button>
+              <button className="play-button" onClick={togglePlay} aria-label={isPlaying ? "Pausar" : "Reproduzir"}>
+                {isPlaying ? "Ⅱ" : "▶"}
+              </button>
+              <button aria-label="Próxima estação" onClick={() => changeStation((activeIndex + 1) % radioStations.length)}>▶▶</button>
+            </div>
+
+            <div className="volume-display">
+              <span className="mono">VOL.</span>
+              <input
+                type="range" min={0} max={1} step={0.01} value={volume}
+                onChange={(e) => setVolume(Number(e.target.value))}
+                aria-label="Volume"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+
+        <div className="console-footer mono">
+          <span>DESIGNED BY {profile.fullName.split(" ")[0].toUpperCase()} {profile.fullName.split(" ")[1]?.toUpperCase() ?? ""}</span>
+          {profile.city && <span>EST. 2026 — {profile.city.toUpperCase()}</span>}
+        </div>
+      </section>
+
+      <section className="station-section">
+        <div className="station-heading">
+          <h2 className="font-integral">Escolha sua estação</h2>
+          <span className="mono">{String(radioStations.length).padStart(2, "0")} FREQUÊNCIAS DISPONÍVEIS</span>
+        </div>
+
+        <div className="station-grid">
+          {radioStations.map((item, i) => (
+            <button
+              key={item.frequency}
+              className={`station-card${activeIndex === i ? " active" : ""}`}
+              style={{ "--station-color": item.color } as React.CSSProperties}
+              onClick={() => changeStation(i)}
+            >
+              <span className="station-number mono">0{i + 1}</span>
+              <strong className="font-integral">{item.name}</strong>
+              <span className="station-frequency mono">{item.frequency.toFixed(1)} FM</span>
+              <span className="station-arrow" aria-hidden="true">↗</span>
+            </button>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

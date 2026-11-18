@@ -92,15 +92,17 @@ pra este arquivo — nunca referências inventadas.
 
 ### Rádio — `src/data/radio.ts` e página `/radio`
 
-Cada estação é `{ frequency, name, note?, source }`. `source` aponta pra
-uma fonte de áudio ao vivo de verdade, em um dos três formatos:
-`{ kind: "aac", streamUrl }` (stream direto), `{ kind: "hls", streamUrl }`
-(stream `.m3u8`, tocado via `hls.js`) ou `{ kind: "youtube", videoId }`
-(vídeo/live do YouTube, tocado por um player oculto). O áudio toca de
-verdade, pelo player global do site (`RadioContext`), e continua tocando
-mesmo navegando entre páginas. `frequency` só posiciona a estação no dial
-(escolha um número entre 88 e 108). Sem estações, o dial funciona
-normalmente mas fica sempre em "estática".
+Cada estação é `{ frequency, name, description, color, source }`.
+`description` aparece no visor do console e `color` (um hex) é só a cor de
+identidade da estação, usada em detalhes (borda do card, número, ponto).
+`source` aponta pra uma fonte de áudio ao vivo de verdade, em um dos três
+formatos: `{ kind: "aac", streamUrl }` (stream direto), `{ kind: "hls",
+streamUrl }` (stream `.m3u8`, tocado via `hls.js`) ou `{ kind: "youtube",
+videoId }` (vídeo/live do YouTube, tocado por um player oculto). O áudio
+toca de verdade, pelo player global do site (`RadioContext`), e continua
+tocando mesmo navegando entre páginas. `frequency` só posiciona a estação
+no dial (escolha um número entre 88 e 108). Sem estações, a página mostra
+só o aviso discreto apontando pra este arquivo.
 
 As URLs de stream de rádios comerciais mudam com o tempo — se alguma
 parar de tocar, é só trocar o `streamUrl`/`videoId` pelo de outra estação.
