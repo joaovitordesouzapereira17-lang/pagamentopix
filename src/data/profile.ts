@@ -5,7 +5,7 @@
  */
 
 export interface SocialLink {
-  /** Nome exibido no botão, ex: "LinkedIn", "GitHub", "Instagram" */
+  /** Nome exibido no botão, ex: "LinkedIn", "Behance", "Instagram" */
   label: string;
   url: string;
 }

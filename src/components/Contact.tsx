@@ -12,6 +12,18 @@ export function Contact() {
 
   const [values, setValues] = useState({ name: "", email: "", message: "" });
   const [note, setNote] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  async function copyEmail() {
+    if (!profile.email) return;
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard indisponível — o link mailto continua funcionando normalmente */
+    }
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -56,7 +68,14 @@ export function Contact() {
                 <dt>{row.label}</dt>
                 <dd>
                   {row.value ? (
-                    row.href ? <a href={row.href}>{row.value}</a> : row.value
+                    <>
+                      {row.href ? <a href={row.href}>{row.value}</a> : row.value}
+                      {row.label === "E-mail" && (
+                        <button type="button" className="mono copy-email-btn" onClick={copyEmail}>
+                          {copied ? "Copiado ✓" : "Copiar"}
+                        </button>
+                      )}
+                    </>
                   ) : (
                     <EditHint file="src/data/profile.ts">{`Preencha o campo ${row.label.toLowerCase()}`}</EditHint>
                   )}

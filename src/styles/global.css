@@ -434,6 +434,11 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
 .contact-details-editorial .fact-row { border-color: var(--border-on-dark); }
 .contact-details-editorial .fact-row dt { color: var(--text-on-dark-muted); }
 .contact-details-editorial .fact-row dd a:hover { color: var(--wine-soft); }
+.copy-email-btn {
+  margin-left: 12px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-on-dark-muted); border: 1px solid var(--border-on-dark); padding: 3px 8px; vertical-align: middle;
+}
+.copy-email-btn:hover { color: var(--text-on-dark); border-color: var(--text-on-dark); }
 .contact-socials-inline { display: flex; gap: 18px; flex-wrap: wrap; padding: 16px 0; }
 .contact-socials-inline a { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-on-dark-muted); }
 .contact-socials-inline a:hover { color: var(--text-on-dark); }
