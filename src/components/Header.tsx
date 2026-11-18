@@ -8,7 +8,8 @@ const NAV_ITEMS = [
   { label: "Projetos", index: "02", to: "/#projetos", sectionId: "projetos" },
   { label: "Skills", index: "03", to: "/#skills", sectionId: "skills" },
   { label: "Mural", index: "04", to: "/mural", sectionId: null },
-  { label: "Contato", index: "05", to: "/#contato", sectionId: "contato" },
+  { label: "Rádio", index: "05", to: "/radio", sectionId: null },
+  { label: "Contato", index: "06", to: "/#contato", sectionId: "contato" },
 ];
 
 export function Header() {
