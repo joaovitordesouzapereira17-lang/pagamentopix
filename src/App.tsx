@@ -78,7 +78,7 @@ export default function App() {
 
   return (
     <TypeRemixPreloader
-      word="CRIATIVO"
+      word="PORTFÓLIO"
       name={profile.fullName}
       discipline={profile.role}
       year="2026"

@@ -330,51 +330,46 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   align-items: center; gap: 6px; padding: 8px 6px; text-align: center; border: 1px solid transparent; border-radius: 8px;
 }
 .desktop-icon-glyph {
-  font-size: 24px; line-height: 1; image-rendering: pixelated; display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: center; color: var(--ink);
   width: 44px; height: 44px; border-radius: 10px;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(203, 213, 225, 0.75));
-  border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(226, 232, 240, 0.85));
+  border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .desktop-icon-label {
   font-family: var(--font-title); font-size: 10.5px; color: #fff; line-height: 1.4; word-break: break-word;
   text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 2px 2px 0 rgba(0, 0, 0, 0.55);
+  cursor: grab;
 }
-.desktop-icon.is-selected { background: rgba(0, 85, 229, 0.4); border-color: var(--xp-sky-top); }
-.desktop-icon:focus-visible { background: rgba(0, 85, 229, 0.4); border-color: var(--xp-sky-top); outline: none; }
+.desktop-icon.is-selected { background: rgba(29, 78, 216, 0.35); border-color: var(--blue); }
+.desktop-icon:focus-visible { background: rgba(29, 78, 216, 0.35); border-color: var(--blue); outline: none; }
 
-/* ---- stickers flutuantes: colagem Y2K/MSN/TheSlap por cima do desktop ---- */
+/* ---- adesivos arrastáveis: ícones nítidos (lucide), base metálica neutra, cor só no ícone ---- */
 .desktop-stickers { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.sticker { position: absolute; }
-.sticker-buddy { display: flex; flex-direction: column; align-items: center; transform: rotate(-6deg); }
+.sticker { position: absolute; cursor: grab; pointer-events: auto; touch-action: none; }
+.sticker-buddy { display: flex; flex-direction: column; align-items: center; }
 .sticker-buddy-glyph {
-  font-size: 34px; filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.5));
-  background: var(--text-on-dark); border: 2px solid var(--ink); border-radius: 50%;
-  width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
-  box-shadow: 3px 3px 0 var(--ink);
+  color: var(--ink); background: linear-gradient(160deg, #fff, var(--metal-bottom));
+  border: 1px solid var(--metal-border); border-radius: 50%;
+  width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 8px rgba(30, 27, 75, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .sticker-buddy-dot {
-  position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%;
-  background: #22C55E; border: 2px solid var(--ink);
+  position: absolute; bottom: 2px; right: 2px; width: 11px; height: 11px; border-radius: 50%;
+  background: #22C55E; border: 2px solid #fff;
 }
 .sticker-bubble {
-  font-family: var(--font-title); font-size: 13px; letter-spacing: 0.1em; color: var(--ink);
-  background: #fff; border: 2px solid var(--ink); border-radius: 16px 16px 16px 2px;
-  padding: 6px 12px; box-shadow: 3px 3px 0 var(--ink); transform: rotate(3deg);
+  color: var(--blue); background: #fff; border: 1px solid var(--metal-border); border-radius: 50%;
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 8px rgba(30, 27, 75, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .sticker-burst {
-  font-family: var(--font-cartoon); letter-spacing: 0.04em; border: 2px solid var(--ink);
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  box-shadow: 3px 3px 0 var(--ink); transform: rotate(-8deg);
+  border: 1px solid var(--metal-border); border-radius: 50%;
+  background: linear-gradient(160deg, #fff, var(--metal-bottom));
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 8px rgba(30, 27, 75, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
-.sticker-burst-pink {
-  width: 70px; height: 70px; border-radius: 38% 62% 55% 45% / 45% 55% 45% 55%;
-  background: var(--wine); color: #fff; font-size: 13px;
-}
-.sticker-burst-yellow {
-  width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); color: var(--ink);
-  font-size: 20px; transform: rotate(12deg);
-}
+.sticker-burst-pink { width: 48px; height: 48px; color: var(--wine); }
+.sticker-burst-yellow { width: 40px; height: 40px; color: var(--yellow); }
 
 .desktop-taskbar {
   position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 3; pointer-events: auto;
@@ -407,10 +402,17 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 
 .hero-name {
   grid-column: 1 / 10; grid-row: 2; align-self: center; z-index: 2;
-  font-size: clamp(1.8rem, 3.6vw, 3.1rem); line-height: 1.08; color: #fff;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.hero-name-eyebrow {
+  display: block; font-size: clamp(2.4rem, 6vw, 5rem); line-height: 0.95; color: var(--blue-soft);
+  -webkit-text-stroke: 1.5px #fff; text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+.hero-name-full {
+  display: block; font-size: clamp(1.5rem, 3vw, 2.6rem); line-height: 1.1; color: #fff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
 }
-.hero-name-accent { color: var(--blue); -webkit-text-stroke: 0.5px var(--ink); }
+.hero-name-accent { color: var(--yellow); -webkit-text-stroke: 0.4px var(--ink); }
 
 .hero-photo-panel {
   grid-column: 7 / 13; grid-row: 1 / 4; align-self: stretch; position: relative; z-index: 1;
@@ -420,8 +422,9 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   background: linear-gradient(180deg, var(--metal-top), var(--metal-bottom));
   border: 3px solid var(--blue-soft); border-radius: 8px; width: min(300px, 90%);
   box-shadow: 6px 6px 0 rgba(30, 27, 75, 0.25), inset 0 1px 0 var(--bevel-light);
-  overflow: hidden;
+  overflow: hidden; cursor: grab; touch-action: none;
 }
+.wmp-photo-window:active, .hero-bio-window:active { cursor: grabbing; }
 .wmp-photo-titlebar {
   position: relative; display: flex; align-items: center; justify-content: space-between; font-family: var(--font-window);
   font-size: 10.5px; font-weight: 700; color: #fff; background: linear-gradient(180deg, #3B82C4, var(--blue-soft));
@@ -472,6 +475,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .hero-bio-window {
   background: #fff; border: 3px solid var(--portal-blue-start); border-radius: 10px;
   box-shadow: 6px 6px 0 var(--portal-purple); width: 100%; max-width: 460px; overflow: hidden;
+  cursor: grab; touch-action: none;
 }
 .hero-bio-titlebar { border-radius: 0; }
 .hero-bio-body { padding: 18px 20px 20px; color: var(--ink); }

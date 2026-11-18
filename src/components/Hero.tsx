@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import { useParallax } from "../hooks/useParallax";
@@ -6,6 +7,14 @@ import { EditHint } from "./EditHint";
 import { GraphicMark } from "./GraphicMark";
 import { ProfilePhoto } from "./ProfilePhoto";
 import { DesktopLayer } from "./DesktopLayer";
+
+const dragProps = {
+  drag: true,
+  dragElastic: 0.08,
+  dragMomentum: false,
+  whileTap: { cursor: "grabbing" },
+  whileDrag: { scale: 1.02, zIndex: 15, boxShadow: "0 20px 40px rgba(30,27,75,0.35)" },
+} as const;
 
 function splitSurname(fullName: string): [string, string] {
   const words = fullName.split(" ").filter(Boolean);
@@ -30,9 +39,10 @@ export function Hero() {
   const tagReveal = useReveal<HTMLSpanElement>(500);
   const tagParallax = useParallax<HTMLSpanElement>(0.06);
   const [photoMissing, setPhotoMissing] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
 
   return (
-    <section className="hero" id="topo">
+    <section className="hero" id="topo" ref={heroRef}>
       <DesktopLayer />
       <div className="hero-grid">
         <p className={`hero-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
@@ -40,12 +50,15 @@ export function Hero() {
           {profile.role ? profile.role : <EditHint file="src/data/profile.ts">Defina seu cargo/título (campo role)</EditHint>}
         </p>
 
-        <h1 className={`hero-name font-integral ${nameReveal.className}`} ref={nameReveal.ref} style={nameReveal.style}>
-          {firstNames} <span className="font-hotham hero-name-accent">{surname}</span>
+        <h1 className={`hero-name ${nameReveal.className}`} ref={nameReveal.ref} style={nameReveal.style}>
+          <span className="hero-name-eyebrow font-hotham">Portfólio</span>
+          <span className="hero-name-full font-integral">
+            {firstNames} <span className="font-hotham hero-name-accent">{surname}</span>
+          </span>
         </h1>
 
         <div className={`hero-photo-panel ${photo.className}`} ref={photo.ref} style={photo.style}>
-          <div className="wmp-photo-window">
+          <motion.div className="wmp-photo-window" {...dragProps} dragConstraints={heroRef}>
             <div className="wmp-photo-titlebar">
               <span>🪟 {profile.fullName.split(" ")[0]}.jpg - Windows Media Player</span>
               <span className="paint-titlebar-buttons" aria-hidden="true">
@@ -74,7 +87,7 @@ export function Hero() {
                 🔊<span className="wmp-photo-volume-track"><span /></span>
               </span>
             </div>
-          </div>
+          </motion.div>
           {photoMissing && (
             <EditHint file="public/images/profile/" className="hero-avatar-hint">
               Adicione sua foto
@@ -95,7 +108,7 @@ export function Hero() {
         </div>
 
         <div className={`hero-foot ${foot.className}`} ref={foot.ref} style={foot.style}>
-          <div className="hero-bio-window">
+          <motion.div className="hero-bio-window" {...dragProps} dragConstraints={heroRef}>
             <div className="paint-titlebar hero-bio-titlebar">
               <span className="paint-titlebar-text">👤 Perfil.txt</span>
               <span className="paint-titlebar-buttons" aria-hidden="true">
@@ -117,7 +130,7 @@ export function Hero() {
                 <span className="hero-scroll-line"><span /></span>
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
