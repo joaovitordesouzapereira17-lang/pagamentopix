@@ -487,6 +487,55 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
 body.modal-open { overflow: hidden; }
 
 /* =====================================================
+   MURAL — colagem de referências (fundo escuro, estética Y2K/grunge)
+===================================================== */
+.mural-page { background: var(--ink); color: var(--text-on-dark); min-height: 100vh; padding: 140px var(--edge) 100px; }
+.mural-intro { max-width: var(--container); margin: 0 auto 64px; }
+.mural-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem); font-style: italic; max-width: 16ch; margin-bottom: 18px;
+}
+.mural-sub { color: var(--text-on-dark-muted); max-width: 56ch; font-size: 16px; }
+
+.mural-empty { max-width: var(--container); margin: 0 auto; }
+
+.mural-grid {
+  max-width: var(--container); margin: 0 auto; display: grid;
+  grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 36px);
+}
+.mural-tile {
+  position: relative; aspect-ratio: 4 / 5; background: var(--surface); overflow: hidden;
+  rotate: var(--rz, 0deg); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border-on-dark);
+  transition: rotate 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.mural-tile:hover, .mural-tile:focus-visible {
+  rotate: 0deg; transform: scale(1.04); box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border-on-dark);
+  z-index: 2;
+}
+.mural-tile img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15) contrast(1.05); }
+.mural-tile-tag {
+  position: absolute; left: 10px; bottom: 10px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  background: rgba(21, 21, 21, 0.72); color: var(--text-on-dark); padding: 4px 8px;
+}
+
+.mural-lightbox {
+  position: fixed; inset: 0; background: rgba(21, 21, 21, 0.92); z-index: 500;
+  display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto;
+}
+.mural-lightbox-card {
+  position: relative; background: var(--graphite); max-width: 760px; width: 100%; max-height: 88vh;
+  overflow-y: auto; margin: auto; display: grid; grid-template-columns: 1fr 1fr;
+}
+.mural-lightbox-img { width: 100%; height: 100%; object-fit: cover; max-height: 88vh; }
+.mural-lightbox-info { padding: 36px; color: var(--text-on-dark); }
+.mural-lightbox-kind { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-soft); margin-bottom: 14px; }
+.mural-lightbox-info h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); font-style: italic; margin-bottom: 14px; }
+.mural-lightbox-info p { color: var(--text-on-dark-muted); font-size: 15px; }
+.mural-lightbox-close {
+  position: absolute; top: 14px; right: 14px; z-index: 2; width: 34px; height: 34px;
+  background: var(--ink); color: var(--text-on-dark); display: flex; align-items: center; justify-content: center;
+}
+
+/* =====================================================
    REVEAL
 ===================================================== */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
@@ -523,6 +572,10 @@ body.modal-open { overflow: hidden; }
   .skill-block:nth-child(even) { padding-left: 0; border-left: none; }
 
   .contact-columns { grid-template-columns: 1fr; row-gap: 48px; }
+
+  .mural-grid { grid-template-columns: repeat(2, 1fr); }
+  .mural-lightbox-card { grid-template-columns: 1fr; }
+  .mural-lightbox-img { max-height: 48vh; }
 }
 
 @media (max-width: 860px) {

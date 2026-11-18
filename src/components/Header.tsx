@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { profile } from "../data/profile";
 import { GraphicMark } from "./GraphicMark";
 
 const NAV_ITEMS = [
-  { id: "sobre", label: "Sobre", index: "01" },
-  { id: "projetos", label: "Projetos", index: "02" },
-  { id: "skills", label: "Skills", index: "03" },
-  { id: "contato", label: "Contato", index: "04" },
+  { label: "Sobre", index: "01", to: "/#sobre", sectionId: "sobre" },
+  { label: "Projetos", index: "02", to: "/#projetos", sectionId: "projetos" },
+  { label: "Skills", index: "03", to: "/#skills", sectionId: "skills" },
+  { label: "Mural", index: "04", to: "/mural", sectionId: null },
+  { label: "Contato", index: "05", to: "/#contato", sectionId: "contato" },
 ];
 
 export function Header() {
   const [navOpen, setNavOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>("");
+  const location = useLocation();
 
   useEffect(() => {
     const sections = document.querySelectorAll("main section[id]");
@@ -25,17 +28,20 @@ export function Header() {
     );
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [location.pathname]);
 
   const closeNav = () => setNavOpen(false);
   const signature = profile.nickname || profile.fullName.split(" ")[0] || "Portfólio";
 
+  const isActive = (item: (typeof NAV_ITEMS)[number]) =>
+    item.sectionId ? location.pathname === "/" && activeId === item.sectionId : location.pathname === item.to;
+
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a href="#topo" className="wordmark">
+        <Link to="/" className="wordmark">
           {signature} <GraphicMark symbol="star" className="wordmark-mark" />
-        </a>
+        </Link>
 
         <nav className={`nav${navOpen ? " is-open" : ""}`} id="nav">
           <button className="nav-close mono" aria-label="Fechar menu" onClick={closeNav}>
@@ -43,15 +49,15 @@ export function Header() {
           </button>
           <ul>
             {NAV_ITEMS.map((item) => (
-              <li key={item.id}>
+              <li key={item.label}>
                 <span className="nav-index">{item.index}</span>
-                <a
-                  href={`#${item.id}`}
-                  className={`nav-link${activeId === item.id ? " is-active" : ""}`}
+                <Link
+                  to={item.to}
+                  className={`nav-link${isActive(item) ? " is-active" : ""}`}
                   onClick={closeNav}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -61,9 +67,9 @@ export function Header() {
           </div>
         </nav>
 
-        <a href="#contato" className="btn btn-line header-cta">
+        <Link to="/#contato" className="btn btn-line header-cta">
           Contato
-        </a>
+        </Link>
 
         <button
           className={`menu-toggle${navOpen ? " is-open" : ""}`}

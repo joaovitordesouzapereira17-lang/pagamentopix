@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CustomCursor } from "./components/CustomCursor";
 import { ScrollProgress } from "./components/ScrollProgress";
+import { ScrollToHash } from "./components/ScrollToHash";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -8,11 +10,24 @@ import { Projects } from "./components/Projects";
 import { Skills } from "./components/Skills";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { Mural } from "./components/Mural";
 import TypeRemixPreloader from "./components/ui/type-remix-preloader";
 import { profile } from "./data/profile";
 import { skills } from "./data/skills";
 
 const SEEN_KEY = "portfolio-preloader-seen";
+
+function HomePage() {
+  return (
+    <main id="conteudo">
+      <Hero />
+      <About />
+      <Projects />
+      <Skills />
+      <Contact />
+    </main>
+  );
+}
 
 function Site() {
   return (
@@ -21,14 +36,12 @@ function Site() {
       <ScrollProgress />
       <CustomCursor />
       <Header />
+      <ScrollToHash />
 
-      <main id="conteudo">
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/mural" element={<Mural />} />
+      </Routes>
 
       <Footer />
     </>
@@ -44,7 +57,13 @@ export default function App() {
     }
   });
 
-  if (!loading) return <Site />;
+  if (!loading) {
+    return (
+      <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+        <Site />
+      </BrowserRouter>
+    );
+  }
 
   const roles = profile.focusAreas.length ? profile.focusAreas : skills.flatMap((g) => g.items).slice(0, 4);
 

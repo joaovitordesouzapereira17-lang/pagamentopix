@@ -27,6 +27,7 @@ src/
     profile.ts        # nome, cargo, foto, bio, idade, cidade, formação, contato, redes sociais
     experience.ts      # lista de experiências profissionais
     skills.ts           # habilidades agrupadas por categoria
+    mural.ts             # referências visuais (cinema, música, imagens) do Mural
     projects/
       types.ts          # formato (interface) de um projeto
       index.ts           # agrega automaticamente os arquivos desta pasta — não editar
@@ -37,6 +38,7 @@ src/
   styles/global.css      # paleta, tipografia, layout, responsividade
 public/
   images/profile/        # sua foto
+  images/mural/            # imagens das referências do Mural
   images/projects/<slug>/  # imagens de cada projeto
   videos/projects/<slug>/  # vídeos de apresentação (opcional)
   icons/                    # ícones extras, se precisar
@@ -76,6 +78,14 @@ do mais recente para o mais antigo.
 
 Grupos por categoria (`{ category: "Frontend", items: [...] }`). Adicione,
 remova ou renomeie grupos livremente.
+
+### Mural (referências) — `src/data/mural.ts` e página `/mural`
+
+Um arquivo pessoal de cinema, música e imagens de referência, numa colagem
+estilo Y2K/grunge. Cada item é `{ image, kind, origin, note? }`: coloque a
+imagem em `public/images/mural/` e acrescente o objeto ao array `mural`.
+Sem nenhum item cadastrado, a página mostra apenas o aviso discreto apontando
+pra este arquivo — nunca referências inventadas.
 
 ### Projetos — `src/data/projects/`
 
