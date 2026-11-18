@@ -5,6 +5,7 @@ import { EditHint } from "./EditHint";
 import { GraphicMark } from "./GraphicMark";
 import { useReveal } from "../hooks/useReveal";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { TierList } from "./TierList";
 
 function pickDouble(items: VideotecaItem[]): [VideotecaItem, VideotecaItem] | null {
   if (items.length < 2) return null;
@@ -81,7 +82,13 @@ export function Videoteca() {
           <EditHint file="src/data/videoteca.ts">Adicione seus filmes de referência (array videoteca)</EditHint>
         </div>
       ) : (
-        <div className="videoteca-grid">
+        <>
+          <section className="videoteca-tier-section">
+            <p className="mono videoteca-tier-heading">Minha tier list — arraste ou clique pra reorganizar</p>
+            <TierList items={videoteca} />
+          </section>
+
+          <div className="videoteca-grid">
           {filtered.map((item) => {
             const realIndex = videoteca.indexOf(item);
             return (
@@ -94,7 +101,8 @@ export function Videoteca() {
               </button>
             );
           })}
-        </div>
+          </div>
+        </>
       )}
 
       {activeItem && (

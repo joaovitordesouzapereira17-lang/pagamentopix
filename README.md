@@ -101,9 +101,16 @@ aqui. `frequency` só posiciona a estação no dial (escolha um número entre
 
 ### Videoteca — `src/data/videoteca.ts` e página `/videoteca`
 
-Cada filme é `{ image, title, year, genre, director?, synopsis?, note? }`.
+Cada filme é `{ image, title, year, genre, director?, synopsis?, note?, tier? }`.
 Coloque o pôster em `public/images/videoteca/`. O botão "Montar sessão
 dupla" só aparece com pelo menos 2 filmes cadastrados.
+
+O campo opcional `tier` ("S" | "A" | "B" | "C" | "D") define a posição
+inicial do filme na tier list exibida no topo da página. Sem esse campo,
+o filme começa na fileira "Não avaliados". Quem visita o site pode
+arrastar (ou clicar pra pegar e clicar na fileira pra soltar) os pôsteres
+entre as fileiras — é só uma brincadeira da sessão, não salva em lugar
+nenhum; pra mudar o ranking "oficial" de verdade, edite o campo `tier`.
 
 ### Projetos — `src/data/projects/`
 
