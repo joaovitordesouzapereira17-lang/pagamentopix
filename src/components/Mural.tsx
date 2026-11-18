@@ -4,6 +4,7 @@ import { withBase } from "../utils/paths";
 import { EditHint } from "./EditHint";
 import { GraphicMark } from "./GraphicMark";
 import { useReveal } from "../hooks/useReveal";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const KIND_LABELS: Record<MuralItem["kind"], string> = {
   still: "Still de filme",
@@ -18,6 +19,7 @@ export function Mural() {
   const title = useReveal<HTMLHeadingElement>(0);
   const [active, setActive] = useState<number | null>(null);
   const activeItem = active !== null ? mural[active] : null;
+  useEscapeKey(activeItem !== null, () => setActive(null));
 
   return (
     <main id="conteudo" className="mural-page">

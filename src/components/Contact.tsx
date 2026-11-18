@@ -41,7 +41,7 @@ export function Contact() {
   return (
     <section className="section-contact" id="contato">
       <p className={`section-kicker mono light ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
-        <GraphicMark symbol="star" /> CONTATO — 06
+        <GraphicMark symbol="star" /> CONTATO — 07
       </p>
 
       <h2 className={`contact-statement ${statement.className}`} ref={statement.ref} style={statement.style}>

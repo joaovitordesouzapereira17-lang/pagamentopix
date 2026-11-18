@@ -9,7 +9,8 @@ const NAV_ITEMS = [
   { label: "Skills", index: "03", to: "/#skills", sectionId: "skills" },
   { label: "Mural", index: "04", to: "/mural", sectionId: null },
   { label: "Rádio", index: "05", to: "/radio", sectionId: null },
-  { label: "Contato", index: "06", to: "/#contato", sectionId: "contato" },
+  { label: "Videoteca", index: "06", to: "/videoteca", sectionId: null },
+  { label: "Contato", index: "07", to: "/#contato", sectionId: "contato" },
 ];
 
 export function Header() {

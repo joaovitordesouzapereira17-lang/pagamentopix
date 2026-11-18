@@ -12,6 +12,7 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Mural } from "./components/Mural";
 import { Radio } from "./components/Radio";
+import { Videoteca } from "./components/Videoteca";
 import { ProjectDetail } from "./components/ProjectDetail";
 import TypeRemixPreloader from "./components/ui/type-remix-preloader";
 import { profile } from "./data/profile";
@@ -44,6 +45,7 @@ function Site() {
         <Route path="/" element={<HomePage />} />
         <Route path="/mural" element={<Mural />} />
         <Route path="/radio" element={<Radio />} />
+        <Route path="/videoteca" element={<Videoteca />} />
         <Route path="/trabalhos/:slug" element={<ProjectDetail />} />
       </Routes>
 

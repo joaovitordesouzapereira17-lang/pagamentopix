@@ -538,6 +538,60 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
 .radio-embed iframe { width: 100%; height: 352px; border: none; border-radius: 4px; }
 
 /* =====================================================
+   VIDEOTECA — parede de pôsteres (fundo escuro, estética Y2K/grunge)
+===================================================== */
+.videoteca-page { background: var(--ink); color: var(--text-on-dark); min-height: 100vh; padding: 140px var(--edge) 100px; }
+.videoteca-intro { max-width: var(--container); margin: 0 auto 48px; }
+.videoteca-title { font-size: clamp(2.2rem, 5vw, 3.8rem); font-style: italic; max-width: 20ch; margin-bottom: 18px; }
+.videoteca-sub { color: var(--text-on-dark-muted); max-width: 56ch; font-size: 16px; margin-bottom: 28px; }
+.videoteca-double-btn { margin-bottom: 28px; color: var(--text-on-dark); border-color: var(--border-on-dark); }
+.videoteca-double-btn:hover { background: var(--text-on-dark); color: var(--ink); }
+.videoteca-filters { margin-top: 0; }
+
+.videoteca-empty { max-width: var(--container); margin: 0 auto; }
+
+.videoteca-grid {
+  max-width: var(--container); margin: 0 auto; display: grid;
+  grid-template-columns: repeat(5, 1fr); gap: clamp(16px, 2.4vw, 28px);
+}
+.videoteca-poster {
+  position: relative; aspect-ratio: 2 / 3; background: var(--surface); overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border-on-dark);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.videoteca-poster:hover, .videoteca-poster:focus-visible {
+  transform: translateY(-6px) scale(1.03); box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border-on-dark);
+}
+.videoteca-poster img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.1) contrast(1.05); }
+.videoteca-poster-info {
+  position: absolute; inset: auto 0 0 0; padding: 10px; background: linear-gradient(0deg, rgba(21, 21, 21, 0.92), transparent);
+  display: flex; flex-direction: column; gap: 2px; text-align: left; opacity: 0; transition: opacity 0.25s var(--ease);
+}
+.videoteca-poster:hover .videoteca-poster-info, .videoteca-poster:focus-visible .videoteca-poster-info { opacity: 1; }
+.videoteca-poster-title { font-family: var(--font-display); font-style: italic; font-size: 14px; color: var(--text-on-dark); }
+.videoteca-poster-year { font-size: 10px; color: var(--text-on-dark-muted); }
+
+.videoteca-sheet { grid-template-columns: 1fr 1.4fr; }
+.videoteca-sheet .mural-lightbox-img { object-fit: contain; background: var(--ink); }
+.videoteca-sheet-director { color: var(--text-on-dark-muted); font-size: 13px; margin-bottom: 16px !important; }
+.videoteca-sheet-note { font-style: italic; margin-top: 16px; }
+
+.videoteca-double-card {
+  position: relative; background: var(--graphite); max-width: 640px; width: 100%; padding: 48px 36px;
+  text-align: center; margin: auto;
+}
+.videoteca-reel { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 40px 0; }
+.videoteca-reel .graphic-mark { opacity: 1; font-size: 32px; animation: videoteca-spin 0.8s linear infinite; }
+@keyframes videoteca-spin { to { transform: rotate(360deg); } }
+.videoteca-reel p { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-on-dark-muted); }
+.videoteca-double-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--wine-soft); margin-bottom: 20px; }
+.videoteca-double-posters { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+.videoteca-double-posters img { width: 100%; aspect-ratio: 2/3; object-fit: cover; margin-bottom: 10px; }
+.videoteca-double-posters figcaption { font-family: var(--font-display); font-style: italic; font-size: 15px; }
+.videoteca-double-posters figcaption .mono { font-family: var(--font-mono); font-style: normal; font-size: 11px; color: var(--text-on-dark-muted); }
+.videoteca-double-reroll { color: var(--text-on-dark-muted); }
+
+/* =====================================================
    MURAL — colagem de referências (fundo escuro, estética Y2K/grunge)
 ===================================================== */
 .mural-page { background: var(--ink); color: var(--text-on-dark); min-height: 100vh; padding: 140px var(--edge) 100px; }
@@ -627,6 +681,10 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
   .mural-grid { grid-template-columns: repeat(2, 1fr); }
   .mural-lightbox-card { grid-template-columns: 1fr; }
   .mural-lightbox-img { max-height: 48vh; }
+
+  .videoteca-grid { grid-template-columns: repeat(3, 1fr); }
+  .videoteca-sheet { grid-template-columns: 1fr; }
+  .videoteca-double-posters { grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 
 @media (max-width: 860px) {
@@ -645,20 +703,17 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balanc
   .nav-footer { display: flex; flex-direction: column; gap: 6px; margin-top: auto; font-family: var(--font-mono); font-size: 11px; color: var(--text-on-dark-muted); }
   .header-cta { display: none; }
   .menu-toggle { display: flex; }
-}
 
-@media (max-width: 640px) {
-  .footer-inner { flex-direction: column; text-align: center; }
-  .experience-row { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 860px) {
   .project-detail-body { grid-template-columns: 1fr; }
   .project-detail-rule { display: none; }
   .project-detail-gallery { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
+  .footer-inner { flex-direction: column; text-align: center; }
+  .experience-row { grid-template-columns: 1fr; }
+  .videoteca-grid { grid-template-columns: repeat(2, 1fr); }
+  .videoteca-double-posters { grid-template-columns: 1fr; }
   .radio-dial { margin: 0 4px 12px; }
   .radio-embed iframe { height: 280px; }
 }
