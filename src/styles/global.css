@@ -31,12 +31,33 @@
   --border-on-dark: rgba(245, 240, 230, 0.12);
   --border-on-light: rgba(32, 29, 24, 0.12);
 
-  /* Títulos: sans pesado (mesma família da abertura/preloader). Serifada
+  /* Títulos: Pixelify Sans (pixel/bitmap, era Web 2.0). Serifada
      itálica (--font-display) fica reservada só pra frases de destaque. */
-  --font-title: "Archivo Black", "Arial Black", sans-serif;
+  --font-title: "Pixelify Sans", "Archivo Black", "Arial Black", sans-serif;
   --font-display: "Bodoni Moda", "Times New Roman", serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Chrome de janela XP (barras de título, menus, Paint, Bloco de Notas) */
+  --font-window: Tahoma, Geneva, "Segoe UI", sans-serif;
+  /* Chamadas estilo cartoon/revista (TheSlap, Cartoon Network) */
+  --font-cartoon: "Bangers", "Archivo Black", cursive;
+
+  /* Céu Bliss (papel de parede do Windows XP) */
+  --xp-sky-top: #1E7FE0;
+  --xp-sky-mid: #4FA8F0;
+  --xp-sky-bottom: #B9E3FB;
+  --xp-hill-back: #3F8A34;
+  --xp-hill-front: #5FAE3D;
+  --xp-cloud: #FDFEFF;
+
+  /* Azul degradê dos cabeçalhos de portal (Cartoon Network / TheSlap, 2005) */
+  --portal-blue-start: #0055E5;
+  --portal-blue-end: #3B82F6;
+  --portal-red: #E53935;
+  --portal-orange: #F2862B;
+  --portal-green: #3FA34D;
+  --portal-paper: #EAF2FF;
+  --portal-ink: #0B1E3D;
 
   --container: 1440px;
   --edge: clamp(20px, 5vw, 72px);
@@ -215,6 +236,28 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   overflow: hidden;
 }
 
+/* ---- papel de parede estilo "Bliss" (Windows XP), feito só em CSS ---- */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(60px 22px at 14% 16%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
+    radial-gradient(36px 16px at 22% 13%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
+    radial-gradient(50px 20px at 68% 9%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
+    radial-gradient(30px 14px at 76% 12%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
+    radial-gradient(44px 18px at 90% 22%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
+    radial-gradient(130% 55% at 18% 118%, var(--xp-hill-front) 0%, var(--xp-hill-front) 58%, transparent 59%),
+    radial-gradient(100% 50% at 82% 124%, var(--xp-hill-back) 0%, var(--xp-hill-back) 60%, transparent 61%),
+    linear-gradient(180deg, var(--xp-sky-top) 0%, var(--xp-sky-mid) 42%, var(--xp-sky-bottom) 70%, var(--xp-sky-bottom) 100%);
+}
+/* textura CRT: scanlines sutis de monitor antigo por cima de tudo */
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 10; pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg, rgba(0, 0, 0, 0.16) 0px, rgba(0, 0, 0, 0.16) 1px, transparent 1px, transparent 3px
+  );
+  mix-blend-mode: overlay; opacity: 0.5;
+}
+
 /* ---- desktop layer: ícones + taskbar por cima da colagem do Hero ---- */
 .desktop-layer { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .desktop-icons { position: absolute; inset: 0; }
@@ -222,13 +265,56 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   position: absolute; pointer-events: auto; width: 76px; display: flex; flex-direction: column;
   align-items: center; gap: 6px; padding: 8px 6px; text-align: center; border: 1px solid transparent; border-radius: 8px;
 }
-.desktop-icon-glyph { font-size: 26px; line-height: 1; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6)); }
-.desktop-icon-label {
-  font-size: 10px; color: var(--text-on-dark); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-  line-height: 1.3; word-break: break-word;
+.desktop-icon-glyph {
+  font-size: 28px; line-height: 1; image-rendering: pixelated;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.75)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
-.desktop-icon.is-selected { background: rgba(217, 54, 86, 0.35); border-color: var(--wine-soft); }
-.desktop-icon:focus-visible { background: rgba(217, 54, 86, 0.35); border-color: var(--wine-soft); outline: none; }
+.desktop-icon-label {
+  font-family: var(--font-title); font-size: 10.5px; color: #fff; line-height: 1.4; word-break: break-word;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 2px 2px 0 rgba(0, 0, 0, 0.55);
+}
+.desktop-icon.is-selected { background: rgba(0, 85, 229, 0.4); border-color: var(--xp-sky-top); }
+.desktop-icon:focus-visible { background: rgba(0, 85, 229, 0.4); border-color: var(--xp-sky-top); outline: none; }
+
+/* ---- stickers flutuantes: colagem Y2K/MSN/TheSlap por cima do desktop ---- */
+.desktop-stickers { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.sticker { position: absolute; }
+.sticker-buddy { display: flex; flex-direction: column; align-items: center; transform: rotate(-6deg); }
+.sticker-buddy-glyph {
+  font-size: 34px; filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.5));
+  background: var(--text-on-dark); border: 2px solid var(--ink); border-radius: 50%;
+  width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.sticker-buddy-dot {
+  position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--green); border: 2px solid var(--ink);
+}
+.sticker-bubble {
+  font-family: var(--font-title); font-size: 13px; letter-spacing: 0.1em; color: var(--ink);
+  background: #fff; border: 2px solid var(--ink); border-radius: 16px 16px 16px 2px;
+  padding: 6px 12px; box-shadow: 3px 3px 0 var(--ink); transform: rotate(3deg);
+}
+.sticker-burst {
+  font-family: var(--font-cartoon); letter-spacing: 0.04em; border: 2px solid var(--ink);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  box-shadow: 3px 3px 0 var(--ink); transform: rotate(-8deg);
+}
+.sticker-burst-pink {
+  width: 70px; height: 70px; border-radius: 38% 62% 55% 45% / 45% 55% 45% 55%;
+  background: var(--wine); color: #fff; font-size: 13px;
+}
+.sticker-burst-yellow {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); color: var(--ink);
+  font-size: 20px; transform: rotate(12deg);
+}
+.sticker-mood {
+  display: flex; flex-direction: column; gap: 3px; background: var(--text-on-dark);
+  border: 2px solid var(--ink); border-radius: 4px; padding: 8px 12px; width: 168px;
+  box-shadow: 4px 4px 0 var(--wine); transform: rotate(-2deg);
+}
+.sticker-mood-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--text-on-light-muted); }
+.sticker-mood-value { font-family: var(--font-window); font-size: 13px; color: var(--ink); font-weight: 700; }
 
 .desktop-taskbar {
   position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 3; pointer-events: auto;
@@ -244,14 +330,14 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .desktop-start-mark { color: var(--wine-soft); }
 .desktop-clock { font-size: 12px; color: var(--text-on-dark-muted); }
 
-.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg { position: absolute; inset: 0; z-index: 1; }
 .hero-bg-image {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: 0.32; filter: saturate(0.85);
+  opacity: 0.22; filter: saturate(0.85);
 }
 .hero-bg::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, var(--ink) 0%, rgba(21, 21, 21, 0.55) 32%, rgba(21, 21, 21, 0.55) 68%, var(--ink) 100%);
+  background: linear-gradient(180deg, rgba(10, 20, 40, 0.58) 0%, rgba(10, 20, 40, 0.22) 32%, rgba(10, 20, 40, 0.22) 68%, rgba(10, 20, 40, 0.62) 100%);
 }
 
 .hero-grid {
@@ -296,7 +382,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   gap: 24px; flex-wrap: wrap; padding: clamp(20px, 4vh, 40px) 0 clamp(24px, 5vh, 48px);
   border-top: 1px solid var(--border-on-dark); margin-top: clamp(20px, 4vh, 40px);
 }
-.hero-intro { max-width: 400px; font-size: 16px; color: var(--text-on-dark-muted); }
+.hero-intro { max-width: 400px; font-size: 16px; color: var(--text-on-dark-muted); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55); }
 .hero-foot .edit-hint { max-width: 400px; }
 
 .hero-scroll { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-on-dark-muted); flex-shrink: 0; }
@@ -329,6 +415,20 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
    SECTIONS GENERIC
 ===================================================== */
 .section { max-width: var(--container); margin: 0 auto; padding: 120px var(--edge); }
+
+/* ---- janela estilo Bloco de Notas / perfil MSN (Sobre) ---- */
+.notepad-window {
+  background: #fff; border: 2px solid #fff; border-bottom-color: #8a877d; border-right-color: #8a877d;
+  box-shadow: 6px 6px 0 var(--wine-soft), 0 24px 48px rgba(0, 0, 0, 0.18);
+}
+.notepad-titlebar { border-radius: 0; }
+.notepad-status {
+  display: flex; align-items: center; gap: 8px; font-family: var(--font-window); font-size: 12px;
+  color: var(--text-on-light-muted); background: #EAF2FF; border-bottom: 1px solid var(--border-on-light);
+  padding: 6px 10px;
+}
+.notepad-status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); border: 1px solid var(--ink); }
+.notepad-body { padding: clamp(28px, 4vw, 56px); }
 .section-kicker {
   font-size: 11px; color: var(--text-on-light-muted); display: flex; align-items: center; gap: 8px;
   padding-bottom: 18px; border-bottom: 1px solid var(--border-on-light); margin-bottom: 56px;
@@ -404,19 +504,32 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .philosophy-text { font-size: 16px; color: var(--text-on-light-muted); }
 
 /* =====================================================
-   PROJECTS (fundo grafite — accent secundário azul)
+   PROJECTS — portal colorido estilo Cartoon Network / TheSlap (2005)
 ===================================================== */
-.section-projects { background: var(--graphite); color: var(--text-on-dark); max-width: none; padding: 120px 0; }
+.section-projects {
+  background-color: var(--portal-paper); color: var(--text-on-light); max-width: none; padding: 120px 0;
+  background-image: radial-gradient(rgba(11, 30, 61, 0.07) 1.6px, transparent 1.6px);
+  background-size: 18px 18px;
+}
 .section-projects .section-kicker,
 .section-projects .section-head { max-width: var(--container); margin-left: auto; margin-right: auto; padding-left: var(--edge); padding-right: var(--edge); }
-.section-projects .section-desc { color: var(--text-on-dark-muted); }
+.section-projects .section-kicker.light { color: var(--text-on-light-muted); border-color: var(--border-on-light); }
+.section-projects .section-desc { color: var(--text-on-light-muted); }
 
-.project-index-nav { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 24px; }
-.project-index-nav button { color: var(--text-on-dark-muted); padding: 4px 0; position: relative; }
-.project-index-nav button::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px; background: var(--blue-soft); transition: width 0.25s var(--ease); }
-.project-index-nav button:hover, .project-index-nav button.is-active { color: var(--text-on-dark); }
-.project-index-nav button:hover::after, .project-index-nav button.is-active::after { width: 100%; }
-.project-index-nav span { color: var(--border-on-dark); }
+/* abas inclinadas e coloridas, estilo portal de 2005 */
+.project-index-nav { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0; font-family: var(--font-title); font-size: 12px; letter-spacing: 0.02em; margin-top: 24px; }
+.project-index-nav span { display: none; }
+.project-index-nav button {
+  color: #fff; padding: 9px 20px 8px; position: relative; border: 2px solid var(--portal-ink);
+  border-bottom: none; margin-right: -2px; clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
+  transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
+}
+.project-index-nav > button { background: var(--portal-blue-start); }
+.project-index-nav > span:nth-of-type(3n + 1) button { background: var(--portal-red); }
+.project-index-nav > span:nth-of-type(3n + 2) button { background: var(--portal-orange); }
+.project-index-nav > span:nth-of-type(3n) button { background: var(--portal-green); }
+.project-index-nav button:hover { filter: brightness(1.12); }
+.project-index-nav button.is-active { transform: translateY(-5px); filter: brightness(1.1); z-index: 1; }
 
 .project-spreads { display: flex; flex-direction: column; }
 .projects-empty { max-width: var(--container); margin: 0 auto; padding: 0 var(--edge); }
@@ -424,7 +537,7 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .project-spread {
   display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(16px, 3vw, 40px);
   align-items: center; max-width: var(--container); margin: 0 auto; padding: 90px var(--edge);
-  border-top: 1px solid var(--border-on-dark);
+  border-top: 1px solid var(--border-on-light);
 }
 .project-spread.is-hidden { display: none; }
 .project-spread.is-reverse .project-visual-col { grid-column: 6 / 13; order: 2; }
@@ -434,8 +547,20 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .project-meta-col { grid-column: 8 / 13; position: relative; }
 
 .project-visual {
-  position: relative; display: block; width: 100%; aspect-ratio: 5 / 4; overflow: hidden;
-  background: var(--surface); border-radius: 12px; box-shadow: 5px 5px 0 var(--blue);
+  position: relative; display: block; width: 100%; aspect-ratio: 5 / 4;
+  background: var(--surface); border-radius: 4px; border: 4px solid var(--portal-ink);
+  box-shadow: 6px 6px 0 var(--blue);
+}
+.project-visual img, .project-visual-fallback { border-radius: 1px; overflow: hidden; }
+.project-visual::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 10px; z-index: 1;
+  background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
+}
+.project-badge {
+  position: absolute; top: -14px; right: -18px; z-index: 2; font-family: var(--font-cartoon);
+  font-size: 15px; letter-spacing: 0.03em; color: #fff; background: var(--portal-red);
+  border: 2px solid var(--portal-ink); padding: 6px 14px; border-radius: 50% 50% 50% 4px;
+  transform: rotate(10deg); box-shadow: 3px 3px 0 var(--portal-ink);
 }
 .project-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
 .project-spread:hover .project-visual img, .project-spread:hover .project-visual-fallback-inner { transform: scale(1.035); }
@@ -452,11 +577,11 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   background: rgba(21, 21, 21, 0.55); padding: 4px 10px;
 }
 
-.project-meta-top { font-size: 11px; letter-spacing: 0.06em; color: var(--text-on-dark-muted); text-transform: uppercase; margin-bottom: 14px; }
+.project-meta-top { font-size: 11px; letter-spacing: 0.06em; color: var(--text-on-light-muted); text-transform: uppercase; margin-bottom: 14px; }
 .project-title-serif { font-size: clamp(1.7rem, 3.4vw, 2.7rem); margin-bottom: 18px; }
-.project-desc { font-size: 15px; color: var(--text-on-dark-muted); max-width: 46ch; margin-bottom: 20px; }
-.project-tech { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-on-dark-muted); margin-bottom: 24px; }
-.project-open-link { color: var(--text-on-dark); }
+.project-desc { font-size: 15px; color: var(--text-on-light-muted); max-width: 46ch; margin-bottom: 20px; }
+.project-tech { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-on-light-muted); margin-bottom: 24px; }
+.project-open-link { color: var(--text-on-light); }
 
 /* =====================================================
    SKILLS (fundo claro, herdado do body)
@@ -560,10 +685,23 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .radio-title { font-size: clamp(1.9rem, 4.2vw, 3.2rem); max-width: 18ch; margin-bottom: 18px; }
 .radio-sub { color: var(--text-on-dark-muted); max-width: 56ch; font-size: 16px; }
 
-.radio-deck {
-  max-width: 760px; margin: 0 auto; background: var(--graphite); border: 2px solid var(--green);
-  border-radius: 16px; padding: clamp(28px, 4vw, 48px); box-shadow: 6px 6px 0 var(--green), 0 20px 48px rgba(0, 0, 0, 0.4);
+.wmp-shell { max-width: 760px; margin: 0 auto; box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4), 0 20px 48px rgba(0, 0, 0, 0.4); }
+.wmp-titlebar {
+  background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
+  color: #fff; font-family: var(--font-window); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: space-between; padding: 6px 10px;
+  border-radius: 10px 10px 0 0;
 }
+.wmp-titlebar-text { display: flex; align-items: center; gap: 6px; }
+
+.radio-deck {
+  background: linear-gradient(160deg, #cfd3d8 0%, #9ba1aa 45%, #cfd3d8 100%);
+  border: 2px solid var(--green); border-top: none;
+  border-radius: 0 0 16px 16px; padding: clamp(28px, 4vw, 48px);
+}
+.radio-deck .radio-display, .radio-deck .radio-display-name { color: var(--ink); }
+.radio-deck .radio-display { border-bottom-color: rgba(23, 23, 23, 0.25); }
+.radio-deck .radio-display-note, .radio-deck .radio-display-static { color: #44474c; }
 
 .radio-display { text-align: center; padding: 28px 16px 44px; border-bottom: 1px dashed var(--border-on-dark); margin-bottom: 48px; }
 .radio-display-freq { display: block; font-size: 13px; letter-spacing: 0.14em; color: var(--green); margin-bottom: 10px; }
@@ -595,6 +733,11 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 }
 .radio-needle:focus-visible { outline: 2px solid var(--wine-soft); outline-offset: 6px; }
 
+.radio-deck .radio-dial-track { background: repeating-linear-gradient(90deg, rgba(23, 23, 23, 0.3) 0 1px, transparent 1px 8px); }
+.radio-deck .radio-tick { color: #44474c; }
+.radio-deck .radio-tick-mark { background: #44474c; }
+.radio-deck .radio-needle, .radio-deck .radio-needle::before { background: var(--wine); }
+
 .radio-empty { margin-top: 24px; text-align: center; }
 .radio-embed { margin-top: 36px; }
 .radio-embed iframe { width: 100%; height: 352px; border: none; border-radius: 4px; }
@@ -617,10 +760,15 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   grid-template-columns: repeat(5, 1fr); gap: clamp(16px, 2.4vw, 28px);
 }
 .videoteca-poster {
-  position: relative; aspect-ratio: 2 / 3; background: var(--surface); overflow: hidden; border-radius: 10px;
-  box-shadow: 4px 4px 0 var(--blue), 0 10px 24px rgba(0, 0, 0, 0.45);
+  position: relative; aspect-ratio: 2 / 3; background: var(--surface); overflow: hidden; border-radius: 4px;
+  border: 3px solid var(--text-on-dark); box-shadow: 4px 4px 0 var(--blue), 0 10px 24px rgba(0, 0, 0, 0.45);
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
+.videoteca-poster::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px; z-index: 1;
+  background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
+}
+.videoteca-badge { top: -10px; right: -12px; font-size: 11px; padding: 5px 10px; }
 .videoteca-poster:hover, .videoteca-poster:focus-visible {
   transform: translateY(-4px) translateX(-2px) scale(1.03); box-shadow: 6px 6px 0 var(--blue), 0 18px 36px rgba(0, 0, 0, 0.55);
 }
@@ -688,7 +836,51 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 /* =====================================================
    MURAL — colagem de referências (fundo escuro, estética Y2K/grunge)
 ===================================================== */
-.mural-page { background: var(--ink); color: var(--text-on-dark); min-height: 100vh; padding: 140px var(--edge) 100px; }
+.mural-page { background: var(--surface); color: var(--text-on-dark); min-height: 100vh; padding: 140px var(--edge) 100px; }
+
+/* ---- janela estilo MS Paint ---- */
+.paint-window {
+  max-width: var(--container); margin: 0 auto; background: #C8C4BC; color: var(--ink);
+  border: 2px solid #fff; border-top-color: #fff; border-left-color: #fff;
+  border-bottom-color: #4b4941; border-right-color: #4b4941;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.45);
+}
+.paint-titlebar {
+  background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
+  color: #fff; font-family: var(--font-window); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: space-between; padding: 5px 8px;
+}
+.paint-titlebar-buttons { display: flex; gap: 4px; font-size: 11px; }
+.paint-titlebar-buttons span {
+  background: #C8C4BC; color: var(--ink); width: 18px; height: 16px; display: inline-flex;
+  align-items: center; justify-content: center; border: 1px solid #4b4941;
+}
+.paint-menubar {
+  display: flex; gap: 18px; padding: 4px 10px; font-family: var(--font-window); font-size: 12px;
+  background: #D8D4CB; border-bottom: 1px solid #8a877d;
+}
+.paint-body { display: flex; min-height: 420px; }
+.paint-toolbar {
+  width: 44px; flex-shrink: 0; background: #D8D4CB; border-right: 1px solid #8a877d;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; padding: 6px; align-content: start;
+}
+.paint-tool {
+  background: #C8C4BC; border: 1px solid #fff; border-bottom-color: #8a877d; border-right-color: #8a877d;
+  display: flex; align-items: center; justify-content: center; height: 24px; font-size: 13px;
+}
+.paint-canvas {
+  flex: 1; background: var(--surface); color: var(--text-on-dark); padding: 56px var(--edge) 64px;
+  border: 2px inset #8a877d; margin: 4px; min-width: 0;
+}
+.paint-palette {
+  display: flex; align-items: center; gap: 4px; padding: 8px 10px;
+  background: #D8D4CB; border-top: 1px solid #fff;
+}
+.paint-palette-current {
+  width: 26px; height: 26px; border: 2px inset #8a877d; background: var(--ink); margin-right: 10px;
+}
+.paint-swatch { width: 18px; height: 18px; border: 1px solid rgba(0, 0, 0, 0.4); }
+
 .mural-intro { max-width: var(--container); margin: 0 auto 64px; }
 .mural-title {
   font-size: clamp(1.9rem, 4.2vw, 3.2rem); max-width: 16ch; margin-bottom: 18px;

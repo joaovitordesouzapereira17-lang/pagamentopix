@@ -78,7 +78,14 @@ export function Radio() {
         </p>
       </section>
 
-      <div className="radio-deck">
+      <div className="wmp-shell">
+        <div className="wmp-titlebar">
+          <span className="wmp-titlebar-text">📻 Radio.mp3 - Media Player</span>
+          <span className="paint-titlebar-buttons" aria-hidden="true">
+            <span>_</span><span>□</span><span>✕</span>
+          </span>
+        </div>
+        <div className="radio-deck">
         <div className="radio-display">
           {active ? (
             <>
@@ -148,6 +155,7 @@ export function Radio() {
             />
           </div>
         )}
+        </div>
       </div>
     </main>
   );

@@ -49,9 +49,23 @@ export function DesktopLayer() {
             onMouseLeave={() => setSelected(null)}
           >
             <span className="desktop-icon-glyph" aria-hidden="true">{icon.glyph}</span>
-            <span className="desktop-icon-label mono">{icon.label}</span>
+            <span className="desktop-icon-label">{icon.label}</span>
           </Link>
         ))}
+      </div>
+
+      <div className="desktop-stickers" aria-hidden="true">
+        <div className="sticker sticker-buddy" style={{ top: "11%", left: "57%" }}>
+          <span className="sticker-buddy-glyph">🧑‍💻</span>
+          <span className="sticker-buddy-dot" />
+        </div>
+        <div className="sticker sticker-bubble" style={{ top: "9%", left: "70%" }}>•••</div>
+        <div className="sticker sticker-burst sticker-burst-pink" style={{ top: "58%", left: "6%" }}>POW!</div>
+        <div className="sticker sticker-burst sticker-burst-yellow" style={{ top: "12%", left: "40%" }}>★</div>
+        <div className="sticker sticker-mood" style={{ top: "68%", left: "58%" }}>
+          <span className="sticker-mood-label">MOOD ATUAL</span>
+          <span className="sticker-mood-value">⚡ no modo criar</span>
+        </div>
       </div>
 
       <div className="desktop-taskbar">

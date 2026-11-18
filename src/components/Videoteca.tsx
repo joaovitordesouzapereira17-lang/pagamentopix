@@ -93,6 +93,7 @@ export function Videoteca() {
             const realIndex = videoteca.indexOf(item);
             return (
               <button key={item.image + item.title} type="button" className="videoteca-poster" onClick={() => setActive(realIndex)}>
+                {realIndex === 0 && <span className="project-badge videoteca-badge" aria-hidden="true">NOVO!</span>}
                 <img src={withBase(item.image)} alt={item.title} />
                 <span className="videoteca-poster-info">
                   <span className="videoteca-poster-title">{item.title}</span>
