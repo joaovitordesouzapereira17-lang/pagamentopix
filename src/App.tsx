@@ -4,6 +4,8 @@ import { CustomCursor } from "./components/CustomCursor";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { ScrollToHash } from "./components/ScrollToHash";
 import { Header } from "./components/Header";
+import { GlobalRadioBar } from "./components/GlobalRadioBar";
+import { RadioProvider } from "./context/RadioContext";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Projects } from "./components/Projects";
@@ -34,7 +36,7 @@ function HomePage() {
 
 function Site() {
   return (
-    <>
+    <RadioProvider>
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <ScrollProgress />
       <CustomCursor />
@@ -50,7 +52,8 @@ function Site() {
       </Routes>
 
       <Footer />
-    </>
+      <GlobalRadioBar />
+    </RadioProvider>
   );
 }
 

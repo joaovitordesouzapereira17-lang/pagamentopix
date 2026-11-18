@@ -7,24 +7,14 @@ import { GraphicMark } from "./GraphicMark";
 import { ProfilePhoto } from "./ProfilePhoto";
 import { DesktopLayer } from "./DesktopLayer";
 
-const LINE_CLASSES = ["line-a", "line-b", "line-c"];
-
-function splitNameIntoLines(fullName: string): string[] {
+function splitSurname(fullName: string): [string, string] {
   const words = fullName.split(" ").filter(Boolean);
-  if (words.length === 0) return ["Seu Nome"];
-  if (words.length <= 3) return words;
-
-  const third = Math.ceil(words.length / 3);
-  const lines = [
-    words.slice(0, third).join(" "),
-    words.slice(third, third * 2).join(" "),
-    words.slice(third * 2).join(" "),
-  ];
-  return lines.filter(Boolean);
+  if (words.length <= 1) return [fullName, ""];
+  return [words.slice(0, -1).join(" "), words[words.length - 1]];
 }
 
 export function Hero() {
-  const nameLines = splitNameIntoLines(profile.fullName);
+  const [firstNames, surname] = splitSurname(profile.fullName);
   const initials = profile.fullName
     .split(" ")
     .filter(Boolean)
@@ -34,10 +24,7 @@ export function Hero() {
     .toUpperCase();
 
   const kicker = useReveal<HTMLParagraphElement>(0);
-  const nameReveal0 = useReveal<HTMLSpanElement>(120);
-  const nameReveal1 = useReveal<HTMLSpanElement>(220);
-  const nameReveal2 = useReveal<HTMLSpanElement>(320);
-  const nameReveals = [nameReveal0, nameReveal1, nameReveal2];
+  const nameReveal = useReveal<HTMLHeadingElement>(120);
   const photo = useReveal<HTMLDivElement>(200);
   const foot = useReveal<HTMLDivElement>(420);
   const tagReveal = useReveal<HTMLSpanElement>(500);
@@ -53,29 +40,22 @@ export function Hero() {
           {profile.role ? profile.role : <EditHint file="src/data/profile.ts">Defina seu cargo/título (campo role)</EditHint>}
         </p>
 
-        <h1 className="hero-name">
-          {nameLines.map((line, i) => {
-            const r = nameReveals[i] ?? nameReveals[nameReveals.length - 1];
-            return (
-              <span
-                className={`hero-name-line ${LINE_CLASSES[i] ?? "line-c"} ${r.className}`}
-                ref={r.ref}
-                style={r.style}
-                key={line}
-              >
-                {line}
-              </span>
-            );
-          })}
+        <h1 className={`hero-name font-integral ${nameReveal.className}`} ref={nameReveal.ref} style={nameReveal.style}>
+          {firstNames} <span className="font-hotham hero-name-accent">{surname}</span>
         </h1>
 
         <div className={`hero-photo-panel ${photo.className}`} ref={photo.ref} style={photo.style}>
-          <div className="msn-webcam-card">
-            <div className="msn-webcam-titlebar">
-              <span>📷 Webcam</span>
-              <span className="msn-webcam-live"><i /> AO VIVO</span>
+          <div className="wmp-photo-window">
+            <div className="wmp-photo-titlebar">
+              <span>🪟 {profile.fullName.split(" ")[0]}.jpg - Windows Media Player</span>
+              <span className="paint-titlebar-buttons" aria-hidden="true">
+                <span>_</span><span>□</span><span>✕</span>
+              </span>
             </div>
-            <div className="hero-avatar">
+            <div className="wmp-photo-menubar" aria-hidden="true">
+              {["File", "View", "Play", "Tools", "Help"].map((m) => <span key={m}>{m}</span>)}
+            </div>
+            <div className="wmp-photo-display">
               <ProfilePhoto
                 src={profile.photo}
                 alt={profile.fullName}
@@ -85,6 +65,14 @@ export function Hero() {
                 hideHint
                 onErrorChange={setPhotoMissing}
               />
+            </div>
+            <div className="wmp-photo-controls">
+              <span className="wmp-photo-btn" aria-hidden="true">⏮</span>
+              <span className="wmp-photo-btn wmp-photo-btn-play" aria-hidden="true">▶</span>
+              <span className="wmp-photo-btn" aria-hidden="true">⏭</span>
+              <span className="wmp-photo-volume" aria-hidden="true">
+                🔊<span className="wmp-photo-volume-track"><span /></span>
+              </span>
             </div>
           </div>
           {photoMissing && (

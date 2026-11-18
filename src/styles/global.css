@@ -1,27 +1,54 @@
 /* =====================================================
+   FONTES CUSTOMIZADAS (Integral Bold + Gotham Black)
+===================================================== */
+@font-face {
+  font-family: "Integral CF";
+  src: url("/fonts/IntegralCF-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Black";
+  src: url("/fonts/Gotham-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+.font-integral { font-family: "Integral CF", Tahoma, sans-serif; font-weight: 700; }
+.font-hotham { font-family: "Gotham Black", Tahoma, sans-serif; font-weight: 900; }
+
+/* =====================================================
    TOKENS
 ===================================================== */
 :root {
-  /* Reset claro: índigo escuro sobre azul-gelo — zero fundos escuros por padrão */
+  /* Base editorial: índigo escuro sobre prata/branco-gelo — sem fundos chapados */
   --ink: #1E1B4B;
-  --graphite: #F2F6FF;
+  --graphite: #E2E8F0;
   --surface: #FFFFFF;
 
-  --paper: #EFF6FF;
-  --paper-dim: #E2ECFC;
+  --paper: #F4F6F9;
+  --paper-dim: #E2E8F0;
 
-  /* Vermelho: destaque principal (Portal Teen / XP) */
-  --wine: #EF4444;
-  --wine-soft: #DC2626;
-  /* Azul: identidade de Projetos e Videoteca */
-  --blue: #2563EB;
-  --blue-soft: #1D4ED8;
-  /* Roxo: acento do Mural / cabeçalho portal */
-  --yellow: #7C3AED;
-  --yellow-soft: #9333EA;
-  /* Roxo-escuro: acento do Rádio */
-  --green: #9333EA;
-  --green-soft: #7C3AED;
+  /* Metálico/vidro: base de janelas e cabeçalhos (substitui blocos de cor sólida) */
+  --metal-top: #FFFFFF;
+  --metal-bottom: #E2E8F0;
+  --metal-border: #CBD5E1;
+  --bevel-light: rgba(255, 255, 255, 0.9);
+  --bevel-dark: rgba(100, 116, 139, 0.4);
+
+  /* Vermelho: só como destaque (selos, abas ativas) — nunca fundo gigante */
+  --wine: #DC2626;
+  --wine-soft: #B91C1C;
+  /* Azul: identidade de Projetos e Videoteca, só como destaque */
+  --blue: #1D4ED8;
+  --blue-soft: #1E3A8A;
+  /* Roxo: acento do Mural / cabeçalho portal, só como destaque */
+  --yellow: #6D28D9;
+  --yellow-soft: #5B21B6;
+  /* Roxo (Rádio), só como destaque */
+  --green: #6D28D9;
+  --green-soft: #5B21B6;
 
   --text-on-dark: #F5F0E6;
   --text-on-dark-muted: #CBD5F5;
@@ -31,16 +58,18 @@
   --border-on-dark: rgba(245, 240, 230, 0.18);
   --border-on-light: rgba(30, 27, 75, 0.16);
 
-  /* Títulos: Fredoka (bold, redondinha, estilo Portal Teen 2005). Zero
-     fontes pixeladas/8-bit — Tahoma/Verdana cuida de menus e corpo. */
-  --font-title: "Fredoka", Tahoma, sans-serif;
-  --font-display: "Fredoka", Tahoma, sans-serif;
+  /* Títulos: Integral Bold (cabeçalhos, números). Palavras de destaque
+     dentro dos títulos e selos usam Gotham Black (--font-accent), como
+     colagem de revista. Tahoma/Verdana cuida de menus e corpo. */
+  --font-title: "Integral CF", Tahoma, sans-serif;
+  --font-display: "Gotham Black", Tahoma, sans-serif;
   --font-body: Tahoma, Verdana, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   /* Chrome de janela XP (barras de título, menus, Paint, Bloco de Notas) */
   --font-window: Tahoma, "Trebuchet MS", sans-serif;
-  /* Chamadas estilo cartoon/revista — mesma fonte dos títulos, sem 8-bit */
-  --font-cartoon: "Fredoka", Tahoma, sans-serif;
+  /* Palavras de destaque, nomes de projeto e selos */
+  --font-accent: "Gotham Black", Tahoma, sans-serif;
+  --font-cartoon: "Gotham Black", Tahoma, sans-serif;
 
   /* Céu Bliss (papel de parede do Windows XP) — exclusivo da Home */
   --xp-sky-top: #1E7FE0;
@@ -206,45 +235,64 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 ===================================================== */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 300;
-  background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
-  border-bottom: 3px solid var(--portal-purple-dark);
+  background: linear-gradient(180deg, var(--metal-top) 0%, var(--metal-bottom) 100%);
+  border-bottom: 1px solid var(--metal-border);
+  box-shadow: 0 1px 0 var(--bevel-light) inset, 0 2px 10px rgba(30, 27, 75, 0.08);
 }
 .header-inner {
-  padding: 0 var(--edge); height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  position: relative; padding: 0 var(--edge); height: 64px; display: flex; align-items: center;
+  justify-content: space-between; gap: 20px;
+}
+.header-inner::before {
+  content: ""; position: absolute; inset: 0 0 60% 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), transparent);
+  pointer-events: none;
 }
 
 .wordmark {
-  font-family: var(--font-title); font-weight: 700; font-size: 22px; color: #fff;
-  -webkit-text-stroke: 1px var(--portal-purple-dark); text-shadow: 2px 2px 0 var(--portal-purple-dark);
-  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-title); font-weight: 700; font-size: 20px; color: var(--ink);
+  display: inline-flex; align-items: center; gap: 6px;
 }
-.wordmark-mark { font-size: 11px; transition: transform 0.3s var(--ease), opacity 0.6s var(--ease); }
+.wordmark-mark { font-size: 11px; color: var(--wine); transition: transform 0.3s var(--ease), opacity 0.6s var(--ease); }
 .wordmark:hover .wordmark-mark { transform: rotate(90deg) scale(1.15); }
 
-.nav ul { display: flex; gap: 0; align-items: flex-end; }
-.nav-link {
-  font-family: var(--font-title); font-size: 13px; letter-spacing: 0.01em; color: #fff;
-  position: relative; display: inline-flex; padding: 22px 18px 20px; border: 2px solid var(--portal-purple-dark);
-  border-top: none; margin-right: -2px; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
-  transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
+.header-status { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; color: var(--text-on-light-muted); }
+.header-status-dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; border: 1px solid var(--metal-border); }
+.header-search {
+  display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-window); font-size: 11px;
+  color: var(--text-on-light-muted); background: #fff; border: 1px solid var(--metal-border); border-radius: 14px;
+  padding: 5px 12px; box-shadow: inset 0 1px 2px rgba(30, 27, 75, 0.08); white-space: nowrap; flex-shrink: 0;
 }
-.nav ul > li:nth-child(3n + 1) .nav-link { background: var(--portal-blue-start); }
-.nav ul > li:nth-child(3n + 2) .nav-link { background: var(--portal-red); }
-.nav ul > li:nth-child(3n) .nav-link { background: var(--portal-purple); }
-.nav-link:hover { filter: brightness(1.12); }
-.nav-link.is-active { transform: translateY(3px); filter: brightness(1.1); }
+.header-badges { display: inline-flex; gap: 4px; }
+.header-badge {
+  font-family: var(--font-accent); font-size: 9px; color: #fff; padding: 2px 6px; border-radius: 3px;
+}
+.header-badge-blue { background: var(--blue); }
+.header-badge-red { background: var(--wine); }
+
+.nav ul { display: flex; gap: 2px; align-items: stretch; }
+.nav-link {
+  font-family: var(--font-title); font-size: 12.5px; letter-spacing: 0.01em; color: var(--ink);
+  position: relative; display: inline-flex; align-items: center; padding: 0 14px; height: 64px;
+  border-left: 1px solid var(--metal-border);
+}
+.nav-link::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 3px; transform: scaleX(0); transition: transform 0.2s var(--ease); }
+.nav ul > li:nth-child(3n + 1) .nav-link::after { background: var(--blue); }
+.nav ul > li:nth-child(3n + 2) .nav-link::after { background: var(--wine); }
+.nav ul > li:nth-child(3n) .nav-link::after { background: var(--yellow); }
+.nav-link:hover { background: rgba(29, 78, 216, 0.06); }
+.nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); }
 .nav-index { display: none; }
 .nav-close, .nav-footer { display: none; }
 
-.header-cta { flex-shrink: 0; color: var(--ink); background: #fff; border-color: var(--portal-purple-dark); box-shadow: 3px 3px 0 var(--portal-purple-dark); }
-.header-cta.btn-line:hover { background: var(--portal-red); color: #fff; box-shadow: 4px 4px 0 var(--portal-purple-dark); }
+.header-cta { flex-shrink: 0; color: var(--ink); background: linear-gradient(180deg, #fff, var(--metal-bottom)); border-color: var(--metal-border); box-shadow: 2px 2px 0 var(--bevel-dark); }
+.header-cta.btn-line:hover { background: var(--wine); color: #fff; border-color: var(--wine-soft); box-shadow: 3px 3px 0 var(--wine-soft); }
 
 .menu-toggle {
   display: none; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-on-dark);
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink);
 }
 .menu-toggle-box { position: relative; width: 20px; height: 14px; }
-.menu-toggle-box i { position: absolute; left: 0; right: 0; height: 1px; background: var(--text-on-dark); transition: transform 0.25s var(--ease), top 0.25s var(--ease); }
+.menu-toggle-box i { position: absolute; left: 0; right: 0; height: 1px; background: var(--ink); transition: transform 0.25s var(--ease), top 0.25s var(--ease); }
 .menu-toggle-box i:nth-child(1) { top: 0; }
 .menu-toggle-box i:nth-child(2) { top: 13px; }
 .menu-toggle.is-open .menu-toggle-box i:nth-child(1) { top: 6px; transform: rotate(45deg); }
@@ -262,15 +310,8 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 /* ---- papel de parede estilo "Bliss" (Windows XP), feito só em CSS ---- */
 .hero::before {
   content: ""; position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(60px 22px at 14% 16%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
-    radial-gradient(36px 16px at 22% 13%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
-    radial-gradient(50px 20px at 68% 9%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
-    radial-gradient(30px 14px at 76% 12%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
-    radial-gradient(44px 18px at 90% 22%, var(--xp-cloud) 0%, var(--xp-cloud) 70%, transparent 72%),
-    radial-gradient(130% 55% at 18% 118%, var(--xp-hill-front) 0%, var(--xp-hill-front) 58%, transparent 59%),
-    radial-gradient(100% 50% at 82% 124%, var(--xp-hill-back) 0%, var(--xp-hill-back) 60%, transparent 61%),
-    linear-gradient(180deg, var(--xp-sky-top) 0%, var(--xp-sky-mid) 42%, var(--xp-sky-bottom) 70%, var(--xp-sky-bottom) 100%);
+  background-image: url("/images/bliss-bg.jpg");
+  background-size: cover; background-position: center;
 }
 /* textura CRT: scanlines sutis de monitor antigo por cima de tudo */
 .hero::after {
@@ -289,8 +330,11 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   align-items: center; gap: 6px; padding: 8px 6px; text-align: center; border: 1px solid transparent; border-radius: 8px;
 }
 .desktop-icon-glyph {
-  font-size: 28px; line-height: 1; image-rendering: pixelated;
-  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.75)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  font-size: 24px; line-height: 1; image-rendering: pixelated; display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 10px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(203, 213, 225, 0.75));
+  border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
 }
 .desktop-icon-label {
   font-family: var(--font-title); font-size: 10.5px; color: #fff; line-height: 1.4; word-break: break-word;
@@ -335,17 +379,18 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .desktop-taskbar {
   position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 3; pointer-events: auto;
   display: flex; align-items: center; justify-content: space-between; padding: 0 var(--edge);
-  background: linear-gradient(180deg, var(--portal-blue-end), var(--portal-blue-start));
-  border-top: 2px solid #fff;
+  background: linear-gradient(180deg, var(--metal-top), var(--metal-bottom));
+  border-top: 1px solid #fff; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 .desktop-start {
   display: flex; align-items: center; gap: 8px; font-size: 12px; font-family: var(--font-title); letter-spacing: 0.02em;
-  color: #fff; background: linear-gradient(180deg, var(--portal-red), var(--portal-red-dark));
-  border: 2px solid #fff; border-radius: 6px; padding: 6px 14px; box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  color: #fff; background: linear-gradient(180deg, var(--wine), var(--wine-soft));
+  border: 1px solid var(--wine-soft); border-radius: 4px; padding: 6px 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 .desktop-start:hover { filter: brightness(1.08); }
 .desktop-start-mark { color: #fff; }
-.desktop-clock { font-size: 12px; font-family: var(--font-window); color: #fff; }
+.desktop-clock { font-size: 12px; font-family: var(--font-window); color: var(--ink); }
 
 .hero-grid {
   position: relative; z-index: 1;
@@ -360,35 +405,51 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 }
 .hero-kicker-mark { font-size: 12px; }
 
-.hero-name { grid-column: 1 / 10; grid-row: 2; align-self: center; z-index: 2; }
-.hero-name-line {
-  display: block; font-size: clamp(3rem, 9.5vw, 8.5rem); line-height: 0.94; letter-spacing: -0.01em;
-  font-weight: 800; color: #fff; -webkit-text-stroke: 2px var(--portal-purple-dark);
-  text-shadow: 3px 3px 0 var(--portal-purple-dark), 6px 6px 0 rgba(30, 27, 75, 0.25);
+.hero-name {
+  grid-column: 1 / 10; grid-row: 2; align-self: center; z-index: 2;
+  font-size: clamp(1.8rem, 3.6vw, 3.1rem); line-height: 1.08; color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
 }
-.line-b { padding-left: clamp(20px, 8vw, 130px); color: var(--portal-red) !important; -webkit-text-stroke: 2px var(--portal-purple-dark); }
-.line-c {
-  padding-left: clamp(40px, 15vw, 260px); font-family: var(--font-title); font-style: normal; font-weight: 800;
-  color: var(--yellow) !important; -webkit-text-stroke: 2px var(--portal-purple-dark);
-}
+.hero-name-accent { color: var(--blue); -webkit-text-stroke: 0.5px var(--ink); }
 
 .hero-photo-panel {
   grid-column: 7 / 13; grid-row: 1 / 4; align-self: stretch; position: relative; z-index: 1;
   min-height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
 }
-.msn-webcam-card {
-  background: #fff; border: 3px solid var(--portal-purple); border-radius: 10px;
-  box-shadow: 6px 6px 0 var(--portal-blue-start); padding: 0 0 14px; width: min(300px, 90%);
+.wmp-photo-window {
+  background: linear-gradient(180deg, var(--metal-top), var(--metal-bottom));
+  border: 3px solid var(--blue-soft); border-radius: 8px; width: min(300px, 90%);
+  box-shadow: 6px 6px 0 rgba(30, 27, 75, 0.25), inset 0 1px 0 var(--bevel-light);
+  overflow: hidden;
 }
-.msn-webcam-titlebar {
-  display: flex; align-items: center; justify-content: space-between; font-family: var(--font-window);
-  font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
-  padding: 6px 10px; border-radius: 7px 7px 0 0;
+.wmp-photo-titlebar {
+  position: relative; display: flex; align-items: center; justify-content: space-between; font-family: var(--font-window);
+  font-size: 10.5px; font-weight: 700; color: #fff; background: linear-gradient(180deg, #3B82C4, var(--blue-soft));
+  padding: 6px 10px; overflow: hidden;
 }
-.msn-webcam-live { display: inline-flex; align-items: center; gap: 5px; color: #FFD9D9; }
-.msn-webcam-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--portal-red); display: inline-block; animation: webcam-blink 1.4s ease-in-out infinite; }
-@keyframes webcam-blink { 50% { opacity: 0.25; } }
-.hero-avatar { position: relative; width: min(240px, 85%); margin: 14px auto 0; }
+.wmp-photo-titlebar::before {
+  content: ""; position: absolute; inset: 0 0 60% 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent);
+  pointer-events: none;
+}
+.wmp-photo-menubar {
+  display: flex; gap: 12px; padding: 4px 10px; font-family: var(--font-window); font-size: 10px;
+  background: var(--paper-dim); border-bottom: 1px solid var(--metal-border); color: var(--ink);
+}
+.wmp-photo-display { background: #000; padding: 6px; }
+.wmp-photo-controls {
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+  background: linear-gradient(180deg, var(--metal-top), var(--metal-bottom)); border-top: 1px solid #fff;
+}
+.wmp-photo-btn {
+  width: 22px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 10px;
+  background: linear-gradient(180deg, #fff, var(--metal-border)); border: 1px solid var(--metal-border);
+  border-radius: 4px; color: var(--ink); box-shadow: 0 1px 0 var(--bevel-light) inset;
+}
+.wmp-photo-btn-play { color: var(--blue-soft); }
+.wmp-photo-volume { display: flex; align-items: center; gap: 6px; font-size: 11px; margin-left: auto; }
+.wmp-photo-volume-track { width: 50px; height: 4px; background: var(--metal-border); border-radius: 2px; position: relative; }
+.wmp-photo-volume-track span { position: absolute; inset: 0; width: 70%; background: var(--blue-soft); border-radius: 2px; }
+.hero-avatar { position: relative; width: 100%; margin: 0; }
 .hero-photo-tag {
   position: absolute; top: 50%; right: -18px; transform-origin: center; z-index: 2;
   writing-mode: vertical-rl; font-size: 10px; letter-spacing: 0.16em; color: #fff;
@@ -441,13 +502,10 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   color: transparent; -webkit-text-stroke: 1px rgba(245, 245, 245, 0.4);
   background: linear-gradient(160deg, var(--surface), var(--ink));
 }
-/* Foto circular do hero, com anel forte para se destacar sobre o plano de fundo (colagem) */
-.hero-avatar { position: relative; width: min(280px, 60%); }
+/* Foto retangular dentro do visor do Windows Media Player — sem moldura circular */
 .hero-avatar-photo.photo-frame { width: 100%; height: auto; }
-.hero-avatar-photo .photo-frame-inner {
-  aspect-ratio: 1; border-radius: 50%; box-shadow: 0 0 0 8px var(--ink), 0 0 0 9px var(--border-on-dark);
-}
-.hero-avatar-hint { max-width: 300px; text-align: center; }
+.hero-avatar-photo .photo-frame-inner { aspect-ratio: 4 / 3; border-radius: 2px; }
+.hero-avatar-hint { max-width: 300px; text-align: center; margin: 10px auto; }
 
 /* =====================================================
    SECTIONS GENERIC
@@ -568,25 +626,27 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .project-index-nav button:hover { filter: brightness(1.12); }
 .project-index-nav button.is-active { transform: translateY(-5px); filter: brightness(1.1); z-index: 1; }
 
-.project-spreads { display: flex; flex-direction: column; }
+.project-spreads {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px;
+  max-width: var(--container); margin: 0 auto; padding: 0 var(--edge);
+}
 .projects-empty { max-width: var(--container); margin: 0 auto; padding: 0 var(--edge); }
 
 .project-spread {
-  display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(16px, 3vw, 40px);
-  align-items: center; max-width: var(--container); margin: 0 auto; padding: 90px var(--edge);
-  border-top: 1px solid var(--border-on-light);
+  display: flex; flex-direction: column; gap: 16px; padding: 14px; border-top: none;
+  background: linear-gradient(180deg, #fff, var(--paper-dim)); border: 1px solid var(--metal-border);
+  border-radius: 10px; box-shadow: 0 2px 0 var(--bevel-light) inset, 0 8px 20px rgba(30, 27, 75, 0.08);
 }
 .project-spread.is-hidden { display: none; }
-.project-spread.is-reverse .project-visual-col { grid-column: 6 / 13; order: 2; }
-.project-spread.is-reverse .project-meta-col { grid-column: 1 / 6; order: 1; }
+.project-spread.is-reverse .project-visual-col, .project-spread.is-reverse .project-meta-col { grid-column: unset; order: unset; }
 
-.project-visual-col { grid-column: 1 / 8; position: relative; }
-.project-meta-col { grid-column: 8 / 13; position: relative; }
+.project-visual-col { position: relative; }
+.project-meta-col { position: relative; }
 
 .project-visual {
   position: relative; display: block; width: 100%; aspect-ratio: 5 / 4;
-  background: var(--surface); border-radius: 4px; border: 4px solid var(--portal-ink);
-  box-shadow: 6px 6px 0 var(--blue);
+  background: var(--surface); border-radius: 4px; border: 3px solid var(--portal-ink);
+  box-shadow: 4px 4px 0 var(--blue);
 }
 .project-visual img, .project-visual-fallback { border-radius: 1px; overflow: hidden; }
 .project-visual::before {
@@ -720,64 +780,94 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
 .radio-page { background: var(--paper); color: var(--ink); min-height: 100vh; padding: 140px var(--edge) 100px; }
 .radio-intro { max-width: var(--container); margin: 0 auto 64px; }
 .radio-title { font-size: clamp(1.9rem, 4.2vw, 3.2rem); max-width: 18ch; margin-bottom: 18px; }
-.radio-sub { color: var(--text-on-dark-muted); max-width: 56ch; font-size: 16px; }
+.radio-sub { color: var(--text-on-light-muted); max-width: 56ch; font-size: 16px; }
 
-.wmp-shell { max-width: 760px; margin: 0 auto; box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4), 0 20px 48px rgba(0, 0, 0, 0.4); }
-.wmp-titlebar {
-  background: linear-gradient(90deg, var(--portal-blue-start), var(--portal-blue-end));
-  color: #fff; font-family: var(--font-window); font-size: 13px; font-weight: 700;
-  display: flex; align-items: center; justify-content: space-between; padding: 6px 10px;
-  border-radius: 10px 10px 0 0;
+/* ---- rádio portátil metálico/glossy, anos 2000 ---- */
+.boombox {
+  max-width: 640px; margin: 0 auto; background: linear-gradient(160deg, #e4e8ee, #b9c0cc 55%, #e4e8ee);
+  border-radius: 20px; padding: 20px; box-shadow: 0 24px 48px rgba(30, 27, 75, 0.2), inset 0 1px 0 var(--bevel-light);
+  display: grid; grid-template-columns: 76px 1fr; gap: 18px;
 }
-.wmp-titlebar-text { display: flex; align-items: center; gap: 6px; }
-
-.radio-deck {
-  background: linear-gradient(160deg, #cfd3d8 0%, #9ba1aa 45%, #cfd3d8 100%);
-  border: 2px solid var(--green); border-top: none;
-  border-radius: 0 0 16px 16px; padding: clamp(28px, 4vw, 48px);
+.boombox-grille {
+  border-radius: 14px; background: linear-gradient(160deg, #9aa1ad, #7b828e);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 14px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
 }
-.radio-deck .radio-display, .radio-deck .radio-display-name { color: var(--ink); }
-.radio-deck .radio-display { border-bottom-color: rgba(23, 23, 23, 0.25); }
-.radio-deck .radio-display-note, .radio-deck .radio-display-static { color: #44474c; }
+.boombox-grille span { aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #4b5563, #1f2937); }
 
-.radio-display { text-align: center; padding: 28px 16px 44px; border-bottom: 1px dashed var(--border-on-dark); margin-bottom: 48px; }
-.radio-display-freq { display: block; font-size: 13px; letter-spacing: 0.14em; color: var(--green); margin-bottom: 10px; }
-.radio-display-name { font-size: clamp(1.4rem, 2.8vw, 2rem); margin-bottom: 10px; }
-.radio-display-note { color: var(--text-on-dark-muted); font-size: 15px; max-width: 48ch; margin: 0 auto; }
-.radio-display-static { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; color: var(--text-on-dark-muted); text-transform: uppercase; }
+.boombox-face { min-width: 0; }
+.boombox-lcd {
+  background: linear-gradient(180deg, #0a2e2e, #041818); border-radius: 8px; padding: 14px 16px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 0 3px #1a1a1a;
+  margin-bottom: 14px; overflow: hidden;
+}
+.boombox-lcd-freq { display: block; font-size: 13px; letter-spacing: 0.14em; color: #7CFBE0; text-shadow: 0 0 6px rgba(124, 251, 224, 0.6); margin-bottom: 6px; }
+.boombox-marquee { overflow: hidden; white-space: nowrap; height: 18px; }
+.boombox-marquee span {
+  display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+  color: #9FFCE8; animation: boombox-scroll 9s linear infinite;
+}
+.boombox-marquee span.is-loading { animation: none; color: #FFD166; }
+@keyframes boombox-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.boombox-note { font-size: 11px; color: #6EE7D8; margin-top: 4px; opacity: 0.8; }
+.boombox-static { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: #6EE7D8; text-transform: uppercase; }
+.boombox-eq { display: flex; align-items: flex-end; gap: 3px; height: 20px; margin-top: 8px; }
+.boombox-eq span { width: 4px; height: 20%; background: #7CFBE0; border-radius: 1px; opacity: 0.35; transition: opacity 0.2s; }
+.boombox-eq.is-playing span {
+  opacity: 1; animation: boombox-eq 0.9s ease-in-out infinite; animation-delay: calc(var(--i) * 0.07s);
+}
+@keyframes boombox-eq { 0%, 100% { height: 15%; } 50% { height: 90%; } }
 
-.radio-dial { position: relative; height: 64px; margin: 0 10px 12px; cursor: pointer; touch-action: none; }
+.radio-dial { position: relative; height: 54px; margin: 0 4px 14px; cursor: pointer; touch-action: none; }
 .radio-dial-track {
-  position: absolute; top: 50%; left: 0; right: 0; height: 2px; transform: translateY(-50%);
-  background: repeating-linear-gradient(90deg, var(--border-on-dark) 0 1px, transparent 1px 8px);
+  position: absolute; top: 50%; left: 0; right: 0; height: 3px; transform: translateY(-50%); border-radius: 2px;
+  background: repeating-linear-gradient(90deg, var(--metal-border) 0 1px, transparent 1px 8px);
 }
 .radio-tick {
   position: absolute; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column;
-  align-items: center; gap: 6px; padding: 10px; color: var(--text-on-dark-muted);
+  align-items: center; gap: 6px; padding: 10px; color: var(--text-on-light-muted);
 }
-.radio-tick-mark { width: 1px; height: 14px; background: var(--text-on-dark-muted); }
+.radio-tick-mark { width: 1px; height: 14px; background: var(--text-on-light-muted); }
 .radio-tick-label { font-size: 10px; letter-spacing: 0.05em; opacity: 0; transition: opacity 0.2s var(--ease); }
 .radio-tick:hover .radio-tick-label, .radio-tick.is-active .radio-tick-label { opacity: 1; }
-.radio-tick.is-active .radio-tick-mark { background: var(--green); height: 20px; }
-.radio-tick.is-active { color: var(--green); }
+.radio-tick.is-active .radio-tick-mark { background: var(--blue); height: 20px; }
+.radio-tick.is-active { color: var(--blue); }
 .radio-needle {
-  position: absolute; top: -8px; bottom: -8px; width: 2px; background: var(--text-on-dark);
+  position: absolute; top: -6px; bottom: -6px; width: 2px; background: var(--wine);
   transform: translateX(-50%); cursor: grab; transition: left 0.08s linear;
 }
 .radio-needle::before {
-  content: ""; position: absolute; top: -6px; left: 50%; width: 14px; height: 14px; border-radius: 50%;
-  background: var(--text-on-dark); transform: translateX(-50%);
+  content: ""; position: absolute; top: -6px; left: 50%; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--wine); transform: translateX(-50%); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
-.radio-needle:focus-visible { outline: 2px solid var(--wine-soft); outline-offset: 6px; }
-
-.radio-deck .radio-dial-track { background: repeating-linear-gradient(90deg, rgba(23, 23, 23, 0.3) 0 1px, transparent 1px 8px); }
-.radio-deck .radio-tick { color: #44474c; }
-.radio-deck .radio-tick-mark { background: #44474c; }
-.radio-deck .radio-needle, .radio-deck .radio-needle::before { background: var(--wine); }
+.radio-needle:focus-visible { outline: 2px solid var(--blue-soft); outline-offset: 6px; }
 
 .radio-empty { margin-top: 24px; text-align: center; }
-.radio-embed { margin-top: 36px; }
-.radio-embed iframe { width: 100%; height: 352px; border: none; border-radius: 4px; }
+
+.boombox-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.boombox-transport, .boombox-presets { display: flex; gap: 6px; }
+.boombox-btn, .boombox-preset {
+  width: 34px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 13px;
+  background: linear-gradient(180deg, #fff, var(--metal-border)); border: 1px solid var(--metal-border);
+  border-radius: 6px; color: var(--ink); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 var(--bevel-light);
+}
+.boombox-btn:active, .boombox-preset:active { transform: translateY(1px); box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); }
+.boombox-btn-play { color: var(--blue-soft); }
+.boombox-preset { font-family: var(--font-mono); font-size: 11px; width: 26px; }
+.boombox-preset.is-active { background: linear-gradient(180deg, var(--blue), var(--blue-soft)); color: #fff; border-color: var(--blue-soft); }
+.boombox-volume { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.boombox-volume input[type="range"] { width: 80px; accent-color: var(--blue); }
+
+.global-radio-bar {
+  position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 400;
+  display: flex; align-items: center; gap: 10px; background: linear-gradient(180deg, var(--metal-top), var(--metal-bottom));
+  border: 1px solid var(--metal-border); border-radius: 20px; padding: 7px 16px;
+  box-shadow: 0 8px 24px rgba(30, 27, 75, 0.25), inset 0 1px 0 var(--bevel-light); font-size: 12px; color: var(--ink);
+}
+.global-radio-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--wine); animation: webcam-blink 1.4s ease-in-out infinite; }
+.global-radio-freq { color: var(--blue-soft); font-weight: 700; }
+.global-radio-name { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.global-radio-toggle { width: 22px; height: 22px; border-radius: 50%; background: var(--paper-dim); display: flex; align-items: center; justify-content: center; }
 
 /* =====================================================
    VIDEOTECA — parede de pôsteres (fundo escuro, estética Y2K/grunge)
@@ -985,8 +1075,6 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   .hero-name { grid-column: 1 / 13; grid-row: 3; order: 3; }
   .hero-photo-panel { grid-column: 1 / 13; grid-row: 2; min-height: 360px; order: 2; }
   .hero-foot { grid-column: 1 / 13; grid-row: 4; }
-  .line-b { padding-left: 8vw; }
-  .line-c { padding-left: 16vw; }
 
   .about-grid { grid-template-columns: 1fr; }
   .about-rule { display: none; }
@@ -1016,6 +1104,10 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   .videoteca-grid { grid-template-columns: repeat(3, 1fr); }
   .videoteca-sheet { grid-template-columns: 1fr; }
   .videoteca-double-posters { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+
+@media (max-width: 1320px) {
+  .header-status, .header-search, .header-badges { display: none; }
 }
 
 @media (max-width: 860px) {
@@ -1050,5 +1142,6 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   .tier-row-mood { display: none; }
   .tier-poster { width: 42px; }
   .radio-dial { margin: 0 4px 12px; }
-  .radio-embed iframe { height: 280px; }
+  .boombox { grid-template-columns: 1fr; }
+  .boombox-grille { display: none; }
 }

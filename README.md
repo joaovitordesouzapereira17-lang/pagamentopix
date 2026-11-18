@@ -92,12 +92,13 @@ pra este arquivo — nunca referências inventadas.
 
 ### Rádio — `src/data/radio.ts` e página `/radio`
 
-Cada estação é `{ frequency, name, note?, embedUrl }`. `embedUrl` é o link de
-"Incorporar" de uma playlist/faixa do Spotify (ou um embed do YouTube) — o
-áudio em si toca por esse player incorporado, nunca um arquivo hospedado
-aqui. `frequency` só posiciona a estação no dial (escolha um número entre
-88 e 108). Sem estações, o dial funciona normalmente mas fica sempre em
-"estática".
+Cada estação é `{ frequency, name, note?, streamUrl }`. `streamUrl` é a URL
+HTTPS de um stream de rádio ao vivo de verdade (hoje, 4 canais da SomaFM —
+veja outras opções em https://somafm.com/listen/). O áudio toca de verdade,
+pelo player global do site (`RadioContext`), e continua tocando mesmo
+navegando entre páginas. `frequency` só posiciona a estação no dial
+(escolha um número entre 88 e 108). Sem estações, o dial funciona
+normalmente mas fica sempre em "estática".
 
 ### Videoteca — `src/data/videoteca.ts` e página `/videoteca`
 

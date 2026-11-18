@@ -69,6 +69,15 @@ export function Header() {
           </div>
         </nav>
 
+        <div className="header-status" aria-hidden="true">
+          <span className="header-status-dot" /> online
+        </div>
+        <span className="header-search" aria-hidden="true">🔍 buscar no portfólio...</span>
+        <span className="header-badges" aria-hidden="true">
+          <span className="header-badge header-badge-blue">2026</span>
+          <span className="header-badge header-badge-red">NEW</span>
+        </span>
+
         <Link to="/#contato" className="btn btn-line header-cta">
           Contato
         </Link>
