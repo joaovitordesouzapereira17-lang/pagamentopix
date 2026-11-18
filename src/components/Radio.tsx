@@ -103,7 +103,7 @@ export function Radio() {
                 <span className="mono boombox-lcd-freq">{active!.frequency.toFixed(1)} FM</span>
                 <div className="boombox-marquee">
                   <span className={isLoading ? "is-loading" : ""}>
-                    {isLoading ? "SINTONIZANDO..." : `${active!.name.toUpperCase()} — AO VIVO VIA SOMAFM — ${active!.name.toUpperCase()} — AO VIVO VIA SOMAFM`}
+                    {isLoading ? "SINTONIZANDO..." : `${active!.name.toUpperCase()} — AO VIVO — ${active!.name.toUpperCase()} — AO VIVO`}
                   </span>
                 </div>
                 {active!.note && <p className="boombox-note">{active!.note}</p>}

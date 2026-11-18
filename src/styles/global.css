@@ -1140,7 +1140,8 @@ h1, h2, h3 { font-family: var(--font-title); line-height: 1; text-wrap: balance;
   .tier-row-label { flex-basis: 64px; }
   .tier-row-letter { font-size: 18px; }
   .tier-row-mood { display: none; }
-  .tier-poster { width: 42px; }
+  .tier-poster { width: 52px; }
+  .tier-row-items { gap: 8px; padding: 8px; }
   .radio-dial { margin: 0 4px 12px; }
   .boombox { grid-template-columns: 1fr; }
   .boombox-grille { display: none; }

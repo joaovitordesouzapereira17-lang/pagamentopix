@@ -92,18 +92,24 @@ pra este arquivo — nunca referências inventadas.
 
 ### Rádio — `src/data/radio.ts` e página `/radio`
 
-Cada estação é `{ frequency, name, note?, streamUrl }`. `streamUrl` é a URL
-HTTPS de um stream de rádio ao vivo de verdade (hoje, 4 canais da SomaFM —
-veja outras opções em https://somafm.com/listen/). O áudio toca de verdade,
-pelo player global do site (`RadioContext`), e continua tocando mesmo
-navegando entre páginas. `frequency` só posiciona a estação no dial
+Cada estação é `{ frequency, name, note?, source }`. `source` aponta pra
+uma fonte de áudio ao vivo de verdade, em um dos três formatos:
+`{ kind: "aac", streamUrl }` (stream direto), `{ kind: "hls", streamUrl }`
+(stream `.m3u8`, tocado via `hls.js`) ou `{ kind: "youtube", videoId }`
+(vídeo/live do YouTube, tocado por um player oculto). O áudio toca de
+verdade, pelo player global do site (`RadioContext`), e continua tocando
+mesmo navegando entre páginas. `frequency` só posiciona a estação no dial
 (escolha um número entre 88 e 108). Sem estações, o dial funciona
 normalmente mas fica sempre em "estática".
+
+As URLs de stream de rádios comerciais mudam com o tempo — se alguma
+parar de tocar, é só trocar o `streamUrl`/`videoId` pelo de outra estação.
 
 ### Videoteca — `src/data/videoteca.ts` e página `/videoteca`
 
 Cada filme é `{ image, title, year, genre, director?, synopsis?, note?, tier? }`.
-Coloque o pôster em `public/images/videoteca/`. O botão "Montar sessão
+Coloque o pôster em `public/posters/` (ou `public/images/videoteca/`, tanto
+faz — o campo `image` aceita qualquer caminho dentro de `public/`). O botão "Montar sessão
 dupla" só aparece com pelo menos 2 filmes cadastrados.
 
 O campo opcional `tier` ("S" | "A" | "B" | "C" | "D") define a posição
