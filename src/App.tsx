@@ -5,6 +5,7 @@ import { ScrollProgress } from "./components/ScrollProgress";
 import { ScrollToHash } from "./components/ScrollToHash";
 import { Header } from "./components/Header";
 import { GlobalRadioBar } from "./components/GlobalRadioBar";
+import { SystemTaskbar } from "./components/SystemTaskbar";
 import { RadioProvider } from "./context/RadioContext";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -53,6 +54,7 @@ function Site() {
 
       <Footer />
       <GlobalRadioBar />
+      <SystemTaskbar />
     </RadioProvider>
   );
 }
