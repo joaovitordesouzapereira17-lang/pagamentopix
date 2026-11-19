@@ -24,6 +24,7 @@ export function ProjectCard({ project, index, reverse, hidden }: ProjectCardProp
     >
       <div className="project-visual-col">
         <Link to={`/trabalhos/${project.slug}`} className="project-visual" data-cursor-label="Ver projeto">
+          {index === 0 && <span className="project-badge" aria-hidden="true">EM DESTAQUE!</span>}
           <span className="project-number mono">{String(index + 1).padStart(2, "0")}</span>
           {cover && !imgErrored ? (
             <img src={withBase(cover)} alt={project.title} onError={() => setImgErrored(true)} />

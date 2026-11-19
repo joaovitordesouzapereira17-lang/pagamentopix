@@ -39,6 +39,23 @@ export function About() {
 
   return (
     <section className="section" id="sobre">
+      <div className="notepad-window">
+        <div className="paint-titlebar notepad-titlebar">
+          <span className="paint-titlebar-text">📄 Sobre.txt - Bloco de Notas</span>
+          <span className="paint-titlebar-buttons" aria-hidden="true">
+            <span>_</span><span>□</span><span>✕</span>
+          </span>
+        </div>
+        <div className="paint-menubar" aria-hidden="true">
+          {["Arquivo", "Editar", "Formatar", "Exibir", "Ajuda"].map((m) => (
+            <span key={m}>{m}</span>
+          ))}
+        </div>
+        <div className="notepad-status" aria-hidden="true">
+          <span className="notepad-status-dot" /> online — status: disponível pra novos projetos
+        </div>
+
+        <div className="notepad-body">
       <p className={`section-kicker mono ${kicker.className}`} ref={kicker.ref} style={kicker.style}>
         <GraphicMark symbol="circle" /> SOBRE — 01
       </p>
@@ -129,6 +146,8 @@ export function About() {
           <p className="philosophy-text">{profile.philosophy.text}</p>
         </div>
       )}
+        </div>
+      </div>
     </section>
   );
 }

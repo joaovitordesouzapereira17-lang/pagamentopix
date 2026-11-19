@@ -10,6 +10,9 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "framer-motion": "^14.14.0",
+    "hls.js": "^1.7.4",
+    "lucide-react": "^1.75.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.18.5"

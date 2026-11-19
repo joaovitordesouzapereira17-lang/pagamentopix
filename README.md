@@ -92,17 +92,26 @@ pra este arquivo — nunca referências inventadas.
 
 ### Rádio — `src/data/radio.ts` e página `/radio`
 
-Cada estação é `{ frequency, name, note?, embedUrl }`. `embedUrl` é o link de
-"Incorporar" de uma playlist/faixa do Spotify (ou um embed do YouTube) — o
-áudio em si toca por esse player incorporado, nunca um arquivo hospedado
-aqui. `frequency` só posiciona a estação no dial (escolha um número entre
-88 e 108). Sem estações, o dial funciona normalmente mas fica sempre em
-"estática".
+Cada estação é `{ frequency, name, description, color, source }`.
+`description` aparece no visor do console e `color` (um hex) é só a cor de
+identidade da estação, usada em detalhes (borda do card, número, ponto).
+`source` aponta pra uma fonte de áudio ao vivo de verdade, em um dos três
+formatos: `{ kind: "aac", streamUrl }` (stream direto), `{ kind: "hls",
+streamUrl }` (stream `.m3u8`, tocado via `hls.js`) ou `{ kind: "youtube",
+videoId }` (vídeo/live do YouTube, tocado por um player oculto). O áudio
+toca de verdade, pelo player global do site (`RadioContext`), e continua
+tocando mesmo navegando entre páginas. `frequency` só posiciona a estação
+no dial (escolha um número entre 88 e 108). Sem estações, a página mostra
+só o aviso discreto apontando pra este arquivo.
+
+As URLs de stream de rádios comerciais mudam com o tempo — se alguma
+parar de tocar, é só trocar o `streamUrl`/`videoId` pelo de outra estação.
 
 ### Videoteca — `src/data/videoteca.ts` e página `/videoteca`
 
 Cada filme é `{ image, title, year, genre, director?, synopsis?, note?, tier? }`.
-Coloque o pôster em `public/images/videoteca/`. O botão "Montar sessão
+Coloque o pôster em `public/posters/` (ou `public/images/videoteca/`, tanto
+faz — o campo `image` aceita qualquer caminho dentro de `public/`). O botão "Montar sessão
 dupla" só aparece com pelo menos 2 filmes cadastrados.
 
 O campo opcional `tier` ("S" | "A" | "B" | "C" | "D") define a posição
